@@ -1,95 +1,37 @@
 <!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Bashir Patel (Web developer/programmer) London-based</title>
+  <link rel="stylesheet" href="_inc/styles/styles.css">
+</head>
+<body>
+<div class="topdiv">
+<fieldset class="intro">
+<legend>About me</legend>
+<p>I am a Web developer based in London, UK. I am passionate about developing for the Web. I have spent a significant period of time learning the tools of the web to a high standard.</p>
+</fieldset>
+<div class="sep"></div>
+<fieldset class="skills">
+<legend>Skills</legend>
+<ul>
+<li><i>PHP</i> &rarr; I have been using PHP since the year 2000.</li>
+<li><i>MySQL</i> &rarr; Like PHP, I have been using this database system since 2000.</li>
+<li><i>HTML</i> &rarr; I have using HTML since 1999.</li>
+<li><i>CSS</i> &rarr; I quickly picked up on the benefits of CSS quite soon after learning to code HTML.</li>
+<li><i>Jquery</i> &rarr; I recently started using this in favour of plain Javascript in the last few years.</li>
+<li><i>Linux server admin</i> &rarr; Since electing to use Ubuntu instead of Windows as my chosen desktop OS, I have developed a liking for the Linux operating system. My domain bashir.biz is hosted on a CentOS server on which I have configured my own web, mail and database servers.</li>
+</ul>
+</fieldset>
+</div>
 
-        <title>Laravel</title>
+<fieldset class="recent">
+<legend>Recent work</legend>
+<p>I have just completed work on the website and web applications at <a href="http://www.hcdchauffeurdrive.com/">HCD Chauffeur drive</a>. They are a chauffeur company based in London. I was asked to redevelop their web site and to build their online booking system and controller/driver systems.</p>
+<ul>
+<li><a href="_inc/img/hcdsite.png" rel="lightbox"><img src="_inc/img/hcdsite.png" alt="" width="200"></a></li><li><a href="_inc/img/hcdbooking2.png" rel="lightbox"><img src="_inc/img/hcdbooking2.png" alt="" width="200"></a></li><li><a href="_inc/img/hcdbooking.png" rel="lightbox"><img src="_inc/img/hcdbooking.png" alt="" width="200"></a></li><li><a href="_inc/img/hcdcapp.png" rel="lightbox"><img src="_inc/img/hcdcapp.png" alt="" width="200"></a></li><li><a href="_inc/img/hcdapp2.png" rel="lightbox"><img src="_inc/img/hcdapp2.png" alt="" width="200"></a></li></ul>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+</fieldset>
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
-                    @endif
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </body>
+</body>
 </html>
