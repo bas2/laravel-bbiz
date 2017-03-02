@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Bashir Patel (Web developer/programmer) London-based</title>
-  <link rel="stylesheet" href="_inc/styles/styles.css">
+  <link rel="stylesheet" href="/bbiz/public/css/styles.css">
 </head>
 <body>
 <div class="topdiv">
@@ -29,7 +29,8 @@
 <legend>Recent work</legend>
 <p>I have just completed work on the website and web applications at <a href="http://www.hcdchauffeurdrive.com/">HCD Chauffeur drive</a>. They are a chauffeur company based in London. I was asked to redevelop their web site and to build their online booking system and controller/driver systems.</p>
 <ul>
-<li><a href="_inc/img/hcdsite.png" rel="lightbox"><img src="_inc/img/hcdsite.png" alt="" width="200"></a></li><li><a href="_inc/img/hcdbooking2.png" rel="lightbox"><img src="_inc/img/hcdbooking2.png" alt="" width="200"></a></li><li><a href="_inc/img/hcdbooking.png" rel="lightbox"><img src="_inc/img/hcdbooking.png" alt="" width="200"></a></li><li><a href="_inc/img/hcdcapp.png" rel="lightbox"><img src="_inc/img/hcdcapp.png" alt="" width="200"></a></li><li><a href="_inc/img/hcdapp2.png" rel="lightbox"><img src="_inc/img/hcdapp2.png" alt="" width="200"></a></li></ul>
+@foreach($images as $image)<li><a href="img/{{ $image }}.png" rel="lightbox"><img src="img/{{ $image }}.png" alt="" width="200"></a></li>@endforeach
+</ul>
 
 </fieldset>
 
