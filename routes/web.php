@@ -16,5 +16,6 @@ Route::get('/', function () {
 });
 
 Route::get('/home', function () {
-  return view('welcome');
+  $images=['hcdsite','hcdbooking2','hcdbooking','hcdcapp','hcdapp2'];
+  return view('welcome')->with('images',$images);
 });
