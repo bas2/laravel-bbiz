@@ -1,11 +1,15 @@
 {!! Form::open() !!}
-{{ csrf_field() }}
 
-{!! Form::text('text',null,['placeholder'=>'Your message...']) !!}
+{!! Form::text('message',null,['placeholder'=>'Your message...']) !!}
 {!! Form::submit('Send') !!}
 
 {!! Form::close() !!}
 
-@if (isset($errors))
-{{ print_r($errors) }}
+@foreach($errors->all() as $error)
+<p class="error">{{ $error }}</p>
+@endforeach
+
+@if($flash=session('message'))
+<p class="success">{{ $flash }}</p>
 @endif
+
