@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 
 use App\Mail\ContactMail;
 
-use Validator, Input, Redirect; 
-
 class HomeController extends Controller
 {
     public function sendEmail() {
