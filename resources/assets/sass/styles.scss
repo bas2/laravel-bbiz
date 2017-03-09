@@ -7,6 +7,7 @@ body {
 }
 
 .error {color:#f00;font-weight:bold;}
+.success {color:lime;font-weight:bold;}
 
 div.topdiv {
   display:flex;
@@ -28,6 +29,7 @@ fieldset {
     box-shadow: 1px 1px 8px rgba(0,0,255,.8);
     width:40%;
     p {line-height: 1.6;font-size: 150%;}
+    form {text-align: center;}
   }
   &.skills {
     border: 2px solid red;
