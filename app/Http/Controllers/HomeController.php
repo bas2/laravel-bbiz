@@ -4,11 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Mail\ContactMail;
+
+use Validator, Input, Redirect; 
+
 class HomeController extends Controller
 {
     public function sendEmail() {
-        $this->validate(request(), [
-    'text'=>'required',
-  ]);
+      $this->validate(request(), [
+        'message'=>'required',
+      ]);
+      \Mail::to('mail3@bashir.biz')->send(new ContactMail(request('message')));
+      session()->flash('message','Thank you for your message!');
+
+      return redirect()->home();
     }
 }
