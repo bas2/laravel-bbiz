@@ -1,0 +1,124 @@
+body {
+  background: rgba(0, 0, 0, 0.6);
+  color: #ccc;
+  font: 1em Arial;
+  padding: 0;
+  margin: 0 1em 0; }
+
+.error {
+  color: #f00;
+  font-weight: bold; }
+
+.success {
+  color: lime;
+  font-weight: bold; }
+
+div.topdiv {
+  display: flex;
+  flex-wrap: wrap; }
+
+a {
+  color: #ccc;
+  text-decoration: none;
+  border-bottom: 1px dotted #ccc; }
+  a:hover {
+    color: #000; }
+
+fieldset {
+  box-sizing: border-box;
+  margin: 1em 0 0 0; }
+  fieldset.intro {
+    border: 2px solid blue;
+    box-shadow: 1px 1px 8px rgba(0, 0, 255, 0.8);
+    width: 40%; }
+    fieldset.intro p {
+      line-height: 1.6;
+      font-size: 150%; }
+    fieldset.intro form {
+      text-align: center; }
+  fieldset.skills {
+    border: 2px solid red;
+    box-shadow: 1px 1px 8px rgba(255, 0, 0, 0.8);
+    width: 59%; }
+  fieldset p, fieldset.skills li {
+    font-size: 1.5em;
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px navy; }
+  fieldset p {
+    margin: .5em 1em; }
+  fieldset.skills ul {
+    margin-top: .75em;
+    padding-left: 1.5em;
+    font-size: 75%; }
+    fieldset.skills ul i {
+      color: yellow; }
+    fieldset.skills ul li {
+      text-align: left;
+      list-style: square;
+      margin-bottom: .5em; }
+  fieldset legend {
+    font: 2.1875em tahoma;
+    text-transform: uppercase;
+    text-align: center;
+    width: 100%;
+    background: linear-gradient(blue 60%, rgba(255, 0, 0, 0.5));
+    background-image: url(../img/me.png), linear-gradient(rgba(0, 0, 255, 0.8) 60%, rgba(128, 128, 128, 0.8));
+    background-position: 10px center, 0 0;
+    background-repeat: no-repeat;
+    font-weight: bold;
+    text-shadow: 1px 1px 0px #ccc;
+    letter-spacing: .5em;
+    padding: 0; }
+  fieldset.skills legend {
+    background-image: url(../img/skill.png), linear-gradient(rgba(255, 0, 0, 0.8) 60%, rgba(128, 128, 128, 0.8)); }
+  fieldset.recent {
+    border: 2px solid #ff8000;
+    box-shadow: 1px 1px 8px rgba(255, 128, 0, 0.8);
+    padding-bottom: 0; }
+    fieldset.recent ul {
+      list-style: none;
+      padding: 0; }
+      fieldset.recent ul li {
+        display: inline-block;
+        width: 20%;
+        text-align: center; }
+    fieldset.recent img {
+      box-shadow: 2px 2px 2px #000; }
+  fieldset.recent legend {
+    background-image: url(../img/time.png), linear-gradient(rgba(255, 128, 0, 0.8) 60%, rgba(128, 128, 128, 0.8)); }
+
+fieldset, fieldset legend {
+  border-radius: .3em;
+  color: #fff; }
+
+div.sep {
+  width: 1%; }
+
+@media only screen and (min-width: 601px) and (max-width: 990px) {
+  fieldset.intro {
+    float: none;
+    width: auto;
+    height: auto !important; }
+
+  fieldset.skills {
+    width: 100%; }
+
+  fieldset.recent li {
+    display: block;
+    width: 33% !important;
+    margin-bottom: 1em; } }
+@media only screen and (max-width: 600px) {
+  fieldset.intro {
+    float: none;
+    width: auto;
+    height: auto !important; }
+
+  fieldset.skills {
+    width: 100%; }
+
+  fieldset.recent li {
+    width: 50% !important;
+    margin-bottom: 1em; } }
+
+/*# sourceMappingURL=styles.css.map */
