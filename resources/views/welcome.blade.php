@@ -2,7 +2,9 @@
 @section('content')
 <div class="topdiv">
   <fieldset class="intro"><legend>About me</legend>{!! $pagecontent['aboutme'] !!}
+    <div>
     @include('contactform')
+    </div>
   </fieldset>
 
   <div class="sep"></div>
