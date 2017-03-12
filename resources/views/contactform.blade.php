@@ -1,7 +1,7 @@
 {!! Form::open() !!}
 
-{!! Form::text('message',null,['placeholder'=>'Your message...']) !!}
-{!! Form::submit('Send') !!}
+{!! Form::text('message',null,['placeholder'=>'Your message...','required']) !!}
+{!! Form::submit('Send >') !!}
 
 {!! Form::close() !!}
 
