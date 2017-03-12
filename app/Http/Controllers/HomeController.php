@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
     public function sendEmail() {
       $this->validate(request(), [
-        'message'=>'required',
+        'message'=>'required|min:5|max:300',
       ]);
       \Mail::to('mail3@bashir.biz')->send(new ContactMail(request('message')));
       session()->flash('message','Thank you for your message!');
