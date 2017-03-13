@@ -1,11 +1,7 @@
 <?php
-Route::get('/', function () {return view('welcome');});
-
-Route::get('/home', function () {
+Route::get('/', function () {
   $pagetitle='Bashir Patel (Web developer/programmer) London-based';
-  $aboutme='<p>I am a Web developer based in London, UK. I am passionate about developing for the Web. I have spent a significant period of time learning the tools of the web to a high standard.</p>
-    <!--<p><a href="#">Contact me</a>-->';
-
+  $aboutme='<p>I am a Web developer based in London, UK. I am passionate about developing for the Web. I have spent a significant period of time learning the tools of the web to a high standard.</p>';
   $skills_list=[
   'PHP'               =>'I have been using PHP since the year 2000. I am therefore knowledgable with this scripting language. I use OOP extensively and have recently started using the <a href="https://laravel.com/">Laravel</a> PHP framework.',
   'MySQL'             =>'Like PHP, I have been using this database system since 2000.',
@@ -23,4 +19,4 @@ Route::get('/home', function () {
 })->name('home');
 
 // Send email.
-Route::post('/home', 'HomeController@sendEmail');
+Route::post('/', 'HomeController@sendEmail');
