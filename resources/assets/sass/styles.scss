@@ -4,7 +4,10 @@ body {
   font:1em Arial;
   padding:0;
   margin:0 1em 0;
-  &#home a.homelink, &#projects a.projectslink {color: yellow;}
+  &#home a.homelink, 
+  &#projects a.projectslink,
+  &#update a.updatelink
+  {color: yellow;}
   
 }
 
