@@ -20,8 +20,8 @@ class HomeController extends Controller
     ];
     $recent='I have just completed work on the website and web applications at <a href="http://www.hcdchauffeurdrive.com/">HCD Chauffeur drive</a>. They are a chauffeur company based in London. I was asked to redevelop their web site and to build their online booking system and controller/driver systems.';
     $images=['hcdsite','hcdbooking2','hcdbooking','hcdcapp','hcdapp2'];
-    return view('welcome')->with('page','home')
-    ->with('pagetitle','Bashir Patel (Web developer/programmer) London-based')
+    return view('welcome')
+    ->with('page',['home','Bashir Patel (Web developer/programmer) London-based'])
     ->with('pagecontent',['aboutme'=>$aboutme,'skill'=>$skills_list,'recent'=>$recent])
     ->with('images',$images);
   }
@@ -37,11 +37,10 @@ class HomeController extends Controller
   }
 
   public function projects() {
-    return view('projects')->with('page','projects')
-    ->with('pagetitle','Projects')
+    return view('projects')->with('page',['projects','Projects'])
     ;
   }
 
 
-  
+
 }
