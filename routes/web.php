@@ -1,6 +1,7 @@
 <?php
 
-Route::get('projects', 'HomeController@projects');
+Route::get('projects',    'HomeController@projects');
 
-Route::get('{home?}', 'HomeController@index')->name('home');
-Route::post('home', 'HomeController@sendEmail'); # Send email.
+Route::get( '{slug?}',    'HomeController@index')->where('slug','(home)') # Matches / or /home.
+->name('home');
+Route::post('email/send', 'HomeController@sendEmail')->name('sendcontacemeil'); # Send email.
