@@ -1,7 +1,7 @@
 <?php
 
 Route::get('projects',        'HomeController@projects');
-Route::get('content/update',  'HomeController@update');
+Route::get('content/update',  'HomeController@update')->name('updatecontent');
 Route::post('content/update', 'HomeController@updatecontent')->name('updatecontent');
 
 Route::get( '{slug?}',    'HomeController@index')->where('slug','(home)') # Matches / or /home.
