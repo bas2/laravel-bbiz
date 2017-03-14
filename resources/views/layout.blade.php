@@ -11,7 +11,8 @@
   {!! Html::script('js/slimbox/slimbox2.js') !!}
   {!! Html::script('js/script.js') !!}
 </head>
-<body>
+<body id="{{ $page }}">
+  @include('nav')
   @yield('content')
 </body>
 </html>
