@@ -4,6 +4,21 @@ body {
   font:1em Arial;
   padding:0;
   margin:0 1em 0;
+  &#home a.homelink, &#projects a.projectslink {color: yellow;}
+  
+}
+
+ul.nav {
+  padding: 0;
+  list-style: none;
+  text-align: center;
+  li {
+    padding-left: 0;
+    display: inline-block;
+    text-align: center;
+    a {font-weight: bold;margin-right: 1em;
+      border: none;font: 1.3em verdana;}
+  }
 }
 
 .error {color:#f00;font-weight:bold;}
