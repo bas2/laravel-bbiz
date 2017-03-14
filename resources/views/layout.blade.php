@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>{{ $pagetitle }}</title>
+  <title>{{ $page[1] }}</title>
   {!! Html::style('css/styles.css') !!}
   {!! Html::style('js/slimbox/slimbox2.css') !!}
 
@@ -11,7 +11,7 @@
   {!! Html::script('js/slimbox/slimbox2.js') !!}
   {!! Html::script('js/script.js') !!}
 </head>
-<body id="{{ $page }}">
+<body id="{{ $page[0] }}">
   @include('nav')
   @yield('content')
 </body>
