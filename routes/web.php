@@ -1,6 +1,13 @@
 <?php
-Route::get('/', function () {
-  $pagetitle='Bashir Patel (Web developer/programmer) London-based';
+
+Route::get('projects',function(){
+  return view('projects')->with('page','projects')
+  ->with('pagetitle','Projects')
+
+  ;
+});
+
+Route::get('{home?}', function () {
   $aboutme='<p>I am a Web developer based in London, UK. I am passionate about developing for the Web. I have spent a significant period of time learning the tools of the web to a high standard.</p>';
   $skills_list=[
   'PHP'               =>'I have been using PHP since the year 2000. I am therefore knowledgable with this scripting language. I use OOP extensively and have recently started using the <a href="https://laravel.com/">Laravel</a> PHP framework.',
@@ -12,11 +19,13 @@ Route::get('/', function () {
   ];
   $recent='I have just completed work on the website and web applications at <a href="http://www.hcdchauffeurdrive.com/">HCD Chauffeur drive</a>. They are a chauffeur company based in London. I was asked to redevelop their web site and to build their online booking system and controller/driver systems.';
   $images=['hcdsite','hcdbooking2','hcdbooking','hcdcapp','hcdapp2'];
-  return view('welcome')
-  ->with('pagetitle',$pagetitle)
+  return view('welcome')->with('page','home')
+  ->with('pagetitle','Bashir Patel (Web developer/programmer) London-based')
   ->with('pagecontent',['aboutme'=>$aboutme,'skill'=>$skills_list,'recent'=>$recent])
   ->with('images',$images);
 })->name('home');
 
 // Send email.
-Route::post('/', 'HomeController@sendEmail');
+Route::post('home', 'HomeController@sendEmail');
+
+
