@@ -1,9 +1,10 @@
 $(document).ready(function(){
   if ($('p.error').length==0&&$('p.success').length==0) { 
-    $('<p><a href="#">Contact me</a></p>').insertBefore('.intro div').click(function(){
+    $('<p><a href="#">Contact me</a></p>').insertBefore('.intro div').click(function(e){
       $('.intro div').show();
       $(this).hide();
       $('input[name=message]').focus();
+      e.preventDefault();
     });
     $('.intro div').hide();
   } else {
