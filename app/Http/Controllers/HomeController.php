@@ -9,20 +9,14 @@ use App\Mail\ContactMail;
 class HomeController extends Controller
 {
   public function index() {
-    $skills_list=[
-    'PHP'               =>'I have been using PHP since the year 2000. I am therefore knowledgable with this scripting language. I use OOP extensively and have recently started using the <a href="https://laravel.com/">Laravel</a> PHP framework.',
-    'MySQL'             =>'Like PHP, I have been using this database system since 2000.',
-    'HTML'              =>'I have been using HTML since 1999.',
-    'CSS'               =>'I quickly picked up on the benefits of CSS quite soon after learning to code HTML.',
-    'Jquery'            =>'I recently started using this in favour of plain Javascript in the last few years.',
-    'Linux server admin'=>'Since electing to use Ubuntu instead of Windows as my chosen desktop OS, I have developed a liking for the Linux operating system. My domain bashir.biz was hosted on a CentOS server on which I had configured web, mail and database servers.',
-    ];
-    $images=['hcdsite','hcdbooking2','hcdbooking','hcdcapp','hcdapp2'];
     return view('pages.welcome')
     ->with('page',['home','Bashir Patel (Web developer/programmer) London-based'])
-    ->with('pagecontent',
-      ['aboutme'=>$this->getsection('about'),'skill'=>$skills_list,'recent'=>$this->getsection('recent')])
-    ->with('images',$images);
+    ->with('pagecontent', [
+      'aboutme'=>$this->getsection('about'),
+      'skills'=>\App\Skill::get(['skill','content']),
+      'recent'=>$this->getsection('recent')
+      ])
+    ->with('images',\App\Image::get(['filename']));
   }
 
   public function sendEmail() {
@@ -41,10 +35,13 @@ class HomeController extends Controller
 
   public function update() {
     $about=\App\Content::where('name','about')->get();
+    $skills=\App\Skill::get(['id','skill','content']);
     $recent=\App\Content::where('name','recent')->get();
     $recent=($recent->count()==1) ? $recent[0]->content : '' ;
     return view('pages.update')->with('page',['update','Update'])
-    ->with('content',['about'=>$about[0]->content,'recent'=>$recent])
+    ->with('content',
+      ['about'=>$about[0]->content,'skills'=>$skills,'recent'=>$recent]
+      )
     ;
   }
 
@@ -69,9 +66,37 @@ class HomeController extends Controller
     $this->updatesection('about', $request);
     $this->updatesection('recent', $request);
 
+    if ($file=$request->file('image')) {
+      $filename=$file->getClientOriginalName();
+      $file->move('img',$filename);
+      $image=\App\Image::where('filename',$filename)->get();
+      if(!$image->count()) {
+        $image=new \App\Image;
+        $image->filename=$filename;
+        $image->save();
+      }
+    }
+    $input=$request->all();
+    if(!empty($input['skillname'])) {
+      $skill=new \App\Skill;
+      $skill->skill=$input['skillname'];
+      $skill->save();
+    }
 
+    foreach($input as $k=>$v) {
+      if(substr($k, 0,strlen('skillname'))=='skillname') {
+        $skillid=substr($k,strpos($k,'_')+1);
+        if (is_numeric($skillid)) { 
+          echo $update=\App\Skill::where('id',$skillid)->update(['skill'=>$v,'content'=>$input["skillcontent_{$skillid}"]]);
+        }
+      }
+    }
 
-    return redirect('home');
+    return redirect('content/update');
   }
+
+
+
+
 
 }
