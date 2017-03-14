@@ -1,4 +1,4 @@
-{!! Form::open() !!}
+{!! Form::open(['route'=>'sendcontacemeil']) !!}
 
 {!! Form::text('message',null,['placeholder'=>'Your message...','required']) !!}
 {!! Form::submit('Send >') !!}
