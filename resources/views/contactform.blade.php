@@ -1,8 +1,16 @@
 {!! Form::open(['route'=>'sendcontacemeil']) !!}
-
-{!! Form::text('message',null,['placeholder'=>'Your message...','required']) !!}
+<div>
+{!! Form::text('name',null,['placeholder'=>'Your name...']) !!}
+</div>
+<div>
+{!! Form::email('email',null,['placeholder'=>'Your email...']) !!}
+</div>
+<div>
+{!! Form::textarea('message',null,['placeholder'=>'Your message...','required']) !!}
+</div>
+<div>
 {!! Form::submit('Send >') !!}
-
+</div>
 {!! Form::close() !!}
 
 @foreach($errors->all() as $error)
