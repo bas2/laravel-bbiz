@@ -36,16 +36,18 @@ class HomeController extends Controller
   }
 
   public function update() {
-    $about=\App\Content::where('name','about')->get();
-    $skills=\App\Skill::get(['id','skill','content']);
-    $recent=\App\Content::where('name','recent')->get();
-    $recent=($recent->count()==1) ? $recent[0]->content : '' ;
-    return view('pages.update')->with('page',['update','Update'])
-    ->with('content',
-      ['about'=>$about[0]->content,'skills'=>$skills,'recent'=>$recent]
-      )
-    ->with('images',\App\Image::get(['filename']))
-    ;
+    if(\Auth::check()){ 
+      $about=\App\Content::where('name','about')->get();
+      $skills=\App\Skill::get(['id','skill','content']);
+      $recent=\App\Content::where('name','recent')->get();
+      $recent=($recent->count()==1) ? $recent[0]->content : '' ;
+      return view('pages.update')->with('page',['update','Update'])
+      ->with('content',
+        ['about'=>$about[0]->content,'skills'=>$skills,'recent'=>$recent]
+        )
+      ->with('images',\App\Image::get(['filename']))
+      ;
+    } else {abort(404);}
   }
 
   private function getsection($section) {
@@ -90,7 +92,7 @@ class HomeController extends Controller
       if(substr($k, 0,strlen('skillname'))=='skillname') {
         $skillid=substr($k,strpos($k,'_')+1);
         if (is_numeric($skillid)) { 
-          echo $update=\App\Skill::where('id',$skillid)->update(['skill'=>$v,'content'=>$input["skillcontent_{$skillid}"]]);
+          $update=\App\Skill::where('id',$skillid)->update(['skill'=>$v,'content'=>$input["skillcontent_{$skillid}"]]);
         }
       }
     }
@@ -99,7 +101,33 @@ class HomeController extends Controller
   }
 
 
+  public function getlogin() {
+    return view('pages.login')->with('page',['login','Login']);
+  }
 
+  public function postlogin() {
+    $this->validate(request(), ['username'=>'required','password'=>'required']);
 
+    $userdata = [
+      'username' => request('username'),
+      'password' => request('password')
+    ];
+
+    if (\Auth::attempt($userdata)) {
+      return redirect('home');
+    } else {
+      return view('pages/login')
+      ->with('title','Login failed')
+      ->with('page','log-in')
+      ->with('message','Login failed')
+      ;
+    }
+
+  }
+
+  public function getlogout() {
+    \Auth::logout(); // log the user out of our application
+    return redirect('home')->with('message','You are now logged out'); // redirect the user.
+  }
 
 }
