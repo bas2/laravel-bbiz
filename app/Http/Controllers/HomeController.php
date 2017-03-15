@@ -38,10 +38,6 @@ class HomeController extends Controller
 
   public function update() {
     if(\Auth::check()){ 
-      //$about=\App\Content::where('name','about')->get();
-      //$skills=\App\Skill::get(['id','skill','content']);
-      //$recent=\App\Content::where('name','recent')->get();
-      //$recent=($recent->count()==1) ? $recent[0]->content : '' ;
       return view('pages.update')->with('page',['update','Update'])
       ->with('content',
         ['about'=>$this->getsection('about'),
