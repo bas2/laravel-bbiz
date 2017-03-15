@@ -48,11 +48,15 @@ fieldset {
     width:40%;
     p {line-height: 1.6;font-size: 150%;}
     form {text-align: center;}
+    div {margin-bottom: .4em;}
+    input,textarea {box-sizing:border-box;width:70%;font:1em arial;}
+    input[type=submit]{font-weight: bold;cursor: pointer;background:navy;color:#fff;border:none;border-radius:.3em;padding:.3em;}
   }
   &.skills {
     border: 2px solid red;
     box-shadow: 1px 1px 8px rgba(255,0,0,.8);
     width: 59%;
+    
   }
   p, &.skills li {
     font-size:1.5em;
@@ -107,6 +111,16 @@ fieldset {
   &.recent legend {
     background-image: url(../img/time.png), linear-gradient(hsla(30,100%,50%,.8)60%, hsla(20,0%,50%,.8));
   }
+}
+
+body#update fieldset {
+  width:auto;
+  textarea,input[name^=skillcontent] {
+    box-sizing:border-box;width:100%;
+    font:1em arial;
+  }
+  input {font-weight: bold;}
+  textarea {height:4em;}
 }
 
 fieldset, fieldset legend {
