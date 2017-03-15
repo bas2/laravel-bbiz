@@ -3,7 +3,7 @@
 <div class="topdiv">
   <fieldset class="intro"><legend>About me</legend>
   {!! $pagecontent['aboutme'] !!}
-    <div>@include('contactform')</div>
+    <div class="contactform">@include('contactform')</div>
   </fieldset>
 
   <div class="sep"></div>
@@ -22,7 +22,7 @@
   <legend>Recent work</legend>
   <p>{!! $pagecontent['recent'] !!}</p>
   <ul>
-  @foreach($images as $image)<li><a href="img/{{ $image->filename }}" rel="lightbox"><img src="img/{{ $image->filename }}" alt="" width="200"></a></li>@endforeach
+  @foreach($images as $image)<li>{{ link_to("img/{$image->filename}",Html::image("img/{$image->filename}",'',['width'=>200]), ['rel'=>'lightbox'], null, false) }}</li>@endforeach
   </ul>
 </fieldset>
 
