@@ -25,7 +25,8 @@ class HomeController extends Controller
       'email'=>'email',
       'message'=>'required|min:5|max:300',
     ]);
-    \Mail::to('mail3@bashir.biz')->send(new ContactMail(request('name'),request('email'),request('message')));
+    $email=\App\Content::where('name','email')->get(['content']);
+    \Mail::to($email[0]->content)->send(new ContactMail(request('name'),request('email'),request('message')));
     session()->flash('message','Thank you for your message!');
 
     return redirect('home');
@@ -37,13 +38,16 @@ class HomeController extends Controller
 
   public function update() {
     if(\Auth::check()){ 
-      $about=\App\Content::where('name','about')->get();
-      $skills=\App\Skill::get(['id','skill','content']);
-      $recent=\App\Content::where('name','recent')->get();
-      $recent=($recent->count()==1) ? $recent[0]->content : '' ;
+      //$about=\App\Content::where('name','about')->get();
+      //$skills=\App\Skill::get(['id','skill','content']);
+      //$recent=\App\Content::where('name','recent')->get();
+      //$recent=($recent->count()==1) ? $recent[0]->content : '' ;
       return view('pages.update')->with('page',['update','Update'])
       ->with('content',
-        ['about'=>$about[0]->content,'skills'=>$skills,'recent'=>$recent]
+        ['about'=>$this->getsection('about'),
+         'email'=>$this->getsection('email'),
+         'skills'=>\App\Skill::get(['id','skill','content']),
+         'recent'=>$this->getsection('recent')]
         )
       ->with('images',\App\Image::get(['filename']))
       ;
@@ -68,8 +72,10 @@ class HomeController extends Controller
   }
 
   public function updatecontent(Request $request) {
+    $this->validate(request(), ['email'=>'required']);
     $this->updatesection('about', $request);
     $this->updatesection('recent', $request);
+    $this->updatesection('email', $request);
 
     if ($file=$request->file('image')) {
       $filename=$file->getClientOriginalName();
