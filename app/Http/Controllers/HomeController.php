@@ -16,17 +16,19 @@ class HomeController extends Controller
       'skills'=>\App\Skill::get(['skill','content']),
       'recent'=>$this->getsection('recent')
       ])
-    ->with('images',\App\Image::get(['filename']));
+    ->with('images',\App\Image::get(['filename']))
+    ;
   }
 
   public function sendEmail() {
     $this->validate(request(), [
+      'email'=>'email',
       'message'=>'required|min:5|max:300',
     ]);
-    \Mail::to('mail3@bashir.biz')->send(new ContactMail(request('message')));
+    \Mail::to('mail3@bashir.biz')->send(new ContactMail(request('name'),request('email'),request('message')));
     session()->flash('message','Thank you for your message!');
 
-    return redirect()->home();
+    return redirect('home');
   }
 
   public function projects() {
@@ -42,6 +44,7 @@ class HomeController extends Controller
     ->with('content',
       ['about'=>$about[0]->content,'skills'=>$skills,'recent'=>$recent]
       )
+    ->with('images',\App\Image::get(['filename']))
     ;
   }
 
