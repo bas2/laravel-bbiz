@@ -7,6 +7,9 @@
 <div>
 {!! Form::textarea('about',$content['about'],['required']) !!}
 </div>
+<div>
+{!! Form::email('email',$content['email']) !!}
+</div>
 </fieldset>
 
 
