@@ -5,6 +5,6 @@
   <li>{{ link_to('content/update','Update',['class'=>'updatelink']) }}
   <li>{{ link_to('logout','Logout',['class'=>'logoutlink']) }}
   @else
-  {{-- <li>{{ link_to('login','Login',['class'=>'loginlink']) }} --}}
+  <li>{{ link_to('login','Login',['class'=>'loginlink']) }}
   @endif
 </ul>
