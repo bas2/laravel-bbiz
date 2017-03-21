@@ -157,3 +157,20 @@ div.sep {width:1%;}
     margin-bottom: 1em;
   }
 }
+
+.overlay_container {
+  position: fixed;
+  top:0;left:0;
+  width:100%;
+  overflow:auto;
+  height:100%;
+  font-size:200%;
+  z-index:3;
+  margin: 0;
+  background: hsla(30,0%,50%,.5);
+  img {width:100%;}
+  div {position:fixed;top:0;right:10px;cursor:pointer;background:rgba(0,0,0,.4);
+    font-weight:bold;border:2px solid #000;border-radius: .4em;
+  }
+}
+
