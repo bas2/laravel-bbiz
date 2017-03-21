@@ -22,7 +22,7 @@
   <legend>Recent work</legend>
   <p>{!! $pagecontent['recent'] !!}</p>
   <ul>
-  @foreach($images as $image)<li>{{ link_to("img/{$image->filename}",Html::image("img/{$image->filename}",'',['width'=>200]), ['rel'=>'lightbox'], null, false) }}</li>@endforeach
+  @foreach($images as $image)<li>{{ link_to("img/{$image->filename}",Html::image("img/{$image->filename}",'',['width'=>200]), ['class'=>'overlay'], null, false) }}</li>@endforeach
   </ul>
 </fieldset>
 
