@@ -6,8 +6,10 @@
   <div class="col-md-6 intro">
     <div class="panel hunp">
       <h2 class="panel-heading">About me</h2>
-      {!! $pagecontent['aboutme'] !!}
-      <div class="panel-body hunp contactform">@include('contactform')</div>
+      <div class="panel-body">
+        {!! $pagecontent['aboutme'] !!}
+        <div class="contactform">@include('contactform')</div>
+      </div>
     </div>
   </div>
 
@@ -17,7 +19,9 @@
       <div class="panel-body">
         <ul>
         @foreach($pagecontent['skills'] as $skill)
+        @if(!empty($skill->skill))
         <li><i>{!! $skill->skill !!}</i> &rarr; {!! $skill->content !!}</li>
+        @endif
         @endforeach
         </ul>
       </div>
@@ -35,10 +39,12 @@
 <div class="col-md-12 recent">
   <div class="panel hunp">
     <h2 class="panel-heading">Recent work</h2>
+    <div class="panel-body">
     <p>{!! $pagecontent['recent'] !!}</p>
     <ul class="list-inline">
     @foreach($images as $image)<li>{{ link_to("img/{$image->filename}",Html::image("img/{$image->filename}",'',['width'=>200]), ['class'=>'overlay'], null, false) }}</li>@endforeach
     </ul>
+    </div>
   </div>
 </div>
 
