@@ -6,10 +6,10 @@
 {!! Form::email('email',null,['placeholder'=>'Your email...']) !!}
 </div>
 <div>
-{!! Form::textarea('message',null,['placeholder'=>'Your message...','required']) !!}
+{!! Form::textarea('message',null,['class'=>'form-control','placeholder'=>'Your message...','required']) !!}
 </div>
 <div>
-{!! Form::submit('Send >') !!}
+{!! Form::submit('Send >',['class'=>'btn btn-primary']) !!}
 </div>
 {!! Form::close() !!}
 
