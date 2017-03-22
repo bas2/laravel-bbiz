@@ -86,18 +86,23 @@ class HomeController extends Controller
     $input=$request->all();
     if(!empty($input['skillname'])) {
       $skill=new \App\Skill;
-      $skill->skill=$input['skillname'];
+      $skill->skill=empty($input['skillname'])?'':$input['skillname'];
+      $skill->content='';
       $skill->save();
     }
 
     foreach($input as $k=>$v) {
       if(substr($k, 0,strlen('skillname'))=='skillname') {
         $skillid=substr($k,strpos($k,'_')+1);
-        if (is_numeric($skillid)) { 
-          $update=\App\Skill::where('id',$skillid)->update(['skill'=>$v,'content'=>$input["skillcontent_{$skillid}"]]);
+        if (is_numeric($skillid)) {
+          $skill=(empty($v))?'':$v;
+          $skillcontent=(empty($input["skillcontent_{$skillid}"]))?'':$input["skillcontent_{$skillid}"];
+          $update=\App\Skill::where('id',$skillid)->update(['skill'=>$skill,'content'=>$skillcontent]);
         }
       }
     }
+
+    session()->flash('message','Content was updated');
 
     return redirect('content/update');
   }
