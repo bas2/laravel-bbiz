@@ -21,9 +21,10 @@ body {
 
 input, textarea {border:none;width:100%;color:#000;}
 input[type=submit]{width:auto;}
-form {
+.intro form {
   width:70%;
   div {margin-bottom: .4em;}
+  input[type=text],input[type=email]{padding:.3em;}
 }
 
 .equal {  
@@ -34,21 +35,21 @@ form {
 }
 
 .panel {
-  p {margin: 0 15px;}
   h2 {margin-top: 0;}
   &.hunp {height:100%;}
 }
 
 .intro {
-  h2 {background: url(../img/Person.png) no-repeat 98% 5px;}
+  h2 {background: url(../img/Person.png);}
 }
 
 .skills {
-  h2 {background: url('../img/bulb.png') no-repeat 98% 5px;}
+  h2 {background: url('../img/bulb.png');}
   .panel-body {
-    padding: 0;
+    padding-left: 0;
     ul {
-      padding: 0 30px;
+      padding-left: 30px;
+      padding-right: 30px;
       li {list-style: square;
         i {font-weight:bold;color:darkred;}
       }
@@ -57,12 +58,22 @@ form {
 }
 
 .recent {
-  h2 {background: url('../img/time2.png') no-repeat 99% 5px;}
-  ul {padding:15px;}
+  h2 {background: url('../img/time2.png');padding-bottom:0;}
+  p {margin-left:0;}
+  li{padding:0;margin-right:15px;}
+  li:first-child{margin-left:0;}
+  .list-inline {margin-left:0;}
+}
+
+.intro, .skills, .recent {
+  h2 {
+    background-repeat: no-repeat;
+    background-position: right 10px;
+  }
 }
 
 ul.nav {
-  margin-bottom: 1em;
+  margin-bottom: 0;
   li {
     a {font-weight: normal;}
   }
@@ -72,32 +83,20 @@ ul.nav {
 
 .success {color:lime;font-weight:bold;}
 
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: $footer-height;
-  background-color: #181818;
-  box-shadow: 0 2px 0 inset #000;
-  color: red;
-}
 
-
-body#update fieldset {
-  width:auto;
-  textarea,input[name^=skillcontent] {
-    box-sizing:border-box;width:100%;
-    font:1em arial;
-  }
-  input {font-weight: bold;}
+body#update div {
   textarea {height:4em;}
 }
 
-fieldset, fieldset legend {
-  border-radius: .3em;
-  color:#fff;
+body#update form {
+  width: auto;
+  max-width: 1200px;
+  margin:0 auto;
+  div {margin-top:.2em;margin-bottom:.2em;}
+  input[type=text],input[type=email]{font-weight: bold;}
+  textarea{}
 }
+
 
 .overlay_container {
   position: fixed;
@@ -120,3 +119,22 @@ body#login form {
   margin:0 auto;
 }
 
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: $footer-height;
+  background-color: #181818;
+  box-shadow: 0 2px 0 inset #000;
+  color: red;
+}
+
+@media (max-width: 978px) {
+  .skills {margin-top: 30px;}
+  .recent ul {
+    margin:0 auto;
+    li {margin-top: 1em;text-align: center;}
+  }
+}
