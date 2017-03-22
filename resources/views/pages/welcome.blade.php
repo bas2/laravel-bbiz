@@ -1,29 +1,49 @@
 @extends('layout')
 @section('content')
-<div class="topdiv">
-  <fieldset class="intro"><legend>About me</legend>
-  {!! $pagecontent['aboutme'] !!}
-    <div class="contactform">@include('contactform')</div>
-  </fieldset>
+<div class="container">
+<div class="row equal">
 
-  <div class="sep"></div>
+  <div class="col-md-6 intro">
+    <div class="panel hunp">
+      <h2 class="panel-heading">About me</h2>
+      {!! $pagecontent['aboutme'] !!}
+      <div class="panel-body hunp contactform">@include('contactform')</div>
+    </div>
+  </div>
 
-  <fieldset class="skills">
-    <legend>Skills</legend>
-    <ul>
-      @foreach($pagecontent['skills'] as $skill)
-      <li><i>{!! $skill->skill !!}</i> &rarr; {!! $skill->content !!}</li>
-      @endforeach
-    </ul>
-  </fieldset>
+  <div class="col-md-6 skills">
+    <div class="panel hunp">
+      <h2 class="panel-heading">Skills summary</h2>
+      <div class="panel-body">
+        <ul>
+        @foreach($pagecontent['skills'] as $skill)
+        <li><i>{!! $skill->skill !!}</i> &rarr; {!! $skill->content !!}</li>
+        @endforeach
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
 </div>
 
-<fieldset class="recent">
-  <legend>Recent work</legend>
-  <p>{!! $pagecontent['recent'] !!}</p>
-  <ul>
-  @foreach($images as $image)<li>{{ link_to("img/{$image->filename}",Html::image("img/{$image->filename}",'',['width'=>200]), ['class'=>'overlay'], null, false) }}</li>@endforeach
-  </ul>
-</fieldset>
+
+<div class="container">
+<div class="row">
+
+
+<div class="col-md-12 recent">
+  <div class="panel hunp">
+    <h2 class="panel-heading">Recent work</h2>
+    <p>{!! $pagecontent['recent'] !!}</p>
+    <ul class="list-inline">
+    @foreach($images as $image)<li>{{ link_to("img/{$image->filename}",Html::image("img/{$image->filename}",'',['width'=>200]), ['class'=>'overlay'], null, false) }}</li>@endforeach
+    </ul>
+  </div>
+</div>
+
+
+</div>
+</div>
 
 @endsection
