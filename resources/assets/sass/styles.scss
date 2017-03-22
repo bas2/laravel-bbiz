@@ -1,57 +1,132 @@
+$footer-height: 60px;
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
   background: hsla(0,0%,0%,.6);
-  color: #ccc;
-  font:1em Arial;
-  padding:0;
-  margin:0 1em 0;
   &#home a.homelink, 
   &#projects a.projectslink,
   &#update a.updatelink,
   &#login a.loginlink
   {color: yellow;}
   
+  /* Margin bottom by footer height */
+}
+
+.wrapper {
+  margin:0 10px $footer-height;
+
+}
+
+input, textarea {border:none;width:100%;color:#000;}
+input[type=submit]{width:auto;}
+form {
+  width:70%;
+  div {
+    margin-bottom: .4em;
+  }
+}
+
+.equal {  
+    display: -webkit-flex;
+    display: flex;
+  flex-wrap:wrap;
+  margin-bottom: 2em;
+}
+
+.hunp {height:100%;}
+
+.panel p {
+  margin: 0 15px;
+}
+
+.panel h2 {
+  margin-top: 0;
+}
+
+.intro h2 {
+  background: url(../img/Person.png) no-repeat 98% 5px;
+}
+
+.recent ul, .skills .panel-body {
+  padding:15px;
+}
+
+.skills h2 {
+  background: url('../img/bulb.png') no-repeat 98% 5px;
+}
+
+.skills .panel-body {
+  padding: 0;
+  ul {
+    padding: 0 30px;
+    li {list-style: square;
+      i {font-weight:bold;color:darkred;}
+    }
+  }
+}
+
+.recent h2 {
+  background: url('../img/time2.png') no-repeat 99% 5px;
 }
 
 ul.nav {
-  padding: 0;
-  list-style: none;
-  text-align: center;
+  margin-bottom: 1em;
   li {
-    padding-left: 0;
-    display: inline-block;
-    text-align: center;
-    a {font-weight: bold;margin-right: 1em;
-      border: none;font: 1.3em verdana;}
+
+    a {
+      font-weight: normal;      
+      }
   }
 }
 
 .error {color:#f00;font-weight:bold;}
 .success {color:lime;font-weight:bold;}
 
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: $footer-height;
+  background-color: #181818;
+  box-shadow: 0 2px 0 inset #000;
+  color: red;
+}
+
+
+
+
+
+
 div.topdiv {
   display:flex;
   flex-wrap:wrap;
 }
 
-a {
+a2 {
   color:#ccc;
   text-decoration: none;
   border-bottom: 1px dotted #ccc;
-  &:hover {color:#000;}
+
 }
 
 fieldset {
-  box-sizing: border-box;
-  margin:1em 0 0 0;
+  margin-bottom: 1em;
   &.intro {
     border: 2px solid blue;
     box-shadow: 1px 1px 8px rgba(0,0,255,.8);
     width:40%;
     p {line-height: 1.6;font-size: 150%;}
-    form {text-align: center;}
+    form {width:70%;margin:0 auto;}
     div {margin-bottom: .4em;}
-    input,textarea {box-sizing:border-box;width:70%;font:1em arial;}
-    input[type=submit]{font-weight: bold;cursor: pointer;background:navy;color:#fff;border:none;border-radius:.3em;padding:.3em;}
+    input {padding:.3em;}
+    
+    input, textarea {color:#000;border:none;width:100%;}
   }
   &.skills {
     border: 2px solid red;
@@ -68,7 +143,7 @@ fieldset {
   p {margin: .5em 1em;}
   &.skills ul {
     margin-top: .75em;
-    padding-left:1.5em;
+    padding-left:2em;
     font-size:75%;
     i {color: yellow;}
     li {
@@ -90,6 +165,7 @@ fieldset {
     text-shadow: 1px 1px 0px #ccc;
     letter-spacing: .5em;
     padding:0;
+    border-bottom: none;
   }
   &.skills legend {
     background-image: url(../img/skill.png), linear-gradient(hsla(0,100%,50%,.8)60%, hsla(20,0%,50%,.8));
@@ -131,6 +207,7 @@ fieldset, fieldset legend {
 
 div.sep {width:1%;}
 
+/*
 @media only screen and (min-width: 601px) and (max-width: 990px) {
   fieldset.intro {
     float:none;
@@ -157,6 +234,7 @@ div.sep {width:1%;}
     margin-bottom: 1em;
   }
 }
+*/
 
 .overlay_container {
   position: fixed;
@@ -172,5 +250,11 @@ div.sep {width:1%;}
   div {position:fixed;top:0;right:10px;cursor:pointer;background:rgba(0,0,0,.4);
     font-weight:bold;border:2px solid #000;border-radius: .4em;
   }
+}
+
+body#login form {
+
+  max-width: 400px;
+  margin:0 auto;
 }
 
