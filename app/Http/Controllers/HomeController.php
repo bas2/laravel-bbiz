@@ -52,7 +52,7 @@ class HomeController extends Controller
          'skills'=>\App\Skill::get(['id','skill','content']),
          'recent'=>$this->_getsection('recent')]
         )
-      ->with('images',\App\Image::get(['filename']))
+      ->with('images',\App\Image::get(['id','filename']))
       ;
     } else {abort(404);}
   }
@@ -85,7 +85,7 @@ class HomeController extends Controller
     if ($file=$request->file('image')) {
       // Upload image.
       $filename=$file->getClientOriginalName();
-      $file->move('img',$filename);
+      $file->move('img/uploaded',$filename);
       $image=\App\Image::where('filename',$filename)->get();
       if(!$image->count()) { # Create new row if image filename is not present.
         $image=new \App\Image;
@@ -93,6 +93,14 @@ class HomeController extends Controller
         $image->save();
       }
     }
+    if(count(request('del'))) {
+      foreach(request('del') as $imgid) { # Delete any selected images.
+        $image=\App\Image::where('id',$imgid)->get(['filename']);
+        \File::delete(public_path().'/img/uploaded/'.$image[0]->filename);
+        $image=\App\Image::where('id',$imgid)->delete();
+      }
+    }
+
     $input=$request->all();
     if(!empty($input['skillname'])) {
       // Add new skill record.
