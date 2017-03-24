@@ -44,7 +44,7 @@ class HomeController extends Controller
 
   // GET: content/update
   public function update() {
-    if(\Auth::check()){
+    //if(\Auth::check()){
       return view('pages.update')->with('page',['update','Update'])
       ->with('content',
         ['about'=>$this->_getsection('about'),
@@ -54,7 +54,7 @@ class HomeController extends Controller
         )
       ->with('images',\App\Image::get(['id','filename']))
       ;
-    } else {abort(404);}
+    //} else {abort(404);}
   }
 
   // Used by index() and content/update.
@@ -139,7 +139,7 @@ class HomeController extends Controller
     $this->validate(request(), ['username'=>'required','password'=>'required']);
 
     if (\Auth::attempt(['username'=>request('username'),'password'=>request('password')]))
-      {return redirect('home');} # Log user in and redirect to home page.
+      {return redirect('content/update');} # Log user in and redirect to update page.
     else {
       return view('pages/login')
       ->with('page',['login','Login failed'])
