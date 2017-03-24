@@ -68,18 +68,19 @@
     <div class="panel hunp">
       <h2 class="panel-heading">Recent work</h2>
       <div class="container">
-      <div>
-      {!! Form::textarea('recent',$content['recent'],['class'=>'form-control','required']) !!}
-      </div>
+        <div>
+        {!! Form::textarea('recent',$content['recent'],['class'=>'form-control','required']) !!}
+        </div>
 
-      {!! Form::file('image') !!}
+        {!! Form::file('image') !!}
 
-      <h3>Current images</h3>
-      <ul class="list-inline">
-      @foreach ($images as $image)
-      <li>{{ Html::image("img/$image->filename",'',['width'=>200]) }}
-      @endforeach
-      </ul>
+        <h3>Current images</h3>
+        <ul class="list-inline">
+        @foreach ($images as $image)
+        <li>{{ Form::checkbox('del[]',$image->id,null,['id'=>'img'.$image->id,'style'=>'display:none;']) }}
+        {{ Form::label('img'.$image->id,Html::image("img/uploaded/$image->filename",'',['width'=>200]),[],false) }}
+        @endforeach
+        </ul>
       </div>
     </div>
   </div>
@@ -99,4 +100,11 @@
 </div>
 
 {!! Form::close() !!}
+<script>
+$(document).ready(function(){
+  $('#recent label').click(function(){
+    $(this).find('img').toggleClass('halfopacity');
+  });
+});
+</script>
 @endsection
