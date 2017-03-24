@@ -1,10 +1,11 @@
 <?php
-
 Route::get('projects',        'HomeController@projects');
-Route::get('content/update',  'HomeController@update')->name('updatecontent');
-Route::post('content/update', 'HomeController@updatecontent')->name('updatecontent');
+Route::get('content/update',  'HomeController@update')->name('updatecontent')
+->middleware('auth');
+Route::post('content/update', 'HomeController@updatecontent')->name('updatecontent')
+->middleware('auth');
 
-Route::get('login', 'HomeController@getlogin')->name('getlogin');
+Route::get('login', 'HomeController@getlogin')->name('login');
 Route::post('login', 'HomeController@postlogin')->name('postlogin');
 Route::get('logout', 'HomeController@getlogout')->name('getlogout');
 
