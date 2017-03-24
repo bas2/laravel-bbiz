@@ -17,7 +17,10 @@
 <p class="alert alert-warning">{{ $error }}</p>
 @endforeach
 
-@if($flash=session('message'))
+@if($flash=session('successmessage'))
 <p class="alert alert-success">{{ $flash }}</p>
 @endif
 
+@if($flash=session('failuremessage'))
+<p class="alert alert-danger">{{ $flash }}</p>
+@endif
