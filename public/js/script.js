@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-  if ($('p.alert-warning').length==0&&$('p.alert-success').length==0) {
+  if ($('p.alert-warning').length==0&&$('p.alert-success').length==0&&$('p.alert-danger').length==0) {
     // Hide form and replace with Contact me link, which when clicked, show the form, hide the 
     // link and focus the name field.
     $('<p><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <a href="#">Contact me</a></p>').insertBefore('#home .intro div.contactform').click(function(e){
