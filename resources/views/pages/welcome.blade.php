@@ -44,7 +44,7 @@
     <div class="panel-body">
     <p>{!! $pagecontent['recent'] !!}</p>
     <ul class="list-inline">
-    @foreach($images as $image)<li>{{ link_to("img/{$image->filename}",Html::image("img/{$image->filename}",'',['width'=>200]), ['class'=>'overlay'], null, false) }}</li>@endforeach
+    @foreach($images as $image)<li>{{ link_to("img/uploaded/{$image->filename}",Html::image("img/uploaded/{$image->filename}",'',['width'=>200]), ['class'=>'overlay'], null, false) }}</li>@endforeach
     </ul>
     </div>
   </div>
