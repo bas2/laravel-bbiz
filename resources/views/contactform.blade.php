@@ -3,7 +3,7 @@
 {!! Form::text('name',null,['placeholder'=>'Your name...']) !!}
 </div>
 <div>
-{!! Form::email('email',null,['placeholder'=>'Your email...']) !!}
+{!! Form::email('email',null,['placeholder'=>'Your email...','required']) !!}
 </div>
 <div>
 {!! Form::textarea('message',null,['class'=>'form-control','placeholder'=>'Your message...','required']) !!}
@@ -14,10 +14,10 @@
 {!! Form::close() !!}
 
 @foreach($errors->all() as $error)
-<p class="error">{{ $error }}</p>
+<p class="alert alert-warning">{{ $error }}</p>
 @endforeach
 
 @if($flash=session('message'))
-<p class="success">{{ $flash }}</p>
+<p class="alert alert-success">{{ $flash }}</p>
 @endif
 
