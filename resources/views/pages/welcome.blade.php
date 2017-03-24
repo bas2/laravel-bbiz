@@ -3,7 +3,7 @@
 <div class="container">
 <div class="row equal">
 
-  <div class="col-md-6 intro">
+  <div class="col-md-5 intro">
     <div class="panel hunp">
       <h2 class="panel-heading">About me</h2>
       <div class="panel-body">
@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  <div class="col-md-6 skills">
+  <div class="col-md-7 skills">
     <div class="panel hunp">
       <h2 class="panel-heading">Skills summary</h2>
       <div class="panel-body">
