@@ -6,7 +6,7 @@
   <div class="col-md-5 intro">
     <div class="panel hunp">
       <h2 class="panel-heading">About me</h2>
-      <div class="panel-body">
+      <div class="panel-body text-center">
         {!! $pagecontent['aboutme'] !!}
         @if(!empty($pagecontent['email']))
         <div class="contactform">@include('contactform')</div>
