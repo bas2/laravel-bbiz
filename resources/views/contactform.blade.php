@@ -9,7 +9,7 @@
 {!! Form::textarea('message',null,['class'=>'form-control','placeholder'=>'Your message...','required']) !!}
 </div>
 <div>
-{!! Form::submit('Send >',['class'=>'btn btn-primary']) !!}
+{!! Form::submit('Send >',['class'=>'btn btn-primary btn-lg btn-block']) !!}
 </div>
 {!! Form::close() !!}
 
