@@ -19,7 +19,7 @@ body {
   margin:0 10px $footer-height;
 }
 
-input, textarea {border:none;width:100%;color:#000;}
+input[type=text], textarea {border:none;width:100%;color:#000;}
 input[type=submit]{width:auto;}
 .intro form {
   width:70%;
@@ -84,6 +84,8 @@ ul.nav {
 .success {color:lime;font-weight:bold;}
 
 .halfopacity {opacity:.5;}
+
+.checkbox label input {margin:0;}
 
 
 body#update div {
