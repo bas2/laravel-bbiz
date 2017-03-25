@@ -137,8 +137,8 @@ class HomeController extends Controller
   // otherwise redirect back to login page again.
   public function postlogin() {
     $this->validate(request(), ['username'=>'required','password'=>'required']);
-
-    if (\Auth::attempt(['username'=>request('username'),'password'=>request('password')]))
+    $rememberme=(request('rememberme'))?true:false;
+    if (\Auth::attempt(['username'=>request('username'),'password'=>request('password')],$rememberme))
       {return redirect('content/update');} # Log user in and redirect to update page.
     else {
       return view('pages/login')
