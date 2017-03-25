@@ -11,6 +11,10 @@
 {!! Form::password('password',['class'=>'form-control','placeholder'=>'Your password...']) !!}
 </div>
 
+<div class="checkbox">
+{!! Form::label('rememberme',Form::checkbox('rememberme',1,null,['id'=>'rememberme']).' Rememeber me',[],false) !!}
+</div>
+
 <div class="form-group">
 {!! Form::submit('Login >',['class'=>'btn btn-lg btn-primary btn-block']) !!}
 </div>
