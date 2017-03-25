@@ -19,10 +19,10 @@ body {
   margin:0 10px $footer-height;
 }
 
-input[type=text], textarea {border:none;width:100%;color:#000;}
+input[type=text], input[type=email], textarea {border:none;width:100%;color:#000;}
 input[type=submit]{width:auto;}
 .intro form {
-  width:70%;
+  margin:0 auto;
   div {margin-bottom: .4em;}
   input[type=text],input[type=email]{padding:.3em;}
 }
