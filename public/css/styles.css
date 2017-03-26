@@ -1,9 +1,79 @@
+html {
+  position: relative;
+  min-height: 100%; }
+
 body {
-  background: rgba(0, 0, 0, 0.6);
-  color: #ccc;
-  font: 1em Arial;
+  background: rgba(0, 0, 0, 0.6); }
+  body#home a.homelink, body#projects a.projectslink, body#update a.updatelink, body#login a.loginlink {
+    color: yellow; }
+
+.wrapper {
+  /* Margin bottom by footer height */
+  margin: 0 10px 60px; }
+
+input[type=text], input[type=email], textarea {
+  border: none;
+  width: 100%;
+  color: #000; }
+
+input[type=submit] {
+  width: auto; }
+
+.intro form {
+  margin: 0 auto; }
+  .intro form div {
+    margin-bottom: .4em; }
+  .intro form input[type=text], .intro form input[type=email] {
+    padding: .3em; }
+
+.equal {
+  display: -webkit-flex;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 2em; }
+
+.panel h2 {
+  margin-top: 0; }
+.panel.hunp {
+  height: 100%; }
+
+.intro h2 {
+  background: url(../img/Person.png); }
+
+.skills h2 {
+  background: url("../img/bulb.png"); }
+.skills .panel-body {
+  padding-left: 0; }
+  .skills .panel-body ul {
+    padding-left: 30px;
+    padding-right: 30px; }
+    .skills .panel-body ul li {
+      list-style: square; }
+      .skills .panel-body ul li i {
+        font-weight: bold;
+        color: darkred; }
+
+.recent h2 {
+  background: url("../img/time2.png");
+  padding-bottom: 0; }
+.recent p {
+  margin-left: 0; }
+.recent li {
   padding: 0;
-  margin: 0 1em 0; }
+  margin-right: 15px; }
+.recent li:first-child {
+  margin-left: 0; }
+.recent .list-inline {
+  margin-left: 0; }
+
+.intro h2, .skills h2, .recent h2 {
+  background-repeat: no-repeat;
+  background-position: right 10px; }
+
+ul.nav {
+  margin-bottom: 0; }
+  ul.nav li a {
+    font-weight: normal; }
 
 .error {
   color: #f00;
@@ -13,112 +83,81 @@ body {
   color: lime;
   font-weight: bold; }
 
-div.topdiv {
-  display: flex;
-  flex-wrap: wrap; }
+.halfopacity {
+  opacity: .5; }
 
-a {
-  color: #ccc;
-  text-decoration: none;
-  border-bottom: 1px dotted #ccc; }
-  a:hover {
-    color: #000; }
+.checkbox label input {
+  margin: 0; }
 
-fieldset {
-  box-sizing: border-box;
-  margin: 1em 0 0 0; }
-  fieldset.intro {
-    border: 2px solid blue;
-    box-shadow: 1px 1px 8px rgba(0, 0, 255, 0.8);
-    width: 40%; }
-    fieldset.intro p {
-      line-height: 1.6;
-      font-size: 150%; }
-    fieldset.intro form {
-      text-align: center; }
-  fieldset.skills {
-    border: 2px solid red;
-    box-shadow: 1px 1px 8px rgba(255, 0, 0, 0.8);
-    width: 59%; }
-  fieldset p, fieldset.skills li {
-    font-size: 1.5em;
-    text-align: center;
-    font-weight: bold;
-    text-shadow: 1px 1px 1px navy; }
-  fieldset p {
-    margin: .5em 1em; }
-  fieldset.skills ul {
-    margin-top: .75em;
-    padding-left: 1.5em;
-    font-size: 75%; }
-    fieldset.skills ul i {
-      color: yellow; }
-    fieldset.skills ul li {
-      text-align: left;
-      list-style: square;
-      margin-bottom: .5em; }
-  fieldset legend {
-    font: 2.1875em tahoma;
-    text-transform: uppercase;
-    text-align: center;
-    width: 100%;
-    background: linear-gradient(blue 60%, rgba(255, 0, 0, 0.5));
-    background-image: url(../img/me.png), linear-gradient(rgba(0, 0, 255, 0.8) 60%, rgba(128, 128, 128, 0.8));
-    background-position: 10px center, 0 0;
-    background-repeat: no-repeat;
-    font-weight: bold;
-    text-shadow: 1px 1px 0px #ccc;
-    letter-spacing: .5em;
-    padding: 0; }
-  fieldset.skills legend {
-    background-image: url(../img/skill.png), linear-gradient(rgba(255, 0, 0, 0.8) 60%, rgba(128, 128, 128, 0.8)); }
-  fieldset.recent {
-    border: 2px solid #ff8000;
-    box-shadow: 1px 1px 8px rgba(255, 128, 0, 0.8);
-    padding-bottom: 0; }
-    fieldset.recent ul {
-      list-style: none;
-      padding: 0; }
-      fieldset.recent ul li {
-        display: inline-block;
-        width: 20%;
-        text-align: center; }
-    fieldset.recent img {
-      box-shadow: 2px 2px 2px #000; }
-  fieldset.recent legend {
-    background-image: url(../img/time.png), linear-gradient(rgba(255, 128, 0, 0.8) 60%, rgba(128, 128, 128, 0.8)); }
+.scrollup {
+  width: 40px;
+  height: 40px;
+  opacity: 0.3;
+  position: fixed;
+  text-indent: -9999px;
+  bottom: 10px;
+  right: 1%;
+  background: url("../img/icon_top.png") center center no-repeat;
+  z-index: 2; }
 
-fieldset, fieldset legend {
-  border-radius: .3em;
-  color: #fff; }
+body#update div textarea {
+  height: 4em; }
 
-div.sep {
-  width: 1%; }
+body#update form {
+  width: auto;
+  max-width: 1200px;
+  margin: 0 auto; }
+  body#update form div {
+    margin-top: .2em;
+    margin-bottom: .2em; }
+  body#update form input[type=text], body#update form input[type=email] {
+    font-weight: bold; }
 
-@media only screen and (min-width: 601px) and (max-width: 990px) {
-  fieldset.intro {
-    float: none;
-    width: auto;
-    height: auto !important; }
-
-  fieldset.skills {
+.overlay_container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: auto;
+  height: 100%;
+  font-size: 200%;
+  z-index: 3;
+  margin: 0;
+  background: rgba(128, 128, 128, 0.5); }
+  .overlay_container img {
     width: 100%; }
+  .overlay_container div {
+    position: fixed;
+    top: 0;
+    right: 10px;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.4);
+    font-weight: bold;
+    border: 2px solid #000;
+    border-radius: .4em; }
 
-  fieldset.recent li {
-    display: block;
-    width: 33% !important;
-    margin-bottom: 1em; } }
-@media only screen and (max-width: 600px) {
-  fieldset.intro {
-    float: none;
-    width: auto;
-    height: auto !important; }
+body#login form {
+  max-width: 400px;
+  margin: 0 auto; }
 
-  fieldset.skills {
-    width: 100%; }
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #181818;
+  box-shadow: 0 2px 0 inset #000;
+  color: red; }
 
-  fieldset.recent li {
-    width: 50% !important;
-    margin-bottom: 1em; } }
+@media (max-width: 978px) {
+  .skills {
+    margin-top: 30px; }
+
+  .recent ul {
+    margin: 0 auto; }
+    .recent ul li {
+      margin-top: 1em;
+      text-align: center; } }
 
 /*# sourceMappingURL=styles.css.map */
