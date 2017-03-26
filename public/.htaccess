@@ -17,4 +17,8 @@
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirect non-https to https:
+    RewriteCond %{SERVER_PORT} 80
+    RewriteRule ^(.*)$ https://bashir.biz/$1 [R=301,L]
 </IfModule>
