@@ -1,7 +1,8 @@
 @extends('layout')
 @section('content')
 <div class="topdiv">
-  <fieldset class="intro"><legend>About me</legend>{!! $pagecontent['aboutme'] !!}
+  <fieldset class="intro"><legend>About me</legend>
+  {!! $pagecontent['aboutme'] !!}
     <div>
     @include('contactform')
     </div>
