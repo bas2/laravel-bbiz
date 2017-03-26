@@ -20,7 +20,7 @@ input[type=submit] {
   width: auto; }
 
 .intro form {
-  width: 70%; }
+  margin: 0 auto; }
   .intro form div {
     margin-bottom: .4em; }
   .intro form input[type=text], .intro form input[type=email] {
