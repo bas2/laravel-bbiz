@@ -21,8 +21,34 @@
 </div>
 </div>
 
+
 <div class="container-fluid">
 <div class="row">
+
+  <div id="recent" class="col-md-12 travelodge-affiliate">
+    <div class="panel">
+      <h2 class="panel-heading">Book a room with travelodge</h2>
+      <div class="container">
+
+      <div>
+      {!! Form::textarea('travelodge',$content['travelodge'],['class'=>'form-control','required']) !!}
+      </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+
+<div class="container-fluid">
+<div class="row">
+
+
+
+
+
 
   <div id="intro" class="col-md-12 intro">
     <div class="panel hunp">
