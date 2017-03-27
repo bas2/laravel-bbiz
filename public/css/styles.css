@@ -66,7 +66,11 @@ input[type=submit] {
 .recent .list-inline {
   margin-left: 0; }
 
-.intro h2, .skills h2, .recent h2 {
+.travelodge-affiliate h2 {
+  background: url("../img/travelodge.png");
+  padding-bottom: 0; }
+
+.intro h2, .skills h2, .recent h2, .travelodge-affiliate h2 {
   background-repeat: no-repeat;
   background-position: right 10px; }
 
