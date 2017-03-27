@@ -14,6 +14,7 @@ class HomeController extends Controller
     return view('pages.welcome')
     ->with('page',['home','Bashir Patel (Web developer/programmer) London-based'])
     ->with('pagecontent', [
+      'travelodge'=>$this->_getsection('travelodge'),
       'aboutme'=>$this->_getsection('about'),
       'email'=>(!filter_var($email, FILTER_VALIDATE_EMAIL)===false)?$email:'',
       'skills'=>\App\Skill::get(['skill','content']),
@@ -47,7 +48,8 @@ class HomeController extends Controller
     //if(\Auth::check()){
       return view('pages.update')->with('page',['update','Update'])
       ->with('content',
-        ['about'=>$this->_getsection('about'),
+        ['travelodge'=>$this->_getsection('travelodge'),
+         'about'=>$this->_getsection('about'),
          'email'=>$this->_getsection('email'),
          'skills'=>\App\Skill::get(['id','skill','content']),
          'recent'=>$this->_getsection('recent')]
@@ -78,6 +80,7 @@ class HomeController extends Controller
   // POST: content/update
   public function updatecontent(Request $request) {
     $this->validate(request(), ['email'=>'required']);
+    $this->_updatesection('travelodge', $request);
     $this->_updatesection('about', $request);
     $this->_updatesection('recent', $request);
     $this->_updatesection('email', $request);
