@@ -14,11 +14,88 @@ class HomeController extends Controller
     return view('pages.welcome')
     ->with('page',['home','Bashir Patel (Web developer/programmer) London-based'])
     ->with('pagecontent', [
-      'travelodge'=>$this->_getsection('travelodge'),
       'aboutme'=>$this->_getsection('about'),
       'email'=>(!filter_var($email, FILTER_VALIDATE_EMAIL)===false)?$email:'',
       'skills'=>\App\Skill::get(['skill','content']),
       'recent'=>$this->_getsection('recent')
+      ])
+    ->with('travelodge',
+      [
+      'lead'=>$this->_getsection('travelodge'),
+      'today'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
+      ->where('date',\Carbon\Carbon::now()->format('Y-m-d'))
+      ->where('price','>',0)
+      ->orderBy('price','asc')
+      ->orderBy( 'h.name' )
+      ->get(),
+      'tomorrow'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
+      ->where('date',\Carbon\Carbon::now()->addDay()->format('Y-m-d'))
+      ->where('price','>',0)
+      ->orderBy('price','asc')
+      ->orderBy( 'h.name' )
+      ->get(),
+
+
+      'sat'=>\App\TravelodgeDate::where('date',\Carbon\Carbon::parse('next saturday')->format('Y-m-d'))
+        //->orWhere('date',\Carbon\Carbon::parse('next sunday')->format('Y-m-d'))
+        ->orderBy('date','asc')
+        ->orderBy('price','asc')
+        //->orderBy(hotels()->name,'asc')
+        ->get(),
+      'sun'=>\App\TravelodgeDate::where('date',\Carbon\Carbon::parse('next sunday')->format('Y-m-d'))
+        //->orWhere('date',\Carbon\Carbon::parse('next sunday')->format('Y-m-d'))
+        ->orderBy('date','asc')
+        ->orderBy('price','asc')
+        //->orderBy(hotels()->name,'asc')
+        ->get(),
+
+
+      'sat1'=>\App\TravelodgeDate::where('date',\Carbon\Carbon::parse('next saturday')->addWeek()->format('Y-m-d'))
+        ->orderBy('date','asc')
+        ->orderBy('price','asc')
+        ->get(),
+      'sun1'=>\App\TravelodgeDate::where('date',\Carbon\Carbon::parse('next sunday')->addWeek()->format('Y-m-d'))
+        ->orderBy('date','asc')
+        ->orderBy('price','asc')
+        ->get(),
+
+
+      'sat2'=>\App\TravelodgeDate::where('date',\Carbon\Carbon::parse('next saturday')
+        ->addWeek(2)->format('Y-m-d'))
+        ->orderBy('date','asc')
+        ->orderBy('price','asc')
+        ->get(),
+      'sun2'=>\App\TravelodgeDate::where('date',\Carbon\Carbon::parse('next sunday')
+        ->addWeek(2)->format('Y-m-d'))
+        ->orderBy('date','asc')
+        ->orderBy('price','asc')
+        ->get(),
+
+
+      'sat3'=>\App\TravelodgeDate::where('date',\Carbon\Carbon::parse('next saturday')
+        ->addWeek(3)->format('Y-m-d'))
+        ->orderBy('date','asc')
+        ->orderBy('price','asc')
+        ->get(),
+      'sun3'=>\App\TravelodgeDate::where('date',\Carbon\Carbon::parse('next sunday')
+        ->addWeek(3)->format('Y-m-d'))
+        ->orderBy('date','asc')
+        ->orderBy('price','asc')
+        ->get(),
+
+
+      'sat4'=>\App\TravelodgeDate::where('date',\Carbon\Carbon::parse('next saturday')
+        ->addWeek(4)->format('Y-m-d'))
+        ->orderBy('date','asc')
+        ->orderBy('price','asc')
+        ->get(),
+      'sun4'=>\App\TravelodgeDate::where('date',\Carbon\Carbon::parse('next sunday')
+        ->addWeek(4)->format('Y-m-d'))
+        ->orderBy('date','asc')
+        ->orderBy('price','asc')
+        ->get(),
+
+
       ])
     ->with('images',\App\Image::get(['filename']))
     ;
@@ -46,16 +123,90 @@ class HomeController extends Controller
   // GET: content/update
   public function update() {
     //if(\Auth::check()){
-      return view('pages.update')->with('page',['update','Update'])
-      ->with('content',
-        ['travelodge'=>$this->_getsection('travelodge'),
-         'about'=>$this->_getsection('about'),
-         'email'=>$this->_getsection('email'),
-         'skills'=>\App\Skill::get(['id','skill','content']),
-         'recent'=>$this->_getsection('recent')]
-        )
-      ->with('images',\App\Image::get(['id','filename']))
-      ;
+    $hotels=[''=>'Select'];foreach(\App\TravelodgeHotel::orderBy('name')->get(['hotel_id','name']) as $hotel){$hotels[$hotel->hotel_id]=$hotel->name;}
+    return view('pages.update')->with('page',['update','Update'])
+    ->with('content',
+      [
+       'about'=>$this->_getsection('about'),
+       'email'=>$this->_getsection('email'),
+       'skills'=>\App\Skill::get(['id','skill','content']),
+       'recent'=>$this->_getsection('recent')]
+      )
+    ->with('travelodge', [
+      'lead'=>$this->_getsection('travelodge'),
+      'today'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
+      ->where('date',\Carbon\Carbon::now()->format('Y-m-d'))
+      //->orderBy( 'price','asc' )
+      ->orderBy( 'h.name' )
+      ->get(),
+      'tomorrow'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
+      ->where('date',\Carbon\Carbon::now()->addDay()->format('Y-m-d'))
+      ->orderBy( 'h.name' )
+      ->get(),
+
+      'sat'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
+        ->where('date',\Carbon\Carbon::parse('next saturday')->format('Y-m-d'))
+        ->orderBy( 'h.name' )
+        ->orderBy('price','asc')
+        ->get(),
+      'sun'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
+        ->where('date',\Carbon\Carbon::parse('next sunday')->format('Y-m-d'))
+        ->orderBy( 'h.name' )
+        ->orderBy('price','asc')
+        ->get(),
+
+      'sat1'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
+        ->where('date',\Carbon\Carbon::parse('next saturday')->addWeek(1)->format('Y-m-d'))
+        ->orderBy( 'h.name' )
+        ->orderBy('price','asc')
+        ->get(),
+      'sun1'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
+        ->where('date',\Carbon\Carbon::parse('next sunday')->addWeek(1)->format('Y-m-d'))
+        ->orderBy( 'h.name' )
+        ->orderBy('price','asc')
+        ->get(),
+
+      'sat2'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
+        ->where('date',\Carbon\Carbon::parse('next saturday')->addWeek(2)->format('Y-m-d'))
+        ->orderBy( 'h.name' )
+        ->orderBy('price','asc')
+        ->get(),
+      'sun2'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
+        ->where('date',\Carbon\Carbon::parse('next sunday')->addWeek(2)->format('Y-m-d'))
+        ->orderBy( 'h.name' )
+        ->orderBy('price','asc')
+        ->get(),
+
+      'sat3'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
+        ->where('date',\Carbon\Carbon::parse('next saturday')->addWeek(3)->format('Y-m-d'))
+        ->orderBy( 'h.name' )
+        ->orderBy('price','asc')
+        ->get(),
+      'sun3'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
+        ->where('date',\Carbon\Carbon::parse('next sunday')->addWeek(3)->format('Y-m-d'))
+        ->orderBy( 'h.name' )
+        ->orderBy('price','asc')
+        ->get(),
+
+      'sat4'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
+        ->where('date',\Carbon\Carbon::parse('next saturday')->addWeek(4)->format('Y-m-d'))
+        ->orderBy( 'h.name' )
+        ->orderBy('price','asc')
+        ->get(),
+      'sun4'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
+        ->where('date',\Carbon\Carbon::parse('next sunday')->addWeek(4)->format('Y-m-d'))
+        ->orderBy( 'h.name' )
+        ->orderBy('price','asc')
+        ->get(),
+
+
+
+      'dates'=>\App\TravelodgeDate::where('date','>=',\Carbon\Carbon::now()->format('Y-m-d'))->orderBy('date')->get(),
+      'hotels'=>$hotels,
+      'newrowdate'=>$this->_getsection('newrowdate'),
+      ])
+    ->with('images',\App\Image::get(['id','filename']))
+    ;
     //} else {abort(404);}
   }
 
@@ -85,6 +236,29 @@ class HomeController extends Controller
     $this->_updatesection('recent', $request);
     $this->_updatesection('email', $request);
 
+    // Add new travelodge hotel date.
+    $input=$request->all();
+    if(!empty($input['hotel'])) {
+      // Add new record only if hotel does not already exist.
+      $hotel=new \App\TravelodgeDate;
+      $hotel->hotelid=empty($input['hotel'])?'':$input['hotel'];
+      $date=\Carbon\Carbon::createFromFormat('D M d Y',$input['date'])->format('Y-m-d');
+      $hotel->date=empty($date)?'':$date;
+      $hotel->price=empty($input['price'])?'':$input['price'];
+      $hotel->hide=(isset($input['hide']))?1:0;
+      $hotel->save();
+      $update=\App\Content::where('name','newrowdate')->update(['content'=>$date]);
+    }
+    foreach($input as $k=>$v) {
+      if(substr($k, 0,strlen('date_'))=='date_') {
+        $id=substr($k, strpos($k, '_')+1);
+        $update=\App\TravelodgeDate::where('date_id',$id)
+        ->update(['price'=>$input["price_{$id}"],'hide'=>0]);
+        //return $input["price_{$id}"];
+      }
+    }
+
+
     if ($file=$request->file('image')) {
       // Upload image.
       $filename=$file->getClientOriginalName();
@@ -104,7 +278,7 @@ class HomeController extends Controller
       }
     }
 
-    $input=$request->all();
+    //$input=$request->all();
     if(!empty($input['skillname'])) {
       // Add new skill record.
       $skill=new \App\Skill;
