@@ -79,6 +79,12 @@ input[type=submit] {
 .zero {
   cursor: pointer; }
 
+span.hoteldescr {
+  text-transform: uppercase;
+  font-weight: bold;
+  background-color: yellow;
+  color: #000; }
+
 .intro h2, .skills h2, .recent h2, .travelodge-affiliate h2 {
   background-repeat: no-repeat;
   background-position: right 10px; }
