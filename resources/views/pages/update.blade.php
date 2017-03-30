@@ -42,165 +42,62 @@ https://www.travelodge.co.uk/search/results?location=walthamstow&checkIn=01/04/1
       </div>
 
       <div class="row">
-      <div class="col-md-6">
-      @foreach($travelodge['today'] as $hoteldate)
-      <div class="form-group"> 
-      {!! Form::date("date_{$hoteldate->date_id}",\Carbon\Carbon::parse($hoteldate->date)->format('d/m/Y'),['class'=>'']) !!}
-      {!! Form::select("price_{$hoteldate->date_id}",range(0,70),$hoteldate->price) !!}
-      {!! Form::checkbox("hide_{$hoteldate->date_id}",1, ($hoteldate->hide) ) !!}
-      {{ Form::label($hoteldate->hotels[0]->name) }}
-      </div>
-      @endforeach
+        <div class="col-md-4 trav-today">
+          @include('includes.travday', ['text'=>'Today', 'date2'=>\Carbon\Carbon::now()])
+        </div>
+        <div class="col-md-4 trav-tomorrow">
+          @include('includes.travday', ['text'=>'Tomorrow','date2'=>\Carbon\Carbon::now()->addDay(1)])
+        </div>
+        <div class="col-md-4 trav-dayaftertomorrow">
+          @include('includes.travday', ['text'=>'Day after','date2'=>\Carbon\Carbon::now()->addDay(2)])
+        </div>
       </div>
 
-      <div class="col-md-6">
-      @foreach($travelodge['tomorrow'] as $hoteldate)
-      <div class="form-group"> 
-      {!! Form::date("date_{$hoteldate->date_id}",\Carbon\Carbon::parse($hoteldate->date)->format('d/m/Y'),['class'=>'']) !!}
-      {!! Form::select("price_{$hoteldate->date_id}",range(0,70),$hoteldate->price) !!}
-      {!! Form::checkbox("hide_{$hoteldate->date_id}",1, ($hoteldate->hide) ) !!}
-      {{ Form::label($hoteldate->hotels[0]->name) }}
-      </div>
-      @endforeach
-      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          @include('includes.travday', ['text'=>'Sat next','date2'=>\Carbon\Carbon::parse('next saturday')])
+        </div>
+        <div class="col-md-6">
+          @include('includes.travday', ['text'=>'Sun next','date2'=>\Carbon\Carbon::parse('next sunday')])
+        </div>
       </div>
 
       <div class="row">
-      <div class="col-md-6">
-      @foreach($travelodge['sat'] as $hoteldate)
-      <div class="form-group"> 
-      {!! Form::date("date_{$hoteldate->date_id}",\Carbon\Carbon::parse($hoteldate->date)->format('d/m/Y'),['class'=>'']) !!}
-      {!! Form::select("price_{$hoteldate->date_id}",range(0,70),$hoteldate->price) !!}
-      {!! Form::checkbox("hide_{$hoteldate->date_id}",1, ($hoteldate->hide) ) !!}
-      {{ Form::label($hoteldate->hotels[0]->name) }}
-      </div>
-      @endforeach
-      </div>
-
-      <div class="col-md-6">
-      @foreach($travelodge['sun'] as $hoteldate)
-      <div class="form-group"> 
-      {!! Form::date("date_{$hoteldate->date_id}",\Carbon\Carbon::parse($hoteldate->date)->format('d/m/Y'),['class'=>'']) !!}
-      {!! Form::select("price_{$hoteldate->date_id}",range(0,70),$hoteldate->price) !!}
-      {!! Form::checkbox("hide_{$hoteldate->date_id}",1, ($hoteldate->hide) ) !!}
-      {{ Form::label($hoteldate->hotels[0]->name) }}
-      </div>
-      @endforeach
-      </div>
+        <div class="col-md-6">
+          @include('includes.travday', ['text'=>'Sat next1','date2'=>\Carbon\Carbon::parse('next saturday')->addWeek()])
+        </div>
+        <div class="col-md-6">
+          @include('includes.travday', ['text'=>'Sun next1','date2'=>\Carbon\Carbon::parse('next sunday')->addWeek()])
+        </div>
       </div>
 
       <div class="row">
-      <div class="col-md-6">
-      @foreach($travelodge['sat1'] as $hoteldate)
-      <div class="form-group"> 
-      {!! Form::date("date_{$hoteldate->date_id}",\Carbon\Carbon::parse($hoteldate->date)->format('d/m/Y'),['class'=>'']) !!}
-      {!! Form::select("price_{$hoteldate->date_id}",range(0,70),$hoteldate->price) !!}
-      {!! Form::checkbox("hide_{$hoteldate->date_id}",1, ($hoteldate->hide) ) !!}
-      {{ Form::label($hoteldate->hotels[0]->name) }}
-      </div>
-      @endforeach
-      </div>
-
-      <div class="col-md-6">
-      @foreach($travelodge['sun1'] as $hoteldate)
-      <div class="form-group"> 
-      {!! Form::date("date_{$hoteldate->date_id}",\Carbon\Carbon::parse($hoteldate->date)->format('d/m/Y'),['class'=>'']) !!}
-      {!! Form::select("price_{$hoteldate->date_id}",range(0,70),$hoteldate->price) !!}
-      {!! Form::checkbox("hide_{$hoteldate->date_id}",1, ($hoteldate->hide) ) !!}
-      {{ Form::label($hoteldate->hotels[0]->name) }}
-      </div>
-      @endforeach
-      </div>
+        <div class="col-md-6">
+          @include('includes.travday', ['text'=>'Sat next2','date2'=>\Carbon\Carbon::parse('next saturday')->addWeek(2)])
+        </div>
+        <div class="col-md-6">
+          @include('includes.travday', ['text'=>'Sun next2','date2'=>\Carbon\Carbon::parse('next sunday')->addWeek(2)])
+        </div>
       </div>
 
       <div class="row">
-      <div class="col-md-6">
-      @foreach($travelodge['sat2'] as $hoteldate)
-      <div class="form-group"> 
-      {!! Form::date("date_{$hoteldate->date_id}",\Carbon\Carbon::parse($hoteldate->date)->format('d/m/Y'),['class'=>'']) !!}
-      {!! Form::select("price_{$hoteldate->date_id}",range(0,70),$hoteldate->price) !!}
-      {!! Form::checkbox("hide_{$hoteldate->date_id}",1, ($hoteldate->hide) ) !!}
-      {{ Form::label($hoteldate->hotels[0]->name) }}
-      </div>
-      @endforeach
-      </div>
-
-      <div class="col-md-6">
-      @foreach($travelodge['sun2'] as $hoteldate)
-      <div class="form-group"> 
-      {!! Form::date("date_{$hoteldate->date_id}",\Carbon\Carbon::parse($hoteldate->date)->format('d/m/Y'),['class'=>'']) !!}
-      {!! Form::select("price_{$hoteldate->date_id}",range(0,70),$hoteldate->price) !!}
-      {!! Form::checkbox("hide_{$hoteldate->date_id}",1, ($hoteldate->hide) ) !!}
-      {{ Form::label($hoteldate->hotels[0]->name) }}
-      </div>
-      @endforeach
-      </div>
+        <div class="col-md-6">
+          @include('includes.travday', ['text'=>'Sat next3','date2'=>\Carbon\Carbon::parse('next saturday')->addWeek(3)])
+        </div>
+        <div class="col-md-6">
+          @include('includes.travday', ['text'=>'Sun next3','date2'=>\Carbon\Carbon::parse('next sunday')->addWeek(3)])
+        </div>
       </div>
 
       <div class="row">
-      <div class="col-md-6">
-      @foreach($travelodge['sat3'] as $hoteldate)
-      <div class="form-group"> 
-      {!! Form::date("date_{$hoteldate->date_id}",\Carbon\Carbon::parse($hoteldate->date)->format('d/m/Y'),['class'=>'']) !!}
-      {!! Form::select("price_{$hoteldate->date_id}",range(0,70),$hoteldate->price) !!}
-      {!! Form::checkbox("hide_{$hoteldate->date_id}",1, ($hoteldate->hide) ) !!}
-      {{ Form::label($hoteldate->hotels[0]->name) }}
+        <div class="col-md-6">
+          @include('includes.travday', ['text'=>'Sat next4','date2'=>\Carbon\Carbon::parse('next saturday')->addWeek(4)])
+        </div>
+        <div class="col-md-6">
+          @include('includes.travday', ['text'=>'Sun next4','date2'=>\Carbon\Carbon::parse('next sunday')->addWeek(4)])
+        </div>
       </div>
-      @endforeach
-      </div>
-
-      <div class="col-md-6">
-      @foreach($travelodge['sun3'] as $hoteldate)
-      <div class="form-group"> 
-      {!! Form::date("date_{$hoteldate->date_id}",\Carbon\Carbon::parse($hoteldate->date)->format('d/m/Y'),['class'=>'']) !!}
-      {!! Form::select("price_{$hoteldate->date_id}",range(0,70),$hoteldate->price) !!}
-      {!! Form::checkbox("hide_{$hoteldate->date_id}",1, ($hoteldate->hide) ) !!}
-      {{ Form::label($hoteldate->hotels[0]->name) }}
-      </div>
-      @endforeach
-      </div>
-      </div>
-
-      <div class="row">
-      <div class="col-md-6">
-      @foreach($travelodge['sat4'] as $hoteldate)
-      <div class="form-group"> 
-      {!! Form::date("date_{$hoteldate->date_id}",\Carbon\Carbon::parse($hoteldate->date)->format('d/m/Y'),['class'=>'']) !!}
-      {!! Form::select("price_{$hoteldate->date_id}",range(0,70),$hoteldate->price) !!}
-      {!! Form::checkbox("hide_{$hoteldate->date_id}",1, ($hoteldate->hide) ) !!}
-      {{ Form::label($hoteldate->hotels[0]->name) }}
-      </div>
-      @endforeach
-      </div>
-
-      <div class="col-md-6">
-      @foreach($travelodge['sun4'] as $hoteldate)
-      <div class="form-group"> 
-      {!! Form::date("date_{$hoteldate->date_id}",\Carbon\Carbon::parse($hoteldate->date)->format('d/m/Y'),['class'=>'']) !!}
-      {!! Form::select("price_{$hoteldate->date_id}",range(0,70),$hoteldate->price) !!}
-      {!! Form::checkbox("hide_{$hoteldate->date_id}",1, ($hoteldate->hide) ) !!}
-      {{ Form::label($hoteldate->hotels[0]->name) }}
-      </div>
-      @endforeach
-      </div>
-      </div>
-
-
-      <div class="row newrow">
-      <div class="form-group">
-      {!! Form::date("date",$travelodge['newrowdate'],['class'=>'','placeholder'=>'Date in Y-m-d format', 'id'=>'datepicker']) !!}
-      {!! Form::select("price",range(0,70),39) !!}
-      {!! Form::checkbox("hide") !!}
-      {!! Form::select('hotel',$travelodge['hotels'],'') !!}
-      </div>
-      </div>
-
-
-<div class="row">
-<div>
-{!! Form::submit('Update >',['class'=>'btn btn-lg btn-primary btn-block']) !!}
-</div>
-</div>
 
 
       </div>
@@ -225,11 +122,6 @@ https://www.travelodge.co.uk/search/results?location=walthamstow&checkIn=01/04/1
 
 <div class="container-fluid">
 <div class="row">
-
-
-
-
-
 
   <div id="intro" class="col-md-12 intro">
     <div class="panel hunp">
@@ -319,6 +211,34 @@ $(document).ready(function(){
   $(window).scroll(function(){
     if($(this).scrollTop()>100){$('a.scrollup').fadeIn();}else{$('a.scrollup').fadeOut();}
   });
+
+  $(document).on('click', 'button.updatetoday', function(e){
+    var updatestr='update=1';
+    var fields=$(this).parent().find('select[name^=price_]');
+    $(fields).each(function(){
+      var id = $(this);
+      updatestr += '&hotel_' + $(this).attr('name') + '=' + $(this).val();
+    });
+    updatestr += '&newdaterow=' + $(this).prev().find('select.addhotel').val();
+    updatestr += '&newpricerow=' + $(this).prev().find('select[name=price_]').val();
+    updatestr += '&date=' + $(this).attr('title2');
+    var $this=$(this);
+    $.ajax({
+      "type":"POST",
+      "url":"/bbiz/public/travelodge/update/today/",
+      "data": updatestr,
+      "success":function(data){
+        $this.parent().parent().html(data);
+      }
+    });
+    e.preventDefault();
+  });
+
+  $(document).on('click', 'span.zero', function(){
+    $(this).parent().find('select[name^=price]').val(0);
+  });
+
+
 });
 </script>
 @endsection
