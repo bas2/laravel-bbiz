@@ -4,7 +4,7 @@
   @foreach($travelodge[strtolower(str_replace(' ','',$text))] as $hoteldate)
   <div class="form-group"> 
   {!! Form::select("price_{$hoteldate->date_id}",range(0,70),$hoteldate->price) !!}
-  {{ Form::label($hoteldate->hotels[0]->name) }} <span class="zero">x</span> {{ strtoupper(substr($hoteldate->descr, 0,3)) }}
+  {{ Form::label($hoteldate->hotels[0]->name) }} <span class="zero">x</span> <span class="hoteldescr">{{ substr($hoteldate->descr, 0,3) }}</span>
   </div>
   @endforeach
 
