@@ -8,6 +8,9 @@
   {!! Html::style('css/bootstrap.min.css') !!}
   {!! Html::style('css/styles.css') !!}
 
+  {!! Html::style('css/pikaday.css') !!}
+
+
   {!! Html::script('js/jquery/jquery-3.1.1.min.js') !!}
   {!! Html::script('js/script.js') !!}
 </head>

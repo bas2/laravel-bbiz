@@ -8,6 +8,16 @@ use App\Mail\ContactMail;
 
 class HomeController extends Controller
 {
+
+  private function _getDB($date) {
+    return \App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
+      ->where('date',\Carbon\Carbon::parse($date)->format('Y-m-d'))
+      //->where('price','>',0)
+      ->orderBy('price','asc')
+      ->orderBy( 'h.name' )
+      ->get();
+  }
+
   // GET: {slug?}
   public function index() {
     $email=$this->_getsection('email');
@@ -18,6 +28,24 @@ class HomeController extends Controller
       'email'=>(!filter_var($email, FILTER_VALIDATE_EMAIL)===false)?$email:'',
       'skills'=>\App\Skill::get(['skill','content']),
       'recent'=>$this->_getsection('recent')
+      ])
+    ->with('travelodge',
+      [
+      'lead'=>$this->_getsection('travelodge'),
+      'today'=>$this->_getDB(\Carbon\Carbon::now()),
+      'tomorrow'=>$this->_getDB(\Carbon\Carbon::now()->addDay()),
+
+      'sat'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')),
+      'sun'=>$this->_getDB(\Carbon\Carbon::parse('next sunday')),
+      'sat1'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addWeek()),
+      'sun1'=>$this->_getDB(\Carbon\Carbon::parse('next sunday')->addWeek()),
+      'sat2'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addWeek(2)),
+      'sun2'=>$this->_getDB(\Carbon\Carbon::parse('next sunday')->addWeek(2)),
+      'sat3'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addWeek(3)),
+      'sun3'=>$this->_getDB(\Carbon\Carbon::parse('next sunday')->addWeek(3)),
+      'sat4'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addWeek(4)),
+      'sun4'=>$this->_getDB(\Carbon\Carbon::parse('next sunday')->addWeek(4)),
+
       ])
     ->with('images',\App\Image::get(['filename']))
     ;
@@ -45,15 +73,38 @@ class HomeController extends Controller
   // GET: content/update
   public function update() {
     //if(\Auth::check()){
-      return view('pages.update')->with('page',['update','Update'])
-      ->with('content',
-        ['about'=>$this->_getsection('about'),
-         'email'=>$this->_getsection('email'),
-         'skills'=>\App\Skill::get(['id','skill','content']),
-         'recent'=>$this->_getsection('recent')]
-        )
-      ->with('images',\App\Image::get(['id','filename']))
-      ;
+    $hotels=[''=>'Select'];foreach(\App\TravelodgeHotel::orderBy('name')->get(['hotel_id','name']) as $hotel){$hotels[$hotel->hotel_id]=$hotel->name;}
+    return view('pages.update')->with('page',['update','Update'])
+    ->with('content',
+      [
+       'about'=>$this->_getsection('about'),
+       'email'=>$this->_getsection('email'),
+       'skills'=>\App\Skill::get(['id','skill','content']),
+       'recent'=>$this->_getsection('recent')]
+      )
+    ->with('travelodge', [
+      'lead'=>$this->_getsection('travelodge'),
+      'today'=>$this->_getDB(\Carbon\Carbon::now()->format('Y-m-d')),
+      'tomorrow'=>$this->_getDB(\Carbon\Carbon::now()->addDay()),
+      'dayafter'=>$this->_getDB(\Carbon\Carbon::now()->addDay(2)),
+
+      'satnext' =>$this->_getDB(\Carbon\Carbon::parse('next saturday')),
+      'sunnext' =>$this->_getDB(\Carbon\Carbon::parse('next sunday')),
+      'satnext1'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addWeek(1)),
+      'sunnext1'=>$this->_getDB(\Carbon\Carbon::parse('next sunday')->addWeek(1)),
+      'satnext2'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addWeek(2)),
+      'sunnext2'=>$this->_getDB(\Carbon\Carbon::parse('next sunday')->addWeek(2)),
+      'satnext3'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addWeek(3)),
+      'sunnext3'=>$this->_getDB(\Carbon\Carbon::parse('next sunday')->addWeek(3)),
+      'satnext4'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addWeek(4)),
+      'sunnext4'=>$this->_getDB(\Carbon\Carbon::parse('next sunday')->addWeek(4)),
+
+      'dates'=>\App\TravelodgeDate::where('date','>=',\Carbon\Carbon::now()->format('Y-m-d'))->orderBy('date')->get(),
+      'hotels'=>$hotels,
+      'newrowdate'=>$this->_getsection('newrowdate'),
+      ])
+    ->with('images',\App\Image::get(['id','filename']))
+    ;
     //} else {abort(404);}
   }
 
@@ -78,9 +129,12 @@ class HomeController extends Controller
   // POST: content/update
   public function updatecontent(Request $request) {
     $this->validate(request(), ['email'=>'required']);
+    $this->_updatesection('travelodge', $request);
     $this->_updatesection('about', $request);
     $this->_updatesection('recent', $request);
     $this->_updatesection('email', $request);
+
+    $input=$request->all();
 
     if ($file=$request->file('image')) {
       // Upload image.
@@ -101,7 +155,6 @@ class HomeController extends Controller
       }
     }
 
-    $input=$request->all();
     if(!empty($input['skillname'])) {
       // Add new skill record.
       $skill=new \App\Skill;
@@ -125,6 +178,68 @@ class HomeController extends Controller
     session()->flash('message','Content was updated');
 
     return redirect('content/update');
+  }
+
+  public function postUpdateTravToday(Request $request) {
+    $hotels=[''=>'Select'];foreach(\App\TravelodgeHotel::orderBy('name')->get(['hotel_id','name']) as $hotel){$hotels[$hotel->hotel_id]=$hotel->name;}
+    $input=$request->all();
+    foreach($input as $k=>$v) {
+      if ($k!='update') {
+        $hotel_id=substr($k, strlen('hotel_price')+1);
+        if ($v==0) {
+          $delete=\App\TravelodgeDate::where('date_id',$hotel_id)->delete();
+        } else {
+          $update=\App\TravelodgeDate::where('date_id',$hotel_id)->update(['price'=>$v]);
+        }
+      }
+    }
+          
+    if($input['newdaterow']) {
+      $insert=new \App\TravelodgeDate;
+      $insert->price=$input['newpricerow'];
+      $insert->date=$input['date'];
+      $insert->hotelid=$input['newdaterow'];
+      $insert->save();
+      //$update=\App\Content::where('name','price')->update(['content'=>$input['newpricerow']]);
+    }
+    $theday='Today';$thecdate=\Carbon\Carbon::parse($input['date'])->format('Y-m-d');
+    if($thecdate==\Carbon\Carbon::now()->addDay()->format('Y-m-d')) {$theday='Tomorrow';}
+    if($thecdate==\Carbon\Carbon::now()->addDay(2)->format('Y-m-d')) {$theday='Day after';}
+    if($thecdate==\Carbon\Carbon::parse('next saturday')->format('Y-m-d')) {$theday='Sat next';}
+    if($thecdate==\Carbon\Carbon::parse('next sunday')->format('Y-m-d')) {$theday='Sun next';}
+    if($thecdate==\Carbon\Carbon::parse('next saturday')->addWeek()->format('Y-m-d')) {$theday='Sat next1';}
+    if($thecdate==\Carbon\Carbon::parse('next sunday')->addWeek()->format('Y-m-d')) {$theday='Sun next1';}
+    if($thecdate==\Carbon\Carbon::parse('next saturday')->addWeek(2)->format('Y-m-d')) {$theday='Sat next2';}
+    if($thecdate==\Carbon\Carbon::parse('next sunday')->addWeek(2)->format('Y-m-d')) {$theday='Sun next2';}
+    if($thecdate==\Carbon\Carbon::parse('next saturday')->addWeek(3)->format('Y-m-d')) {$theday='Sat next3';}
+    if($thecdate==\Carbon\Carbon::parse('next sunday')->addWeek(3)->format('Y-m-d')) {$theday='Sun next3';}
+    if($thecdate==\Carbon\Carbon::parse('next saturday')->addWeek(4)->format('Y-m-d')) {$theday='Sat next4';}
+    if($thecdate==\Carbon\Carbon::parse('next sunday')->addWeek(4)->format('Y-m-d')) {$theday='Sun next4';}
+
+    return view('includes.travday')
+    ->with('travelodge', [
+      'today'=>$this->_getDB(\Carbon\Carbon::now()),
+      'tomorrow'=>$this->_getDB(\Carbon\Carbon::now()->addDay()),
+      'dayafter'=>$this->_getDB(\Carbon\Carbon::now()->addDay(2)),
+
+      'satnext' =>$this->_getDB(\Carbon\Carbon::parse('next saturday')),
+      'sunnext' =>$this->_getDB(\Carbon\Carbon::parse('next sunday')),
+      'satnext1'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addWeek(1)),
+      'sunnext1'=>$this->_getDB(\Carbon\Carbon::parse('next sunday')->addWeek(1)),
+      'satnext2'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addWeek(2)),
+      'sunnext2'=>$this->_getDB(\Carbon\Carbon::parse('next sunday')->addWeek(2)),
+      'satnext3'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addWeek(3)),
+      'sunnext3'=>$this->_getDB(\Carbon\Carbon::parse('next sunday')->addWeek(3)),
+      'satnext4'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addWeek(4)),
+      'sunnext4'=>$this->_getDB(\Carbon\Carbon::parse('next sunday')->addWeek(4)),
+
+      'hotels'=>$hotels,
+    ])
+    ->with(['text'=>$theday, 
+    'date2'=>\Carbon\Carbon::parse($input['date']),
+    'price'=>(isset($input['newpricerow'])?$input['newpricerow']:39),
+    ])
+    ;
   }
 
   // GET: login

@@ -65,7 +65,15 @@ input[type=submit]{width:auto;}
   .list-inline {margin-left:0;}
 }
 
-.intro, .skills, .recent {
+.travelodge-affiliate {
+  h2 {background: url('../img/travelodge.png');padding-bottom:0;}
+  h3 {margin-top: 0;margin-bottom: 0;padding-bottom: 0;}
+  legend{margin-bottom: 0;}
+}
+
+.zero {cursor: pointer;}
+
+.intro, .skills, .recent, .travelodge-affiliate {
   h2 {
     background-repeat: no-repeat;
     background-position: right 10px;
@@ -101,6 +109,7 @@ ul.nav {
 
 body#update div {
   textarea {height:4em;}
+  input[type=date]{width:8em;}
 }
 
 body#update form {
@@ -110,6 +119,9 @@ body#update form {
   div {margin-top:.2em;margin-bottom:.2em;}
   input[type=text],input[type=email]{font-weight: bold;}
   textarea{}
+  #travelodge {
+    input[type=text]{width:4em;}
+  }
 }
 
 
