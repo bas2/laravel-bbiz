@@ -68,7 +68,10 @@ input[type=submit]{width:auto;}
 .travelodge-affiliate {
   h2 {background: url('../img/travelodge.png');padding-bottom:0;}
   h3 {margin-top: 0;margin-bottom: 0;padding-bottom: 0;}
+  legend{margin-bottom: 0;}
 }
+
+.zero {cursor: pointer;}
 
 .intro, .skills, .recent, .travelodge-affiliate {
   h2 {
