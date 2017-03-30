@@ -73,6 +73,11 @@ input[type=submit] {
   margin-top: 0;
   margin-bottom: 0;
   padding-bottom: 0; }
+.travelodge-affiliate legend {
+  margin-bottom: 0; }
+
+.zero {
+  cursor: pointer; }
 
 .intro h2, .skills h2, .recent h2, .travelodge-affiliate h2 {
   background-repeat: no-repeat;
