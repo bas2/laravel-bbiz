@@ -240,8 +240,9 @@ class HomeController extends Controller
     $this->_updatesection('recent', $request);
     $this->_updatesection('email', $request);
 
-    // Add new travelodge hotel date.
     $input=$request->all();
+/*
+    // Add new travelodge hotel date.
     if(!empty($input['hotel'])) {
       // Add new record only if hotel does not already exist.
       $hotel=new \App\TravelodgeDate;
@@ -267,7 +268,7 @@ class HomeController extends Controller
         }
       }
     }
-
+*/
 
     if ($file=$request->file('image')) {
       // Upload image.
@@ -288,7 +289,6 @@ class HomeController extends Controller
       }
     }
 
-    //$input=$request->all();
     if(!empty($input['skillname'])) {
       // Add new skill record.
       $skill=new \App\Skill;
