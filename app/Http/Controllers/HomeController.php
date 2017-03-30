@@ -135,34 +135,6 @@ class HomeController extends Controller
     $this->_updatesection('email', $request);
 
     $input=$request->all();
-/*
-    // Add new travelodge hotel date.
-    if(!empty($input['hotel'])) {
-      // Add new record only if hotel does not already exist.
-      $hotel=new \App\TravelodgeDate;
-      $hotel->hotelid=empty($input['hotel'])?'':$input['hotel'];
-      $date=\Carbon\Carbon::createFromFormat('D M d Y',$input['date'])->format('Y-m-d');
-      $price=empty($input['price'])?'':$input['price'];
-      $hotel->date=empty($date)?'':$date;
-      $hotel->price=$price;
-      $hotel->hide=(isset($input['hide']))?1:0;
-      $hotel->save();
-      $update=\App\Content::where('name','price')->update(['content'=>$price]);
-    }
-    // Update existing.
-    foreach($input as $k=>$v) {
-      if(substr($k, 0,strlen('date_'))=='date_') {
-        $id=substr($k, strpos($k, '_')+1);
-        $price=$input["price_{$id}"];
-        if($price==0) {
-          $delete=\App\TravelodgeDate::where('date_id',$id)->delete();
-        } else {
-          $update=\App\TravelodgeDate::where('date_id',$id)
-          ->update(['price'=>$price,'hide'=>0]);
-        }
-      }
-    }
-*/
 
     if ($file=$request->file('image')) {
       // Upload image.
