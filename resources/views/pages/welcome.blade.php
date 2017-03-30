@@ -11,10 +11,10 @@
 
     <div class="col-md-6">
     <h4>Today's lowest prices - {{ date('l, j F') }} check-in</h4>
-    <p>Online booking available until <strong>midnight</strong>, <strong>check-in is after 3pm</strong> and <strong>check-out is at midday on {{ \Carbon\Carbon::parse(\Carbon\Carbon::now()->addDay())->format('l') }}</strong>.</p>
+    <p>Online booking available until <strong>midnight on {{ \Carbon\Carbon::parse(\Carbon\Carbon::now()->addDay())->format('l') }}</strong>, <strong>check-in is after 3pm</strong> and <strong>check-out is at midday on {{ \Carbon\Carbon::parse(\Carbon\Carbon::now()->addDay())->format('l') }}</strong>.</p>
     <ul>
       @foreach($travelodge['today'] as $hoteldate)
-      <li>{{ $hoteldate->hotels[0]->name }}, <strong>{{ $hoteldate->price }}</strong></li>
+      <li>{{ $hoteldate->hotels[0]->name }}, <strong>{{ $hoteldate->price }}</strong> {{ $hoteldate->updated_at }}</li>
       @endforeach
     </ul>
     </div>
@@ -173,7 +173,7 @@
   </div>
 
   <div class="col-md-8 skills">
-    <div class="panel">
+    <div class="panel hunp">
       <h2 class="panel-heading">Skills summary</h2>
       <div class="panel-body">
         <ul>
