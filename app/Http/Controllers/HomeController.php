@@ -8,6 +8,16 @@ use App\Mail\ContactMail;
 
 class HomeController extends Controller
 {
+
+  private function _getDB($date) {
+    return \App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
+      ->where('date',\Carbon\Carbon::parse($date)->format('Y-m-d'))
+      //->where('price','>',0)
+      ->orderBy('price','asc')
+      ->orderBy( 'h.name' )
+      ->get();
+  }
+
   // GET: {slug?}
   public function index() {
     $email=$this->_getsection('email');
@@ -22,77 +32,19 @@ class HomeController extends Controller
     ->with('travelodge',
       [
       'lead'=>$this->_getsection('travelodge'),
-      'today'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-      ->where('date',\Carbon\Carbon::now()->format('Y-m-d'))
-      ->where('price','>',0)
-      ->orderBy('price','asc')
-      ->orderBy( 'h.name' )
-      ->get(),
-      'tomorrow'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-      ->where('date',\Carbon\Carbon::now()->addDay()->format('Y-m-d'))
-      ->where('price','>',0)
-      ->orderBy('price','asc')
-      ->orderBy( 'h.name' )
-      ->get(),
+      'today'=>$this->_getDB(\Carbon\Carbon::now()),
+      'tomorrow'=>$this->_getDB(\Carbon\Carbon::now()->addDay()),
 
-
-      'sat'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-      ->where('date',\Carbon\Carbon::parse('next saturday')->format('Y-m-d'))
-        ->orderBy('price','asc')
-        ->orderBy( 'h.name' )
-        ->get(),
-      'sun'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-        ->where('date',\Carbon\Carbon::parse('next sunday')->format('Y-m-d'))
-        ->orderBy('price','asc')
-        ->orderBy( 'h.name' )
-        ->get(),
-
-
-      'sat1'=>\App\TravelodgeDate::where('date',\Carbon\Carbon::parse('next saturday')->addWeek()->format('Y-m-d'))
-        ->orderBy('date','asc')
-        ->orderBy('price','asc')
-        ->get(),
-      'sun1'=>\App\TravelodgeDate::where('date',\Carbon\Carbon::parse('next sunday')->addWeek()->format('Y-m-d'))
-        ->orderBy('date','asc')
-        ->orderBy('price','asc')
-        ->get(),
-
-
-      'sat2'=>\App\TravelodgeDate::where('date',\Carbon\Carbon::parse('next saturday')
-        ->addWeek(2)->format('Y-m-d'))
-        ->orderBy('date','asc')
-        ->orderBy('price','asc')
-        ->get(),
-      'sun2'=>\App\TravelodgeDate::where('date',\Carbon\Carbon::parse('next sunday')
-        ->addWeek(2)->format('Y-m-d'))
-        ->orderBy('date','asc')
-        ->orderBy('price','asc')
-        ->get(),
-
-
-      'sat3'=>\App\TravelodgeDate::where('date',\Carbon\Carbon::parse('next saturday')
-        ->addWeek(3)->format('Y-m-d'))
-        ->orderBy('date','asc')
-        ->orderBy('price','asc')
-        ->get(),
-      'sun3'=>\App\TravelodgeDate::where('date',\Carbon\Carbon::parse('next sunday')
-        ->addWeek(3)->format('Y-m-d'))
-        ->orderBy('date','asc')
-        ->orderBy('price','asc')
-        ->get(),
-
-
-      'sat4'=>\App\TravelodgeDate::where('date',\Carbon\Carbon::parse('next saturday')
-        ->addWeek(4)->format('Y-m-d'))
-        ->orderBy('date','asc')
-        ->orderBy('price','asc')
-        ->get(),
-      'sun4'=>\App\TravelodgeDate::where('date',\Carbon\Carbon::parse('next sunday')
-        ->addWeek(4)->format('Y-m-d'))
-        ->orderBy('date','asc')
-        ->orderBy('price','asc')
-        ->get(),
-
+      'sat'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')),
+      'sun'=>$this->_getDB(\Carbon\Carbon::parse('next sunday')),
+      'sat1'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addWeek()),
+      'sun1'=>$this->_getDB(\Carbon\Carbon::parse('next sunday')->addWeek()),
+      'sat2'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addWeek(2)),
+      'sun2'=>$this->_getDB(\Carbon\Carbon::parse('next sunday')->addWeek(2)),
+      'sat3'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addWeek(3)),
+      'sun3'=>$this->_getDB(\Carbon\Carbon::parse('next sunday')->addWeek(3)),
+      'sat4'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addWeek(4)),
+      'sun4'=>$this->_getDB(\Carbon\Carbon::parse('next sunday')->addWeek(4)),
 
       ])
     ->with('images',\App\Image::get(['filename']))
@@ -132,78 +84,20 @@ class HomeController extends Controller
       )
     ->with('travelodge', [
       'lead'=>$this->_getsection('travelodge'),
-      'today'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-      ->where('date',\Carbon\Carbon::now()->format('Y-m-d'))
-      ->orderBy( 'price','asc' )
-      ->orderBy( 'h.name' )
-      ->get(),
-      'tomorrow'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-      ->where('date',\Carbon\Carbon::now()->addDay()->format('Y-m-d'))
-      ->orderBy( 'price','asc' )
-      ->orderBy( 'h.name' )
-      ->get(),
-      'dayafter'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-      ->where('date',\Carbon\Carbon::now()->addDay(2)->format('Y-m-d'))
-      ->orderBy( 'price','asc' )
-      ->orderBy( 'h.name' )
-      ->get(),
+      'today'=>$this->_getDB(\Carbon\Carbon::now()->format('Y-m-d')),
+      'tomorrow'=>$this->_getDB(\Carbon\Carbon::now()->addDay()),
+      'dayafter'=>$this->_getDB(\Carbon\Carbon::now()->addDay(2)),
 
-      'satnext'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-        ->where('date',\Carbon\Carbon::parse('next saturday')->format('Y-m-d'))
-        ->orderBy('price','asc')
-        ->orderBy( 'h.name' )
-        ->get(),
-      'sunnext'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-        ->where('date',\Carbon\Carbon::parse('next sunday')->format('Y-m-d'))
-        ->orderBy('price','asc')
-        ->orderBy( 'h.name' )
-        ->get(),
-
-      'satnext1'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-        ->where('date',\Carbon\Carbon::parse('next saturday')->addWeek(1)->format('Y-m-d'))
-        ->orderBy('price','asc')
-        ->orderBy( 'h.name' )
-        ->get(),
-      'sunnext1'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-        ->where('date',\Carbon\Carbon::parse('next sunday')->addWeek(1)->format('Y-m-d'))
-        ->orderBy('price','asc')
-        ->orderBy( 'h.name' )
-        ->get(),
-
-      'satnext2'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-        ->where('date',\Carbon\Carbon::parse('next saturday')->addWeek(2)->format('Y-m-d'))
-        ->orderBy('price','asc')
-        ->orderBy( 'h.name' )
-        ->get(),
-      'sunnext2'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-        ->where('date',\Carbon\Carbon::parse('next sunday')->addWeek(2)->format('Y-m-d'))
-        ->orderBy('price','asc')
-        ->orderBy( 'h.name' )
-        ->get(),
-
-      'satnext3'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-        ->where('date',\Carbon\Carbon::parse('next saturday')->addWeek(3)->format('Y-m-d'))
-        ->orderBy('price','asc')
-        ->orderBy( 'h.name' )
-        ->get(),
-      'sunnext3'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-        ->where('date',\Carbon\Carbon::parse('next sunday')->addWeek(3)->format('Y-m-d'))
-        ->orderBy('price','asc')
-        ->orderBy( 'h.name' )
-        ->get(),
-
-      'satnext4'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-        ->where('date',\Carbon\Carbon::parse('next saturday')->addWeek(4)->format('Y-m-d'))
-        ->orderBy('price','asc')
-        ->orderBy( 'h.name' )
-        ->get(),
-      'sunnext4'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-        ->where('date',\Carbon\Carbon::parse('next sunday')->addWeek(4)->format('Y-m-d'))
-        ->orderBy('price','asc')
-        ->orderBy( 'h.name' )
-        ->get(),
-
-
+      'satnext' =>$this->_getDB(\Carbon\Carbon::parse('next saturday')),
+      'sunnext' =>$this->_getDB(\Carbon\Carbon::parse('next sunday')),
+      'satnext1'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addWeek(1)),
+      'sunnext1'=>$this->_getDB(\Carbon\Carbon::parse('next sunday')->addWeek(1)),
+      'satnext2'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addWeek(2)),
+      'sunnext2'=>$this->_getDB(\Carbon\Carbon::parse('next sunday')->addWeek(2)),
+      'satnext3'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addWeek(3)),
+      'sunnext3'=>$this->_getDB(\Carbon\Carbon::parse('next sunday')->addWeek(3)),
+      'satnext4'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addWeek(4)),
+      'sunnext4'=>$this->_getDB(\Carbon\Carbon::parse('next sunday')->addWeek(4)),
 
       'dates'=>\App\TravelodgeDate::where('date','>=',\Carbon\Carbon::now()->format('Y-m-d'))->orderBy('date')->get(),
       'hotels'=>$hotels,
@@ -336,97 +230,36 @@ class HomeController extends Controller
       $insert->save();
       //$update=\App\Content::where('name','price')->update(['content'=>$input['newpricerow']]);
     }
-    $theday='Today';
-    if(\Carbon\Carbon::parse($input['date'])->format('Y-m-d')==\Carbon\Carbon::now()->addDay()->format('Y-m-d')) {$theday='Tomorrow';}
-    if(\Carbon\Carbon::parse($input['date'])->format('Y-m-d')==\Carbon\Carbon::now()->addDay(2)->format('Y-m-d')) {$theday='Day after';}
-    if(\Carbon\Carbon::parse($input['date'])->format('Y-m-d')==\Carbon\Carbon::parse('next saturday')->format('Y-m-d')) {$theday='Sat next';}
-    if(\Carbon\Carbon::parse($input['date'])->format('Y-m-d')==\Carbon\Carbon::parse('next sunday')->format('Y-m-d')) {$theday='Sun next';}
-    if(\Carbon\Carbon::parse($input['date'])->format('Y-m-d')==\Carbon\Carbon::parse('next saturday')->addWeek()->format('Y-m-d')) {$theday='Sat next1';}
-    if(\Carbon\Carbon::parse($input['date'])->format('Y-m-d')==\Carbon\Carbon::parse('next sunday')->addWeek()->format('Y-m-d')) {$theday='Sun next1';}
-    if(\Carbon\Carbon::parse($input['date'])->format('Y-m-d')==\Carbon\Carbon::parse('next saturday')->addWeek(2)->format('Y-m-d')) {$theday='Sat next2';}
-    if(\Carbon\Carbon::parse($input['date'])->format('Y-m-d')==\Carbon\Carbon::parse('next sunday')->addWeek(2)->format('Y-m-d')) {$theday='Sun next2';}
-    if(\Carbon\Carbon::parse($input['date'])->format('Y-m-d')==\Carbon\Carbon::parse('next saturday')->addWeek(3)->format('Y-m-d')) {$theday='Sat next3';}
-    if(\Carbon\Carbon::parse($input['date'])->format('Y-m-d')==\Carbon\Carbon::parse('next sunday')->addWeek(3)->format('Y-m-d')) {$theday='Sun next3';}
-    if(\Carbon\Carbon::parse($input['date'])->format('Y-m-d')==\Carbon\Carbon::parse('next saturday')->addWeek(4)->format('Y-m-d')) {$theday='Sat next4';}
-    if(\Carbon\Carbon::parse($input['date'])->format('Y-m-d')==\Carbon\Carbon::parse('next sunday')->addWeek(4)->format('Y-m-d')) {$theday='Sun next4';}
+    $theday='Today';$thecdate=\Carbon\Carbon::parse($input['date'])->format('Y-m-d');
+    if($thecdate==\Carbon\Carbon::now()->addDay()->format('Y-m-d')) {$theday='Tomorrow';}
+    if($thecdate==\Carbon\Carbon::now()->addDay(2)->format('Y-m-d')) {$theday='Day after';}
+    if($thecdate==\Carbon\Carbon::parse('next saturday')->format('Y-m-d')) {$theday='Sat next';}
+    if($thecdate==\Carbon\Carbon::parse('next sunday')->format('Y-m-d')) {$theday='Sun next';}
+    if($thecdate==\Carbon\Carbon::parse('next saturday')->addWeek()->format('Y-m-d')) {$theday='Sat next1';}
+    if($thecdate==\Carbon\Carbon::parse('next sunday')->addWeek()->format('Y-m-d')) {$theday='Sun next1';}
+    if($thecdate==\Carbon\Carbon::parse('next saturday')->addWeek(2)->format('Y-m-d')) {$theday='Sat next2';}
+    if($thecdate==\Carbon\Carbon::parse('next sunday')->addWeek(2)->format('Y-m-d')) {$theday='Sun next2';}
+    if($thecdate==\Carbon\Carbon::parse('next saturday')->addWeek(3)->format('Y-m-d')) {$theday='Sat next3';}
+    if($thecdate==\Carbon\Carbon::parse('next sunday')->addWeek(3)->format('Y-m-d')) {$theday='Sun next3';}
+    if($thecdate==\Carbon\Carbon::parse('next saturday')->addWeek(4)->format('Y-m-d')) {$theday='Sat next4';}
+    if($thecdate==\Carbon\Carbon::parse('next sunday')->addWeek(4)->format('Y-m-d')) {$theday='Sun next4';}
 
     return view('includes.travday')
     ->with('travelodge', [
-      'today'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-      ->where('date',\Carbon\Carbon::now()->format('Y-m-d'))
-      ->orderBy('price','asc')
-      ->orderBy( 'h.name' )
-      ->get(),
-      'tomorrow'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-      ->where('date',\Carbon\Carbon::now()->addDay()->format('Y-m-d'))
-      ->orderBy('price','asc')
-      ->orderBy( 'h.name' )
-      ->get(),
-      'dayafter'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-      ->where('date',\Carbon\Carbon::now()->addDay(2)->format('Y-m-d'))
-      ->orderBy('price','asc')
-      ->orderBy( 'h.name' )
-      ->get(),
+      'today'=>$this->_getDB(\Carbon\Carbon::now()),
+      'tomorrow'=>$this->_getDB(\Carbon\Carbon::now()->addDay()),
+      'dayafter'=>$this->_getDB(\Carbon\Carbon::now()->addDay(2)),
 
-      'satnext'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-        ->where('date',\Carbon\Carbon::parse('next saturday')->format('Y-m-d'))
-        ->orderBy('price','asc')
-        ->orderBy( 'h.name' )
-        ->get(),
-
-      'sunnext'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-        ->where('date',\Carbon\Carbon::parse('next sunday')->format('Y-m-d'))
-        ->orderBy('price','asc')
-        ->orderBy( 'h.name' )
-        ->get(),
-
-      'satnext1'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-        ->where('date',\Carbon\Carbon::parse('next saturday')->addWeek(1)->format('Y-m-d'))
-        ->orderBy('price','asc')
-        ->orderBy( 'h.name' )
-        ->get(),
-
-      'sunnext1'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-        ->where('date',\Carbon\Carbon::parse('next sunday')->addWeek(1)->format('Y-m-d'))
-        ->orderBy('price','asc')
-        ->orderBy( 'h.name' )
-        ->get(),
-
-      'satnext1'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-        ->where('date',\Carbon\Carbon::parse('next saturday')->addWeek(1)->format('Y-m-d'))
-        ->orderBy('price','asc')
-        ->orderBy( 'h.name' )
-        ->get(),
-
-      'sunnext2'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-        ->where('date',\Carbon\Carbon::parse('next sunday')->addWeek(2)->format('Y-m-d'))
-        ->orderBy('price','asc')
-        ->orderBy( 'h.name' )
-        ->get(),
-
-      'satnext3'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-        ->where('date',\Carbon\Carbon::parse('next saturday')->addWeek(3)->format('Y-m-d'))
-        ->orderBy('price','asc')
-        ->orderBy( 'h.name' )
-        ->get(),
-
-      'sunnext3'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-        ->where('date',\Carbon\Carbon::parse('next sunday')->addWeek(3)->format('Y-m-d'))
-        ->orderBy('price','asc')
-        ->orderBy( 'h.name' )
-        ->get(),
-
-      'satnext4'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-        ->where('date',\Carbon\Carbon::parse('next saturday')->addWeek(4)->format('Y-m-d'))
-        ->orderBy('price','asc')
-        ->orderBy( 'h.name' )
-        ->get(),
-
-      'sunnext4'=>\App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-        ->where('date',\Carbon\Carbon::parse('next sunday')->addWeek(4)->format('Y-m-d'))
-        ->orderBy('price','asc')
-        ->orderBy( 'h.name' )
-        ->get(),
+      'satnext' =>$this->_getDB(\Carbon\Carbon::parse('next saturday')),
+      'sunnext' =>$this->_getDB(\Carbon\Carbon::parse('next sunday')),
+      'satnext1'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addWeek(1)),
+      'sunnext1'=>$this->_getDB(\Carbon\Carbon::parse('next sunday')->addWeek(1)),
+      'satnext2'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addWeek(2)),
+      'sunnext2'=>$this->_getDB(\Carbon\Carbon::parse('next sunday')->addWeek(2)),
+      'satnext3'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addWeek(3)),
+      'sunnext3'=>$this->_getDB(\Carbon\Carbon::parse('next sunday')->addWeek(3)),
+      'satnext4'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addWeek(4)),
+      'sunnext4'=>$this->_getDB(\Carbon\Carbon::parse('next sunday')->addWeek(4)),
 
       'hotels'=>$hotels,
     ])
