@@ -225,7 +225,7 @@ $(document).ready(function(){
     var $this=$(this);
     $.ajax({
       "type":"POST",
-      "url":"travelodge/update/today/",
+      "url":"/travelodge/update/today/",
       "data": updatestr,
       "success":function(data){
         $this.parent().parent().html(data);
