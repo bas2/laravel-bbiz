@@ -59,45 +59,22 @@ https://www.travelodge.co.uk/search/results?location=walthamstow&checkIn=01/04/1
           @include('includes.travday', ['text'=>'Sat next','date2'=>\Carbon\Carbon::parse('next saturday')])
         </div>
         <div class="col-md-6">
-          @include('includes.travday', ['text'=>'Sun next','date2'=>\Carbon\Carbon::parse('next sunday')])
+          @include('includes.travday', ['text'=>'Sun next','date2'=>\Carbon\Carbon::parse('next saturday')->addDay()])
         </div>
       </div>
 
+      @for($i=1;$i<12;$i++)
       <div class="row">
         <div class="col-md-6">
-          @include('includes.travday', ['text'=>'Sat next1','date2'=>\Carbon\Carbon::parse('next saturday')->addWeek()])
+          @include('includes.travday', ['text'=>"Sat next{$i}",'date2'=>\Carbon\Carbon::parse('next saturday')->addWeek($i)])
         </div>
         <div class="col-md-6">
-          @include('includes.travday', ['text'=>'Sun next1','date2'=>\Carbon\Carbon::parse('next sunday')->addWeek()])
+          @include('includes.travday', ['text'=>"Sun next{$i}",'date2'=>\Carbon\Carbon::parse('next saturday')->addDay()->addWeek($i)])
         </div>
       </div>
+      @endfor
 
-      <div class="row">
-        <div class="col-md-6">
-          @include('includes.travday', ['text'=>'Sat next2','date2'=>\Carbon\Carbon::parse('next saturday')->addWeek(2)])
-        </div>
-        <div class="col-md-6">
-          @include('includes.travday', ['text'=>'Sun next2','date2'=>\Carbon\Carbon::parse('next sunday')->addWeek(2)])
-        </div>
-      </div>
 
-      <div class="row">
-        <div class="col-md-6">
-          @include('includes.travday', ['text'=>'Sat next3','date2'=>\Carbon\Carbon::parse('next saturday')->addWeek(3)])
-        </div>
-        <div class="col-md-6">
-          @include('includes.travday', ['text'=>'Sun next3','date2'=>\Carbon\Carbon::parse('next sunday')->addWeek(3)])
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-6">
-          @include('includes.travday', ['text'=>'Sat next4','date2'=>\Carbon\Carbon::parse('next saturday')->addWeek(4)])
-        </div>
-        <div class="col-md-6">
-          @include('includes.travday', ['text'=>'Sun next4','date2'=>\Carbon\Carbon::parse('next sunday')->addWeek(4)])
-        </div>
-      </div>
 
 
       </div>
@@ -225,7 +202,8 @@ $(document).ready(function(){
     var $this=$(this);
     $.ajax({
       "type":"POST",
-      "url":"/travelodge/update/today/",
+      // /bbiz/public
+      "url":"/bbiz/public/travelodge/update/today/",
       "data": updatestr,
       "success":function(data){
         $this.parent().parent().html(data);
