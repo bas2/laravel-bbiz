@@ -31,7 +31,7 @@
 
     <div class="col-md-12">
 
-      <h4 class="text-center">Lowest prices at the weekend - {{ \Carbon\Carbon::parse('next saturday')->format('l j F') }} and {{ \Carbon\Carbon::parse('next sunday')->format('l j F') }}</h4>
+      <h4 class="text-center">Lowest prices at the weekend - {{ \Carbon\Carbon::parse('next saturday')->format('l j F') }} and {{ \Carbon\Carbon::parse('next saturday')->addDay()->format('l j F') }}</h4>
       <p class="text-center">Online booking available until <strong>midnight of the following day</strong> and <strong>check-in is after 3pm on the day</strong>.</p>
       
       <div class="col-md-6">
@@ -54,7 +54,7 @@
 
     <div class="col-md-12">
 
-      <h4 class="text-center">Lowest prices at the weekend - {{ \Carbon\Carbon::parse('next saturday')->addWeek()->format('l j F') }} and {{ \Carbon\Carbon::parse('next sunday')->addWeek()->format('l j F') }}</h4>
+      <h4 class="text-center">Lowest prices at the weekend - {{ \Carbon\Carbon::parse('next saturday')->addWeek()->format('l j F') }} and {{ \Carbon\Carbon::parse('next saturday')->addDay()->addWeek()->format('l j F') }}</h4>
       <p class="text-center">Online booking available until <strong>midnight of the following day</strong> and <strong>check-in is after 3pm on the day</strong>.</p>
       
       <div class="col-md-6">
@@ -79,7 +79,7 @@
 
     <div class="col-md-12">
 
-      <h4 class="text-center">Lowest prices at the weekend - {{ \Carbon\Carbon::parse('next saturday')->addWeek(2)->format('l j F') }} and {{ \Carbon\Carbon::parse('next sunday')->addWeek(2)->format('l j F') }}</h4>
+      <h4 class="text-center">Lowest prices at the weekend - {{ \Carbon\Carbon::parse('next saturday')->addWeek(2)->format('l j F') }} and {{ \Carbon\Carbon::parse('next saturday')->addDay()->addWeek(2)->format('l j F') }}</h4>
       <p class="text-center">Online booking available until <strong>midnight of the following day</strong> and <strong>check-in is after 3pm on the day</strong>.</p>
       
       <div class="col-md-6">
@@ -103,7 +103,7 @@
 
     <div class="col-md-12">
 
-      <h4 class="text-center">Lowest prices at the weekend - {{ \Carbon\Carbon::parse('next saturday')->addWeek(3)->format('l j F') }} and {{ \Carbon\Carbon::parse('next sunday')->addWeek(3)->format('l j F') }}</h4>
+      <h4 class="text-center">Lowest prices at the weekend - {{ \Carbon\Carbon::parse('next saturday')->addWeek(3)->format('l j F') }} and {{ \Carbon\Carbon::parse('next saturday')->addDay()->addWeek(3)->format('l j F') }}</h4>
       <p class="text-center">Online booking available until <strong>midnight of the following day</strong> and <strong>check-in is after 3pm on the day</strong>.</p>
       
       <div class="col-md-6">
@@ -127,7 +127,7 @@
 
     <div class="col-md-12">
 
-      <h4 class="text-center">Lowest prices at the weekend - {{ \Carbon\Carbon::parse('next saturday')->addWeek(4)->format('l j F') }} and {{ \Carbon\Carbon::parse('next sunday')->addWeek(4)->format('l j F') }}</h4>
+      <h4 class="text-center">Lowest prices at the weekend - {{ \Carbon\Carbon::parse('next saturday')->addWeek(4)->format('l j F') }} and {{ \Carbon\Carbon::parse('next saturday')->addDay()->addWeek(4)->format('l j F') }}</h4>
       <p class="text-center">Online booking available until <strong>midnight of the following day</strong> and <strong>check-in is after 3pm on the day</strong>.</p>
       
       <div class="col-md-6">
