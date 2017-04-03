@@ -7,6 +7,7 @@ Route::post('content/update', 'HomeController@updatecontent')->name('updateconte
 
 Route::post('travelodge/update/today', 'HomeController@postUpdateTravToday')
 ->middleware('auth');
+Route::get('travelodge/getday/{date}', 'HomeController@getday');
 
 Route::get('login', 'HomeController@getlogin')->name('login');
 Route::post('login', 'HomeController@postlogin')->name('postlogin');

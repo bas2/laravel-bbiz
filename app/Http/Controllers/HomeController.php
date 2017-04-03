@@ -179,6 +179,7 @@ class HomeController extends Controller
 
   public function postUpdateTravToday(Request $request) {
     $hotels=[''=>'Select'];foreach(\App\TravelodgeHotel::orderBy('name')->get(['hotel_id','name']) as $hotel){$hotels[$hotel->hotel_id]=$hotel->name;}
+
     $input=$request->all();
     foreach($input as $k=>$v) {
       if ($k!='update') {
@@ -227,6 +228,23 @@ class HomeController extends Controller
     ->with(['text'=>$theday, 
     'date2'=>\Carbon\Carbon::parse($input['date']),
     'price'=>(isset($input['newpricerow'])?$input['newpricerow']:39),
+    'order'=>$request['orderby'],
+    ])
+    ;
+  }
+
+  // GET: travelodge/getday
+  public function getday($theday, Request $request) {
+    $hotels=[''=>'Select'];foreach(\App\TravelodgeHotel::orderBy('name')->get(['hotel_id','name']) as $hotel){$hotels[$hotel->hotel_id]=$hotel->name;}
+    $arr=[];
+    $arr[strtolower(str_replace(' ','',$request['text']))]=$this->_getDB($theday);
+    $arr['hotels']=$hotels;
+
+    return view('includes.travday')
+    ->with('travelodge', $arr)
+    ->with(['text'=>$request['text'], 
+    'date2'=>\Carbon\Carbon::parse($theday),
+    'order'=>$request['orderby'],
     ])
     ;
   }
@@ -262,3 +280,4 @@ class HomeController extends Controller
 
 
 }
+
