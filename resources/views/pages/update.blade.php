@@ -203,7 +203,7 @@ $(document).ready(function(){
     $.ajax({
       "type":"POST",
       // /bbiz/public
-      "url":"/bbiz/public/travelodge/update/today/",
+      "url":"/travelodge/update/today/",
       "data": updatestr,
       "success":function(data){
         $this.parent().parent().html(data);
