@@ -43,19 +43,19 @@ https://www.travelodge.co.uk/search/results?location=walthamstow&checkIn=01/04/1
 
       <div class="row">
         <div class="col-md-4 trav-today hotels">
-          <p title2="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" title3="Today">Show: <span>WAL</span> <span>TOL</span> <span>BOTH</span></p>
+          <p title2="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" title3="Today">Show: <span>WAL</span> <span>TOL</span> <span>TW</span></p>
           <div>
           @include('includes.travday', ['text'=>'Today', 'date2'=>\Carbon\Carbon::now()])
           </div>
         </div>
         <div class="col-md-4 trav-tomorrow hotels">
-          <p title2="{{ \Carbon\Carbon::now()->addDay(1)->format('Y-m-d') }}" title3="Tomorrow">Show: <span>WAL</span> <span>TOL</span> <span>BOTH</span></p>
+          <p title2="{{ \Carbon\Carbon::now()->addDay(1)->format('Y-m-d') }}" title3="Tomorrow">Show: <span>WAL</span> <span>TOL</span> <span>TW</span></p>
           <div>
           @include('includes.travday', ['text'=>'Tomorrow','date2'=>\Carbon\Carbon::now()->addDay(1)])
           </div>
         </div>
         <div class="col-md-4 trav-dayaftertomorrow hotels">
-          <p title2="{{ \Carbon\Carbon::now()->addDay(2)->format('Y-m-d') }}" title3="Day after">Show: <span>WAL</span> <span>TOL</span> <span>BOTH</span></p>
+          <p title2="{{ \Carbon\Carbon::now()->addDay(2)->format('Y-m-d') }}" title3="Day after">Show: <span>WAL</span> <span>TOL</span> <span>TW</span></p>
           <div>
           @include('includes.travday', ['text'=>'Day after','date2'=>\Carbon\Carbon::now()->addDay(2)])
           </div>
@@ -65,13 +65,13 @@ https://www.travelodge.co.uk/search/results?location=walthamstow&checkIn=01/04/1
 
       <div class="row">
         <div class="col-md-6 hotels">
-          <p title2="{{ \Carbon\Carbon::parse('next sat')->format('Y-m-d') }}" title3="Sat next">Show: <span>WAL</span> <span>TOL</span> <span>BOTH</span></p>
+          <p title2="{{ \Carbon\Carbon::parse('next sat')->format('Y-m-d') }}" title3="Sat next">Show: <span>WAL</span> <span>TOL</span> <span>TW</span></p>
           <div>
           @include('includes.travday', ['text'=>'Sat next','date2'=>\Carbon\Carbon::parse('next saturday')])
           </div>
         </div>
         <div class="col-md-6 hotels">
-          <p title2="{{ \Carbon\Carbon::parse('next sat')->addDay()->format('Y-m-d') }}" title3="Sun next">Show: <span>WAL</span> <span>TOL</span> <span>BOTH</span></p>
+          <p title2="{{ \Carbon\Carbon::parse('next sat')->addDay()->format('Y-m-d') }}" title3="Sun next">Show: <span>WAL</span> <span>TOL</span> <span>TW</span></p>
           <div>
           @include('includes.travday', ['text'=>'Sun next','date2'=>\Carbon\Carbon::parse('next saturday')->addDay()])
           </div>
@@ -81,13 +81,13 @@ https://www.travelodge.co.uk/search/results?location=walthamstow&checkIn=01/04/1
       @for($i=1;$i<12;$i++)
       <div class="row">
         <div class="col-md-6 hotels">
-          <p title2="{{ \Carbon\Carbon::parse('next sat')->addWeek($i)->format('Y-m-d') }}" title3="Sat next{{ $i }}">Show: <span>WAL</span> <span>TOL</span> <span>BOTH</span></p>
+          <p title2="{{ \Carbon\Carbon::parse('next sat')->addWeek($i)->format('Y-m-d') }}" title3="Sat next{{ $i }}">Show: <span>WAL</span> <span>TOL</span> <span>TW</span></p>
           <div>
           @include('includes.travday', ['text'=>"Sat next{$i}",'date2'=>\Carbon\Carbon::parse('next sat')->addWeek($i)])
           </div>
         </div>
         <div class="col-md-6 hotels">
-          <p title2="{{ \Carbon\Carbon::parse('next sat')->addDay()->addWeek($i)->format('Y-m-d') }}" title3="Sun next{{ $i }}">Show: <span>WAL</span> <span>TOL</span> <span>BOTH</span></p>
+          <p title2="{{ \Carbon\Carbon::parse('next sat')->addDay()->addWeek($i)->format('Y-m-d') }}" title3="Sun next{{ $i }}">Show: <span>WAL</span> <span>TOL</span> <span>TW</span></p>
           <div>
           @include('includes.travday', ['text'=>"Sun next{$i}",'date2'=>\Carbon\Carbon::parse('next sat')->addDay()->addWeek($i)])
           </div>
