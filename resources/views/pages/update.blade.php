@@ -16,9 +16,9 @@
 @endif
 <div class="container-fluid">
 <div class="row">
-<div>
-{!! Form::submit('Update >',['class'=>'btn btn-lg btn-primary btn-block']) !!}
-</div>
+  <div>
+  {!! Form::submit('Update >',['class'=>'btn btn-lg btn-primary btn-block']) !!}
+  </div>
 </div>
 </div>
 
@@ -34,7 +34,7 @@ https://www.travelodge.co.uk/search/results?location=walthamstow&checkIn=01/04/1
 
   <div id="travelodge" class="col-md-12 travelodge-affiliate">
     <div class="panel">
-      <h2 class="panel-heading">Book a room with travelodge</h2>
+      <h2 class="panel-heading">Book a room with Travelodge</h2>
       <div class="container">
 
       <div class="row">
@@ -42,34 +42,55 @@ https://www.travelodge.co.uk/search/results?location=walthamstow&checkIn=01/04/1
       </div>
 
       <div class="row">
-        <div class="col-md-4 trav-today">
+        <div class="col-md-4 trav-today hotels">
+          <p title2="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" title3="Today">Show: <span>WAL</span> <span>TOL</span> <span>BOTH</span></p>
+          <div>
           @include('includes.travday', ['text'=>'Today', 'date2'=>\Carbon\Carbon::now()])
+          </div>
         </div>
-        <div class="col-md-4 trav-tomorrow">
+        <div class="col-md-4 trav-tomorrow hotels">
+          <p title2="{{ \Carbon\Carbon::now()->addDay(1)->format('Y-m-d') }}" title3="Tomorrow">Show: <span>WAL</span> <span>TOL</span> <span>BOTH</span></p>
+          <div>
           @include('includes.travday', ['text'=>'Tomorrow','date2'=>\Carbon\Carbon::now()->addDay(1)])
+          </div>
         </div>
-        <div class="col-md-4 trav-dayaftertomorrow">
+        <div class="col-md-4 trav-dayaftertomorrow hotels">
+          <p title2="{{ \Carbon\Carbon::now()->addDay(2)->format('Y-m-d') }}" title3="Day after">Show: <span>WAL</span> <span>TOL</span> <span>BOTH</span></p>
+          <div>
           @include('includes.travday', ['text'=>'Day after','date2'=>\Carbon\Carbon::now()->addDay(2)])
+          </div>
         </div>
       </div>
 
 
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 hotels">
+          <p title2="{{ \Carbon\Carbon::parse('next sat')->format('Y-m-d') }}" title3="Sat next">Show: <span>WAL</span> <span>TOL</span> <span>BOTH</span></p>
+          <div>
           @include('includes.travday', ['text'=>'Sat next','date2'=>\Carbon\Carbon::parse('next saturday')])
+          </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 hotels">
+          <p title2="{{ \Carbon\Carbon::parse('next sat')->addDay()->format('Y-m-d') }}" title3="Sun next">Show: <span>WAL</span> <span>TOL</span> <span>BOTH</span></p>
+          <div>
           @include('includes.travday', ['text'=>'Sun next','date2'=>\Carbon\Carbon::parse('next saturday')->addDay()])
+          </div>
         </div>
       </div>
 
       @for($i=1;$i<12;$i++)
       <div class="row">
-        <div class="col-md-6">
-          @include('includes.travday', ['text'=>"Sat next{$i}",'date2'=>\Carbon\Carbon::parse('next saturday')->addWeek($i)])
+        <div class="col-md-6 hotels">
+          <p title2="{{ \Carbon\Carbon::parse('next sat')->addWeek($i)->format('Y-m-d') }}" title3="Sat next{{ $i }}">Show: <span>WAL</span> <span>TOL</span> <span>BOTH</span></p>
+          <div>
+          @include('includes.travday', ['text'=>"Sat next{$i}",'date2'=>\Carbon\Carbon::parse('next sat')->addWeek($i)])
+          </div>
         </div>
-        <div class="col-md-6">
-          @include('includes.travday', ['text'=>"Sun next{$i}",'date2'=>\Carbon\Carbon::parse('next saturday')->addDay()->addWeek($i)])
+        <div class="col-md-6 hotels">
+          <p title2="{{ \Carbon\Carbon::parse('next sat')->addDay()->addWeek($i)->format('Y-m-d') }}" title3="Sun next{{ $i }}">Show: <span>WAL</span> <span>TOL</span> <span>BOTH</span></p>
+          <div>
+          @include('includes.travday', ['text'=>"Sun next{$i}",'date2'=>\Carbon\Carbon::parse('next sat')->addDay()->addWeek($i)])
+          </div>
         </div>
       </div>
       @endfor
@@ -203,8 +224,8 @@ $(document).ready(function(){
     $.ajax({
       "type":"POST",
       // /bbiz/public
-      "url":"/travelodge/update/today/",
-      "data": updatestr,
+      "url":"/bbiz/public/travelodge/update/today/",
+      "data": updatestr + "&orderby=" + $this.attr('title3'),
       "success":function(data){
         $this.parent().parent().html(data);
       }
@@ -214,6 +235,21 @@ $(document).ready(function(){
 
   $(document).on('click', 'span.zero', function(){
     $(this).parent().find('select[name^=price]').val(0);
+  });
+
+
+  $('.hotels p span').css('cursor','pointer').click(function(){
+    var $this=$(this);
+    $.ajax({
+      "type":"GET",
+      // /bbiz/public
+      "url":"/bbiz/public/travelodge/getday/" + $this.parent().attr('title2'),
+      "data":"orderby=" + $this.text() + "&text=" + $this.parent().attr('title3'),
+      "success":function(data){
+        $($this).parent().next().html(data);
+      } // End ajax success function
+
+    }); // End ajax.
   });
 
 
