@@ -96,8 +96,6 @@ https://www.travelodge.co.uk/search/results?location=walthamstow&checkIn=01/04/1
       @endfor
 
 
-
-
       </div>
     </div>
   </div>
