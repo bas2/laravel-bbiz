@@ -37,7 +37,7 @@
       
       <div class="col-md-6">
         <ul>
-          @foreach($travelodge['sat'] as $hoteldate)
+          @foreach($travelodge['satnext'] as $hoteldate)
           <li>{{ \Carbon\Carbon::parse($hoteldate->date)->format('l') }} {{ $hoteldate->hotels[0]->name }}, <strong>{{ $hoteldate->price }}</strong></li>
           @endforeach
         </ul>
@@ -45,7 +45,7 @@
 
       <div class="col-md-6">
         <ul>
-          @foreach($travelodge['sun'] as $hoteldate)
+          @foreach($travelodge['sunnext'] as $hoteldate)
           <li>{{ \Carbon\Carbon::parse($hoteldate->date)->format('l') }} {{ $hoteldate->hotels[0]->name }}, <strong>{{ $hoteldate->price }}</strong></li>
           @endforeach
         </ul>
@@ -53,7 +53,7 @@
 
     </div>
 
-    @for($i=1;$i<5;$i++)
+    @for($i=1;$i<6;$i++)
     <div class="col-md-12">
 
       <h4 class="text-center">Lowest prices at the weekend - {{ \Carbon\Carbon::parse('next saturday')->addWeek($i)->format('l j F') }} and {{ \Carbon\Carbon::parse('next saturday')->addDay()->addWeek($i)->format('l j F') }}</h4>
@@ -61,7 +61,7 @@
       
       <div class="col-md-6">
       <ul>
-        @foreach($travelodge["sat{$i}"] as $hoteldate)
+        @foreach($travelodge["satnext{$i}"] as $hoteldate)
         <li>{{ \Carbon\Carbon::parse($hoteldate->date)->format('l') }} {{ $hoteldate->hotels[0]->name }}, <strong>{{ $hoteldate->price }}</strong></li>
         @endforeach
       </ul>
@@ -69,7 +69,7 @@
 
       <div class="col-md-6">
       <ul>
-        @foreach($travelodge["sun{$i}"] as $hoteldate)
+        @foreach($travelodge["sunnext{$i}"] as $hoteldate)
         <li>{{ \Carbon\Carbon::parse($hoteldate->date)->format('l') }} {{ $hoteldate->hotels[0]->name }}, <strong>{{ $hoteldate->price }}</strong></li>
         @endforeach
       </ul>
