@@ -20,6 +20,18 @@ class HomeController extends Controller
 
   // GET: {slug?}
   public function index() {
+    $arr=[];
+    $arr['lead']=$this->_getsection('travelodge');
+    $arr['today']=$this->_getDB(\Carbon\Carbon::now()->format('Y-m-d'));
+    $arr['tomorrow']=$this->_getDB(\Carbon\Carbon::now()->addDay());
+    $arr['dayafter']=$this->_getDB(\Carbon\Carbon::now()->addDay(2));
+
+    $arr['satnext']=$this->_getDB(\Carbon\Carbon::parse('next saturday'));
+    $arr['sunnext']=$this->_getDB(\Carbon\Carbon::parse('next saturday')->addDay());
+    for($i=1;$i<7;$i++) {
+      $arr["satnext{$i}"]=$this->_getDB(\Carbon\Carbon::parse('next saturday')->addWeek($i));
+      $arr["sunnext{$i}"]=$this->_getDB(\Carbon\Carbon::parse('next saturday')->addDay()->addWeek($i));
+    }
     $email=$this->_getsection('email');
     return view('pages.welcome')
     ->with('page',['home','Bashir Patel (Web developer/programmer) London-based'])
@@ -29,24 +41,7 @@ class HomeController extends Controller
       'skills'=>\App\Skill::get(['skill','content']),
       'recent'=>$this->_getsection('recent')
       ])
-    ->with('travelodge',
-      [
-      'lead'=>$this->_getsection('travelodge'),
-      'today'=>$this->_getDB(\Carbon\Carbon::now()),
-      'tomorrow'=>$this->_getDB(\Carbon\Carbon::now()->addDay()),
-
-      'sat'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')),
-      'sun'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addDay()),
-      'sat1'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addWeek()),
-      'sun1'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addDay()->addWeek()),
-      'sat2'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addWeek(2)),
-      'sun2'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addDay()->addWeek(2)),
-      'sat3'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addWeek(3)),
-      'sun3'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addDay()->addWeek(3)),
-      'sat4'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addWeek(4)),
-      'sun4'=>$this->_getDB(\Carbon\Carbon::parse('next saturday')->addDay()->addWeek(4)),
-
-      ])
+    ->with('travelodge', $arr)
     ->with('images',\App\Image::get(['filename']))
     ;
   }
