@@ -20,11 +20,14 @@ body {
   text-align: center;
   ul {
     margin:0;
+    a {
+      padding: 4px;
+    }
   }
 }
 
 .unselected {font-weight:normal;}
-.selected {font-weight:bold;border:1px solid black;}
+.selected {font-weight:normal;background-color:transparent;color:yellow;}
 
 .wrapper {
   /* Margin bottom by footer height */

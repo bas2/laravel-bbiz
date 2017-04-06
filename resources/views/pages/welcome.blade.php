@@ -6,11 +6,11 @@
 <div class="pagenav panel">
 <div class="nav nav-inverse">
 <nav>
-  <ul class="list-inline">
-  <li><a href="#trtodtom">{{ date('j F') }}</a>
-  <li><a href="#trwe1">{{ \Carbon\Carbon::parse('next saturday')->format('j F') }}</a>
+  <ul class="list-inline nav-justified">
+  <li><a href="#trtodtom">{{ date('j M') }}</a>
+  <li><a href="#trwe1">{{ \Carbon\Carbon::parse('next saturday')->format('j M') }}</a>
   @for($i=1;$i<6;$i++)
-  <li><a href="#trwe{{ $i+1 }}">{{ \Carbon\Carbon::parse('next saturday')->addWeek($i)->format('j F') }}</a>
+  <li><a href="#trwe{{ $i+1 }}">{{ \Carbon\Carbon::parse('next saturday')->addWeek($i)->format('j M') }}</a>
   @endfor
   <li><a href="#aboutme">About me</a>
   <li><a href="#skills">Skills</a>
