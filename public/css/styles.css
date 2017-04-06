@@ -7,6 +7,20 @@ body {
   body#home a.homelink, body#projects a.projectslink, body#update a.updatelink, body#login a.loginlink {
     color: yellow; }
 
+.pagenav {
+  z-index: 1;
+  width: 100%;
+  text-align: center; }
+  .pagenav ul {
+    margin: 0; }
+
+.unselected {
+  font-weight: normal; }
+
+.selected {
+  font-weight: bold;
+  border: 1px solid black; }
+
 .wrapper {
   /* Margin bottom by footer height */
   margin: 0 10px 60px; }
