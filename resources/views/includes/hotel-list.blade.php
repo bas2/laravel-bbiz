@@ -1,9 +1,9 @@
 @if(!count($hotels))
 <p class="alert alert-info text-center">No data found</p>
 @else
-<ul>
+<ul class="list-group">
   @foreach($hotels as $hoteldate)
-  <li>{{ \Carbon\Carbon::parse($hoteldate->date)->format('l') }} {{ $hoteldate->hotels[0]->name }}, <strong>{{ $hoteldate->price }}</strong></li>
+  <li class="list-group-item">{{ \Carbon\Carbon::parse($hoteldate->date)->format('l') }} {{ $hoteldate->hotels[0]->name }} <span class="badge">{{ $hoteldate->price }}</span></li>
   @endforeach
 </ul>
 @endif

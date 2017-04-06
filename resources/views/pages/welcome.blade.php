@@ -116,7 +116,7 @@
   <div class="panel hunp">
     <h2 class="panel-heading">Recent work</h2>
     <div class="panel-body">
-    <p>{!! $pagecontent['recent'] !!}</p>
+    <p class="lead">{!! $pagecontent['recent'] !!}</p>
     <ul class="list-inline">
     @foreach($images as $image)<li>{{ link_to("img/uploaded/{$image->filename}",Html::image("img/uploaded/{$image->filename}",'',['width'=>200]), ['class'=>'overlay'], null, false) }}</li>@endforeach
     </ul>
