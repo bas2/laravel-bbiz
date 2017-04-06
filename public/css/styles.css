@@ -13,13 +13,16 @@ body {
   text-align: center; }
   .pagenav ul {
     margin: 0; }
+    .pagenav ul a {
+      padding: 4px; }
 
 .unselected {
   font-weight: normal; }
 
 .selected {
-  font-weight: bold;
-  border: 1px solid black; }
+  font-weight: normal;
+  background-color: transparent;
+  color: yellow; }
 
 .wrapper {
   /* Margin bottom by footer height */
