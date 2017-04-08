@@ -136,10 +136,10 @@ $('<button class="btn btn-primary">Show more &rarr;</button>').insertAfter($('.s
   $('.showmore2').toggle();; // Menu items.
   if ($('.showmore').is(':visible')) {
     $(this).html('Show less &larr;');
-    $('html, body').animate({scrollTop: $('#trwe2').offset().top-20}, 1000);
+    $('html, body').animate({scrollTop: $('#trwe2').offset().top-25}, 1000);
   } else {
     $(this).html('Show more &rarr;');
-    $('html, body').animate({scrollTop: $('#trwe1').offset().top-20}, 1000);
+    $('html, body').animate({scrollTop: $('#trwe1').offset().top-25}, 1000);
   }
   e.preventDefault();
 });
@@ -147,7 +147,7 @@ $('.showmore').hide();
 $('.showmore2').hide();
 
 $('.pagenav nav a').click(function(e){
-  $('html, body').animate({scrollTop: $(''+$(this).attr('href')).offset().top-20}, 500);
+  $('html, body').animate({scrollTop: $(''+$(this).attr('href')).offset().top-25}, 500);
   e.preventDefault();
 });
 
@@ -158,7 +158,7 @@ $(window).scroll(function(){
 
   $('.page-heading').each(function(){
     if($(this).is(':visible')) { // Avoid interating through hidden weekend headings.
-      if( Math.floor($(this).offset().top)-20 > $(window).scrollTop() ) {
+      if( Math.floor($(this).offset().top)-25 > $(window).scrollTop() ) {
         $('a[href$='+$(this).attr('id')+']').removeClass('selected').addClass('unselected');
       } else {
         //console.log($(this).attr('id'));
