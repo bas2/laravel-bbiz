@@ -7,6 +7,13 @@ body {
   body#home a.homelink, body#projects a.projectslink, body#update a.updatelink, body#login a.loginlink {
     color: yellow; }
 
+a:active {
+  color: yellow;
+  text-decoration: none !important; }
+
+a:visited {
+  text-decoration: none !important; }
+
 .pagenav {
   z-index: 1;
   width: 100%;

@@ -10,7 +10,7 @@
   <li><a href="#trtodtom">{{ date('j M') }}</a>
   <li><a href="#trwe1">{{ \Carbon\Carbon::parse('next saturday')->format('j M') }}</a>
   @for($i=1;$i<6;$i++)
-  <li><a href="#trwe{{ $i+1 }}">{{ \Carbon\Carbon::parse('next saturday')->addWeek($i)->format('j M') }}</a>
+  <li class="showmore2"><a href="#trwe{{ $i+1 }}">{{ \Carbon\Carbon::parse('next saturday')->addWeek($i)->format('j M') }}</a>
   @endfor
   <li><a href="#aboutme">About me</a>
   <li><a href="#skills">Skills</a>
@@ -54,6 +54,8 @@
 
     </div>
 
+    <div class="showmore">
+
     @for($i=1;$i<6;$i++)
     <div class="col-md-12 page-heading" id="trwe{{ $i+1 }}">
 
@@ -71,6 +73,7 @@
     </div>
     @endfor
 
+    </div>
 
     </div>
   </div>
@@ -128,19 +131,43 @@
 </div>
 </div>
 <script>
+$('<button class="btn btn-primary">Show more &rarr;</button>').insertAfter($('.showmore')).click(function(e){
+  $('.showmore').toggle(); // Headings.
+  $('.showmore2').toggle();; // Menu items.
+  if ($('.showmore').is(':visible')) {
+    $(this).html('Show less &larr;');
+    $('html, body').animate({scrollTop: $('#trwe2').offset().top-20}, 1000);
+  } else {
+    $(this).html('Show more &rarr;');
+    $('html, body').animate({scrollTop: $('#trwe1').offset().top-20}, 1000);
+  }
+  e.preventDefault();
+});
+$('.showmore').hide();
+$('.showmore2').hide();
+
+$('.pagenav nav a').click(function(e){
+  $('html, body').animate({scrollTop: $(''+$(this).attr('href')).offset().top-20}, 500);
+  e.preventDefault();
+});
+
 $(window).scroll(function(){
   if( Math.floor($('.main-heading').offset().top) > $(window).scrollTop() )
   {$('.pagenav').removeAttr('style');}
   else {$('.pagenav').css({'position':'fixed','top':0,'left':0});}
-  //{$('.pagenav').fadeOut();}else {$('.pagenav').fadeIn();}
+
   $('.page-heading').each(function(){
-    if( Math.floor($(this).offset().top) > $(window).scrollTop() ) {
-      $('a[href$='+$(this).attr('id')+']').removeClass('selected').addClass('unselected');
-    } else {
-      $('a[href]').removeClass('selected').addClass('unselected');
-      $('a[href$='+$(this).attr('id')+']').removeClass('unselected').addClass('selected');
+    if($(this).is(':visible')) { // Avoid interating through hidden weekend headings.
+      if( Math.floor($(this).offset().top)-20 > $(window).scrollTop() ) {
+        $('a[href$='+$(this).attr('id')+']').removeClass('selected').addClass('unselected');
+      } else {
+        //console.log($(this).attr('id'));
+        $('a[href]').removeAttr('class').addClass('unselected');
+        $('a[href$='+$(this).attr('id')+']').removeClass('unselected').addClass('selected');
+      }
     }
   });
+
 });
 </script>
 @endsection
