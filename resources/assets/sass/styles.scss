@@ -14,6 +14,9 @@ body {
   {color: yellow;}
 }
 
+a:active {color:yellow;text-decoration:none !important;}
+a:visited {text-decoration:none !important;}
+
 .pagenav {
   z-index:1;
   width: 100%;
