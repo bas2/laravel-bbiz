@@ -153,7 +153,8 @@ $('.showmore').hide();
 $('.showmore2').hide();
 
 $('.pagenav nav a').click(function(e){
-  $('html, body').animate({scrollTop: $(''+$(this).attr('href')).offset().top-25}, 500);
+  var offset=($('.pagenav').css('position')=='fixed') ? 25 : 67;
+  $('html, body').animate({scrollTop: $(''+$(this).attr('href')).offset().top-offset}, 500);
   e.preventDefault();
 });
 
