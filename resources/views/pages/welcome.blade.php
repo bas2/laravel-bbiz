@@ -116,9 +116,8 @@
 </div>
 
 
-<div class="container">
+<div class="container-fluid">
 <div class="row">
-
 
   <div class="col-md-12 recent page-heading" id="recent">
     <div class="panel hunp">
@@ -131,7 +130,6 @@
       </div>
     </div>
   </div>
-
 
 </div>
 </div>
