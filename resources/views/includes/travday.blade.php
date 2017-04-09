@@ -19,6 +19,6 @@
   {!! Form::select("hotel",$travelodge['hotels'],'',['class'=>'addhotel']) !!}
   </div>
 
-  {{ Form::button('Update >',['class'=>'updatetoday btn btn-primary btn-lg','title2'=>\Carbon\Carbon::parse($date2)->format('Y-m-d'),'title3'=>((isset($order)?$order:'TW'))]) }}
+  {{ Form::button('Update >',['class'=>'updatetoday btn btn-primary','title2'=>\Carbon\Carbon::parse($date2)->format('Y-m-d'),'title3'=>((isset($order)?$order:'TW'))]) }}
 </fieldset>
 
