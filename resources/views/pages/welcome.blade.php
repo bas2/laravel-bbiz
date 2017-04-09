@@ -1,24 +1,26 @@
 @extends('layout')
 @section('content')
-<div class="container-fluid">
-<div class="row equal">
-
-  <div class="pagenav panel">
-    <div class="nav nav-inverse">
-      <nav>
-        <ul class="list-inline nav-justified">
-          <li><a href="#trtodtom">{{ date('j M') }}</a>
-          <li><a href="#trwe1">{{ \Carbon\Carbon::parse('next saturday')->format('j M') }}</a>
-          @for($i=1;$i<6;$i++)
-          <li class="showmore2"><a href="#trwe{{ $i+1 }}">{{ \Carbon\Carbon::parse('next saturday')->addWeek($i)->format('j M') }}</a>
-          @endfor
-          <li><a href="#aboutme">About me</a>
-          <li><a href="#skills">Skills</a>
-          <li><a href="#recent">Recent work</a>
-        </ul>
-      </nav>
-    </div>
+{{-- <div class="row"> --}}
+{{-- <div class="col-md-12"> --}}
+<nav class="pagenav nav navbar-default">
+  <div class="container-fluid">
+    <ul class="list-inline nav-justified">
+      <li><a href="#trtodtom">{{ date('j M') }}</a>
+      <li><a href="#trwe1">{{ \Carbon\Carbon::parse('next saturday')->format('j M') }}</a>
+      @for($i=1;$i<6;$i++)
+      <li class="showmore2"><a href="#trwe{{ $i+1 }}">{{ \Carbon\Carbon::parse('next saturday')->addWeek($i)->format('j M') }}</a>
+      @endfor
+      <li><a href="#aboutme">About me</a>
+      <li><a href="#skills">Skills</a>
+      <li><a href="#recent">Recent work</a>
+    </ul>
   </div>
+</nav>
+{{-- </div> --}}
+{{-- </div> --}}
+
+<div class="container-fluid">
+<div class="row">
 
   <div class="col-md-12 travelodge-affiliate">
     <div class="panel">
@@ -84,6 +86,12 @@
     </div>
   </div>
 
+</div>
+</div>
+
+
+<div class="container-fluid">
+<div class="row equal">
 
   <div class="col-md-4 intro page-heading" id="aboutme">
     <div class="panel hunp">
@@ -150,8 +158,8 @@ $('<div class="row text-center"><button class="btn btn-primary">Show more &rarr;
 $('.showmore').hide();
 $('.showmore2').hide();
 
-$('.pagenav nav a').click(function(e){
-  var offset=($('.pagenav').css('position')=='fixed') ? 25 : 67;
+$('nav.pagenav a').click(function(e){
+  var offset=($('.pagenav').css('position')=='fixed') ? 25 : 45;
   $('html, body').animate({scrollTop: $(''+$(this).attr('href')).offset().top-offset}, 500);
   e.preventDefault();
 });
