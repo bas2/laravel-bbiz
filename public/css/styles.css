@@ -69,10 +69,12 @@ input[type=submit] {
 .skills .panel-body {
   padding-left: 0; }
   .skills .panel-body ul {
+    list-style: none;
     padding-left: 30px;
     padding-right: 30px; }
     .skills .panel-body ul li {
-      list-style: square; }
+      margin-bottom: 4px;
+      border-bottom: 1px dotted rgba(200, 200, 200, 0.2); }
       .skills .panel-body ul li i {
         font: bold 1.2em arial;
         letter-spacing: 2px;
