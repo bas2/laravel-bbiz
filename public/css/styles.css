@@ -74,8 +74,10 @@ input[type=submit] {
     .skills .panel-body ul li {
       list-style: square; }
       .skills .panel-body ul li i {
-        font-weight: bold;
-        color: darkred; }
+        font: bold 1.2em arial;
+        letter-spacing: 2px;
+        color: rgba(255, 0, 0, 0.6);
+        text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5); }
 
 .recent h2 {
   background: url("../img/time2.png");
