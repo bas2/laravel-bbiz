@@ -1,6 +1,6 @@
 @extends('layout')
 @section('content')
-<div class="container">
+<div class="container-fluid">
 <div class="row equal">
 
   <div class="pagenav panel">
@@ -120,7 +120,7 @@
 <div class="row">
 
   <div class="col-md-12 recent page-heading" id="recent">
-    <div class="panel hunp">
+    <div class="panel">
       <h2 class="panel-heading">Recent work</h2>
       <div class="panel-body">
       <p class="lead text-center">{!! $pagecontent['recent'] !!}</p>
