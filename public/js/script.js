@@ -20,7 +20,7 @@ $(document).ready(function(){
 
 
   $('.overlay').click(function(e){
-    $('<div class="overlay_container"><div>Close</div><img src="'+$(this).find('img').attr('src')+'"></div>')
+    $('<div class="overlay_container"><div><img src="img/close.png"></div><img src="'+$(this).find('img').attr('src')+'"></div>')
     .appendTo('body');
     $("body").css("overflow","hidden");
     e.preventDefault();
