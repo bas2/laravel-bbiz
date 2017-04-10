@@ -86,9 +86,12 @@ input[type=submit] {
   padding-bottom: 0; }
 .recent p {
   margin-left: 0; }
+.recent ul {
+  text-align: center; }
 .recent li {
   padding: 0;
-  margin-right: 15px; }
+  margin-right: 0;
+  margin-bottom: 15px; }
 .recent li:first-child {
   margin-left: 0; }
 .recent .list-inline {
