@@ -31,9 +31,18 @@ a:visited {
       color: #ccc;
       text-decoration: none;
       font-variant: small-caps; }
-    .pagenav .panel a.selected, .pagenav .panel a:hover {
-      color: #fff;
-      text-shadow: 1px 1px #000; }
+      .pagenav .panel a.selected, .pagenav .panel a:hover {
+        color: #fff;
+        text-shadow: 1px 1px #000; }
+      .pagenav .panel a[href*=aboutme] {
+        background: url(../img/Person.png) no-repeat left center; }
+      .pagenav .panel a[href*=skills] {
+        background: url(../img/bulb.png) no-repeat left center; }
+      .pagenav .panel a[href*=recent] {
+        background: url(../img/time2.png) no-repeat left center; }
+      .pagenav .panel a[href*=aboutme], .pagenav .panel a[href*=skills], .pagenav .panel a[href*=recent] {
+        padding-left: 22px;
+        background-size: 20px; }
 
 .unselected {
   font-weight: normal; }
