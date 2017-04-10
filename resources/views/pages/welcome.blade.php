@@ -1,7 +1,7 @@
 @extends('layout')
 @section('content')
 
-<nav class="pagenav nav">
+<nav class="pagenav">
   <div class="container-fluid">
     <div class="panel">
     <ul class="list-inline nav-justified">
@@ -159,7 +159,7 @@ $('.showmore').hide();
 $('.showmore2').hide();
 
 $('nav.pagenav a').click(function(e){
-  var offset=($('.pagenav').css('position')=='fixed') ? 25 : 67;
+  var offset=($('.pagenav').css('position')=='fixed') ? 25 : 65;
   $('html, body').animate({scrollTop: $(''+$(this).attr('href')).offset().top-offset}, 500);
   e.preventDefault();
 });
