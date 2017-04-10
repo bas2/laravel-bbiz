@@ -113,15 +113,15 @@ https://www.travelodge.co.uk/search/results?location=walthamstow&checkIn=01/04/1
   </div>
 
 </div>
-{!! Html::script('js/pikaday.js') !!}
-{!! Html::script('js/pikaday_jquery.js') !!}
+{{-- {!! Html::script('js/pikaday.js') !!}
+{!! Html::script('js/pikaday_jquery.js') !!} --}}
 <script>
-    var $datepicker = $('#datepicker').pikaday({
-        firstDay: 1,
-        minDate: new Date(2000, 0, 1),
-        maxDate: new Date(2020, 12, 31),
-        yearRange: [2000,2020],
-    });
+    //var $datepicker = $('#datepicker').pikaday({
+    //    firstDay: 1,
+    //    minDate: new Date(2000, 0, 1),
+    //    maxDate: new Date(2020, 12, 31),
+    //    yearRange: [2000,2020],
+    //});
     // chain a few methods for the first datepicker, jQuery style!
     //$datepicker.pikaday('show').pikaday('nextMonth');
 </script>
