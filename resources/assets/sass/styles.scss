@@ -29,8 +29,15 @@ a:visited {text-decoration:none !important;}
     }
   }
   .panel{margin-bottom: 0;border-radius: 0 0 0 0;background: darkred;
-    a {color:#ccc;text-decoration:none;font-variant: small-caps;}
-    a.selected,a:hover {color:#fff;text-shadow:1px 1px #000;}
+    a {
+      color:#ccc;text-decoration:none;font-variant: small-caps;
+      &.selected,&:hover {color:#fff;text-shadow:1px 1px #000;}
+      &[href*=aboutme] {background: url(../img/Person.png) no-repeat left center;}
+      &[href*=skills] {background: url(../img/bulb.png) no-repeat left center;}
+      &[href*=recent] {background: url(../img/time2.png) no-repeat left center;}
+      &[href*=aboutme],&[href*=skills],&[href*=recent]
+      {padding-left:22px;background-size:20px;}
+    }
   }
 }
 
