@@ -28,9 +28,12 @@ a:visited {
     border-radius: 0 0 0 0;
     background: darkred; }
     .pagenav .panel a {
-      color: #ccc; }
+      color: #ccc;
+      text-decoration: none;
+      font-variant: small-caps; }
     .pagenav .panel a.selected {
-      color: #fff; }
+      color: #fff;
+      text-shadow: 1px 1px #000; }
 
 .unselected {
   font-weight: normal; }
