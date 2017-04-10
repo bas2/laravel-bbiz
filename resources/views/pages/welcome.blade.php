@@ -133,7 +133,7 @@
       <div class="panel-body">
       <p class="lead text-center">{!! $pagecontent['recent'] !!}</p>
       <ul class="list-inline">
-      @foreach($images as $image)<li>{{ link_to("img/uploaded/{$image->filename}",Html::image("img/uploaded/{$image->filename}",'',['width'=>200]), ['class'=>'overlay'], null, false) }}</li>@endforeach
+      @foreach($images as $image)<li>{{ link_to("img/uploaded/{$image->filename}",Html::image("img/uploaded/{$image->filename}",'',['width'=>200,'class'=>'thumbnail']), ['class'=>'overlay'], null, false) }}</li>@endforeach
       </ul>
       </div>
     </div>
@@ -172,11 +172,11 @@ $(window).scroll(function(){
   $('.page-heading').each(function(){
     if($(this).is(':visible')) { // Avoid interating through hidden weekend headings.
       if( Math.floor($(this).offset().top)-25 > $(window).scrollTop() ) {
-        $('a[href$='+$(this).attr('id')+']').removeClass('selected').addClass('unselected');
+        $('.pagenav a[href$='+$(this).attr('id')+']').removeClass('selected').addClass('unselected');
       } else {
         //console.log($(this).attr('id'));
-        $('a[href]').removeAttr('class').addClass('unselected');
-        $('a[href$='+$(this).attr('id')+']').removeClass('unselected').addClass('selected');
+        $('.pagenav a[href]').removeAttr('class').addClass('unselected');
+        $('.pagenav a[href$='+$(this).attr('id')+']').removeClass('unselected').addClass('selected');
       }
     }
   });
