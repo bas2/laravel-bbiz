@@ -184,23 +184,19 @@ body#update form {
   top: 0;
   left: 0;
   width: 100%;
-  overflow: auto;
   height: 100%;
-  font-size: 200%;
+  overflow: auto;
   z-index: 3;
   margin: 0;
   background: rgba(128, 128, 128, 0.5); }
   .overlay_container img {
     width: 100%; }
-  .overlay_container div {
+  .overlay_container div img {
     position: fixed;
     top: 0;
     right: 10px;
     cursor: pointer;
-    background: rgba(0, 0, 0, 0.4);
-    font-weight: bold;
-    border: 2px solid #000;
-    border-radius: .4em; }
+    width: 50px; }
 
 body#login form {
   max-width: 400px;

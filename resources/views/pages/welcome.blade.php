@@ -142,6 +142,15 @@
 </div>
 </div>
 <script>
+$('<a href="#" class="scrollup"></a>').prependTo('body').hide().click(function(e){
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  e.preventDefault();
+});
+
+$(window).scroll(function(){
+  if($(this).scrollTop()>100){$('a.scrollup').fadeIn();}else{$('a.scrollup').fadeOut();}
+});
+
 $('<div class="row text-center"><button class="btn btn-primary">Show more &rarr;</button></div>')
 .insertAfter($('.showmore')).click(function(e){
   $('.showmore').toggle(); // Headings.
