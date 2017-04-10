@@ -26,11 +26,13 @@ class HomeController extends Controller
     $arr['tomorrow']=$this->_getDB(\Carbon\Carbon::now()->addDay());
     $arr['dayafter']=$this->_getDB(\Carbon\Carbon::now()->addDay(2));
 
-    $arr['satnext']=$this->_getDB(\Carbon\Carbon::parse('next saturday'));
-    $arr['sunnext']=$this->_getDB(\Carbon\Carbon::parse('next saturday')->addDay());
+    $arr['frinext']=$this->_getDB(\Carbon\Carbon::parse('next friday'));
+    $arr['satnext']=$this->_getDB(\Carbon\Carbon::parse('next friday')->addDay());
+    $arr['sunnext']=$this->_getDB(\Carbon\Carbon::parse('next friday')->addDay(2));
     for($i=1;$i<7;$i++) {
-      $arr["satnext{$i}"]=$this->_getDB(\Carbon\Carbon::parse('next saturday')->addWeek($i));
-      $arr["sunnext{$i}"]=$this->_getDB(\Carbon\Carbon::parse('next saturday')->addDay()->addWeek($i));
+      $arr["frinext{$i}"]=$this->_getDB(\Carbon\Carbon::parse('next friday')->addWeek($i));
+      $arr["satnext{$i}"]=$this->_getDB(\Carbon\Carbon::parse('next friday')->addDay()->addWeek($i));
+      $arr["sunnext{$i}"]=$this->_getDB(\Carbon\Carbon::parse('next friday')->addDay(2)->addWeek($i));
     }
     $email=$this->_getsection('email');
     return view('pages.welcome')
