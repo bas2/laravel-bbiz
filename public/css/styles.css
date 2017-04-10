@@ -65,7 +65,7 @@ input[type=submit] {
   display: -webkit-flex;
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 2em; }
+  margin-bottom: 20px; }
 
 .panel h2 {
   margin-top: 0; }
@@ -78,11 +78,11 @@ input[type=submit] {
 .skills h2 {
   background: url("../img/bulb.png"); }
 .skills .panel-body {
-  padding-left: 0; }
+  padding: 0; }
   .skills .panel-body ul {
     list-style: none;
     padding-left: 20px;
-    padding-right: 0px; }
+    padding-right: 20px; }
     .skills .panel-body ul li {
       margin-bottom: 4px;
       border-bottom: 1px dotted rgba(200, 200, 200, 0.2); }
@@ -218,12 +218,22 @@ body#login form {
 
 @media (max-width: 978px) {
   .skills {
-    margin-top: 30px; }
+    margin-top: 20px; }
 
-  .recent ul {
-    margin: 0 auto; }
-    .recent ul li {
-      margin-top: 1em;
-      text-align: center; } }
+  /*  .recent ul {
+      margin:0 auto;
+      li {margin-top: 1em;text-align: center;}
+    }*/ }
+/* Small devices (tablets, 768px and up) */
+/*@media (max-width: 480px) {
+  .hunp {
+    height: auto;
+  }
+}
+*/
+/* Medium devices (desktops, 992px and up) */
+/*@media (min-width: @screen-md-min) { ... }*/
+/* Large devices (large desktops, 1200px and up) */
+/*@media (min-width: @screen-lg-min) { ... }*/
 
 /*# sourceMappingURL=styles.css.map */

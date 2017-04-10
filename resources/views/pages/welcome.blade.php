@@ -93,7 +93,7 @@
 <div class="container-fluid">
 <div class="row equal">
 
-  <div class="col-md-4 intro page-heading" id="aboutme">
+  <div class="col-md-4 col-sm-12 intro page-heading" id="aboutme">
     <div class="panel hunp">
       <h2 class="panel-heading">About me</h2>
       <div class="panel-body text-center">
@@ -105,7 +105,7 @@
     </div>
   </div>
 
-  <div class="col-md-8 skills page-heading" id="skills">
+  <div class="col-md-8 col-sm-12 skills page-heading" id="skills">
     <div class="panel hunp">
       <h2 class="panel-heading">Skills summary</h2>
       <div class="panel-body">
