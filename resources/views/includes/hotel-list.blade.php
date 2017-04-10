@@ -1,5 +1,5 @@
 @if(!count($hotels))
-<p class="alert alert-info text-center">No cheap hotels on this date</p>
+<p class="alert alert-info text-center">No cheap hotels on {{ $day }}</p>
 @else
 <ul class="list-group">
   @foreach($hotels as $hoteldate)
