@@ -29,8 +29,8 @@ a:visited {text-decoration:none !important;}
     }
   }
   .panel{margin-bottom: 0;border-radius: 0 0 0 0;background: darkred;
-    a {color:#ccc;}
-    a.selected {color:#fff;}
+    a {color:#ccc;text-decoration:none;font-variant: small-caps;}
+    a.selected {color:#fff;text-shadow:1px 1px #000;}
   }
 }
 
