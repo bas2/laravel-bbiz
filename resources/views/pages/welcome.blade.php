@@ -148,10 +148,10 @@ $('<div class="row text-center"><button class="btn btn-primary">Show more &rarr;
   $('.showmore2').toggle();; // Menu items.
   if ($('.showmore').is(':visible')) {
     $(this).find('button').html('Show less &larr;');
-    $('html, body').animate({scrollTop: $('#trwe2').offset().top-25}, 1000);
+    $('html, body').animate({scrollTop: $('#trwe2').offset().top-42}, 1000);
   } else {
     $(this).find('button').html('Show more &rarr;');
-    $('html, body').animate({scrollTop: $('#trwe1').offset().top-25}, 1000);
+    $('html, body').animate({scrollTop: $('#trwe1').offset().top-42}, 1000);
   }
   e.preventDefault();
 });
@@ -171,7 +171,7 @@ $(window).scroll(function(){
 
   $('.page-heading').each(function(){
     if($(this).is(':visible')) { // Avoid interating through hidden weekend headings.
-      if( Math.floor($(this).offset().top)-25 > $(window).scrollTop() ) {
+      if( Math.floor($(this).offset().top)-42 > $(window).scrollTop() ) {
         $('.pagenav a[href$='+$(this).attr('id')+']').removeClass('selected').addClass('unselected');
       } else {
         //console.log($(this).attr('id'));
