@@ -28,10 +28,14 @@ a:visited {text-decoration:none !important;}
       font-weight: bold;
     }
   }
+  .panel{margin-bottom: 0;border-radius: 0 0 0 0;background: darkred;
+    a {color:#ccc;}
+    a.selected {color:#fff;}
+  }
 }
 
 .unselected {font-weight:normal;}
-.selected {font-weight:normal;background-color:transparent;color:yellow;}
+.selected {font-weight:normal;background-color:transparent;}
 
 .wrapper {
   /* Margin bottom by footer height */
@@ -97,6 +101,7 @@ input[type=submit]{width:auto;}
   h2 {background: url('../img/travelodge.png');padding-bottom:0;}
   h3 {margin-top: 0;margin-bottom: 0;padding-bottom: 0;}
   legend{margin-bottom: 0;}
+  .panel {border-radius: 0 0 .4em .4em;}
 }
 
 .zero {cursor: pointer;}
