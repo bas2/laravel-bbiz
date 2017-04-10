@@ -4,16 +4,16 @@
 <nav class="pagenav">
   <div class="container-fluid">
     <div class="panel">
-    <ul class="list-inline nav-justified">
-      <li><a href="#trtodtom">{{ date('j M') }}</a>
-      <li><a href="#trwe1">{{ \Carbon\Carbon::parse('next saturday')->format('j M') }}</a>
-      @for($i=1;$i<6;$i++)
-      <li class="showmore2"><a href="#trwe{{ $i+1 }}">{{ \Carbon\Carbon::parse('next saturday')->addWeek($i)->format('j M') }}</a>
-      @endfor
-      <li><a href="#aboutme">About me</a>
-      <li><a href="#skills">Skills</a>
-      <li><a href="#recent">Recent work</a>
-    </ul>
+      <ul class="list-inline nav-justified">
+        <li><a href="#trtodtom">{{ date('j M') }}</a>
+        <li><a href="#trwe1">{{ \Carbon\Carbon::parse('next friday')->format('j M') }}</a>
+        @for($i=1;$i<6;$i++)
+        <li class="showmore2"><a href="#trwe{{ $i+1 }}">{{ \Carbon\Carbon::parse('next saturday')->addWeek($i)->format('j M') }}</a>
+        @endfor
+        <li><a href="#aboutme">About me</a>
+        <li><a href="#skills">Skills</a>
+        <li><a href="#recent">Recent work</a>
+      </ul>
     </div>
   </div>
 </nav>
