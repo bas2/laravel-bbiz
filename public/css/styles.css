@@ -21,7 +21,8 @@ a:visited {
   .pagenav ul {
     margin: 0; }
     .pagenav ul a {
-      padding: 4px; }
+      padding: 4px;
+      font-weight: bold; }
 
 .unselected {
   font-weight: normal; }
@@ -89,9 +90,7 @@ input[type=submit] {
 .recent ul {
   text-align: center; }
 .recent li {
-  padding: 0;
-  margin-right: 0;
-  margin-bottom: 15px; }
+  padding: 0; }
 .recent li:first-child {
   margin-left: 0; }
 .recent .list-inline {
