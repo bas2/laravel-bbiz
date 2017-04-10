@@ -159,7 +159,7 @@ $('.showmore').hide();
 $('.showmore2').hide();
 
 $('nav.pagenav a').click(function(e){
-  var offset=($('.pagenav').css('position')=='fixed') ? 25 : 45;
+  var offset=($('.pagenav').css('position')=='fixed') ? 25 : 67;
   $('html, body').animate({scrollTop: $(''+$(this).attr('href')).offset().top-offset}, 500);
   e.preventDefault();
 });
