@@ -19,12 +19,12 @@
   <div class="wrapper">
   @yield('content')
   </div>
-    <footer class="footer">
-      <div class="container-fluid">
-        <p class="text-muted text-center">Glyphicons provided by {{ link_to('http://glyphicons.com','<span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Glyphicons',[],null,false) }}</p>
+  <footer class="footer">
+    <div class="container-fluid">
+      <p class="text-muted text-center">Glyphicons provided by {{ link_to('http://glyphicons.com','<span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Glyphicons',[],null,false) }}</p>
 
-      </div>
-    </footer>
+    </div>
+  </footer>
   {!! Html::script('js/bootstrap.min.js') !!}
 </body>
 </html>
