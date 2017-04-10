@@ -166,7 +166,7 @@ $('nav.pagenav a').click(function(e){
 
 $(window).scroll(function(){
   if( Math.floor($('.main-heading').offset().top) > $(window).scrollTop() )
-  {$('.pagenav').removeAttr('style');}
+  {$('.pagenav').css('position','static');}
   else {$('.pagenav').css({'position':'fixed','top':0,'left':0});}
 
   $('.page-heading').each(function(){
