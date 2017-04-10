@@ -45,14 +45,20 @@
         <div class="row">
           <div class="col-md-12 page-heading" id="trwe1">
 
-            <h4 class="text-center">Lowest prices at the weekend - {{ \Carbon\Carbon::parse('next saturday')->format('l j F') }} and {{ \Carbon\Carbon::parse('next saturday')->addDay()->format('l j F') }}</h4>
+            <h4 class="text-center">
+            Lowest prices at the weekend - {{ \Carbon\Carbon::parse('next friday')->format('l j F') }}, {{ \Carbon\Carbon::parse('next friday')->addDay()->format('l j F') }} and {{ \Carbon\Carbon::parse('next friday')->addDay(2)->format('l j F') }}
+            </h4>
             <p class="text-center">Online booking available until <strong>midnight of the following day</strong> and <strong>check-in is after 3pm on the day</strong>.</p>
             
-            <div class="col-md-6">
+            <div class="col-md-4">
+              @include('includes.hotel-list', ['hotels'=>$travelodge['frinext']])
+            </div>
+
+            <div class="col-md-4">
               @include('includes.hotel-list', ['hotels'=>$travelodge['satnext']])
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-4">
               @include('includes.hotel-list', ['hotels'=>$travelodge['sunnext']])
             </div>
 
