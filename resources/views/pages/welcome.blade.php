@@ -1,9 +1,9 @@
 @extends('layout')
 @section('content')
-{{-- <div class="row"> --}}
-{{-- <div class="col-md-12"> --}}
-<nav class="pagenav nav navbar-default">
+
+<nav class="pagenav nav">
   <div class="container-fluid">
+    <div class="panel">
     <ul class="list-inline nav-justified">
       <li><a href="#trtodtom">{{ date('j M') }}</a>
       <li><a href="#trwe1">{{ \Carbon\Carbon::parse('next saturday')->format('j M') }}</a>
@@ -14,10 +14,10 @@
       <li><a href="#skills">Skills</a>
       <li><a href="#recent">Recent work</a>
     </ul>
+    </div>
   </div>
 </nav>
-{{-- </div> --}}
-{{-- </div> --}}
+
 
 <div class="container-fluid">
 <div class="row">
