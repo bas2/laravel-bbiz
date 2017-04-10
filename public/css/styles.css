@@ -115,7 +115,8 @@ span.hoteldescr {
 
 .intro h2, .skills h2, .recent h2, .travelodge-affiliate h2 {
   background-repeat: no-repeat;
-  background-position: right 10px; }
+  background-position: right 10px;
+  padding-right: 70px; }
 
 ul.nav {
   margin-bottom: 0; }
