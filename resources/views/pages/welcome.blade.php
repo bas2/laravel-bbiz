@@ -8,7 +8,7 @@
         <li><a href="#trtodtom">{{ date('j M') }}</a>
         <li><a href="#trwe1">{{ \Carbon\Carbon::parse('next friday')->format('j M') }}</a>
         @for($i=1;$i<6;$i++)
-        <li class="showmore2"><a href="#trwe{{ $i+1 }}">{{ \Carbon\Carbon::parse('next saturday')->addWeek($i)->format('j M') }}</a>
+        <li class="showmore2"><a href="#trwe{{ $i+1 }}">{{ \Carbon\Carbon::parse('next friday')->addWeek($i)->format('j M') }}</a>
         @endfor
         <li><a href="#aboutme">About me</a>
         <li><a href="#skills">Skills</a>
@@ -71,15 +71,19 @@
           <div class="row">
             <div class="col-md-12 page-heading" id="trwe{{ $i+1 }}">
 
-              <h4 class="text-center">Lowest prices at the weekend - {{ \Carbon\Carbon::parse('next saturday')->addWeek($i)->format('l j F') }} and {{ \Carbon\Carbon::parse('next saturday')->addDay()->addWeek($i)->format('l j F') }}</h4>
+              <h4 class="text-center">Lowest prices at the weekend - {{ \Carbon\Carbon::parse('next friday')->addWeek($i)->format('l j F') }}, {{ \Carbon\Carbon::parse('next friday')->addDay()->addWeek($i)->format('l j F') }} and {{ \Carbon\Carbon::parse('next friday')->addDay(2)->addWeek($i)->format('l j F') }}</h4>
               <p class="text-center">Online booking available until <strong>midnight of the following day</strong> and <strong>check-in is after 3pm on the day</strong>.</p>
               
-              <div class="col-md-6">
-                @include('includes.hotel-list', ['hotels'=>$travelodge["satnext{$i}"],'day'=>\Carbon\Carbon::parse('next saturday')->addWeek($i)->format('l j F')])
+              <div class="col-md-4">
+                @include('includes.hotel-list', ['hotels'=>$travelodge["frinext{$i}"],'day'=>\Carbon\Carbon::parse('next friday')->addWeek($i)->format('l j F')])
               </div>
 
-              <div class="col-md-6">
-                @include('includes.hotel-list', ['hotels'=>$travelodge["sunnext{$i}"],'day'=>\Carbon\Carbon::parse('next saturday')->addDay()->addWeek($i)->format('l j F')])
+              <div class="col-md-4">
+                @include('includes.hotel-list', ['hotels'=>$travelodge["satnext{$i}"],'day'=>\Carbon\Carbon::parse('next friday')->addDay()->addWeek($i)->format('l j F')])
+              </div>
+
+              <div class="col-md-4">
+                @include('includes.hotel-list', ['hotels'=>$travelodge["sunnext{$i}"],'day'=>\Carbon\Carbon::parse('next friday')->addDay(2)->addWeek($i)->format('l j F')])
               </div>
 
             </div>
