@@ -64,13 +64,13 @@
               </div>
             </div>
             <div class="col-md-4 hotels">
-              <p title2="{{ \Carbon\Carbon::parse('next sat')->format('Y-m-d') }}" title3="Sat next">Show: <span>WAL</span> <span>TOL</span> <span>WALTOL</span></p>
+              <p title2="{{ \Carbon\Carbon::parse('next fri')->addDay()->format('Y-m-d') }}" title3="Sat next">Show: <span>WAL</span> <span>TOL</span> <span>WALTOL</span></p>
               <div>
               @include('includes.travday', ['text'=>'Sat next','date2'=>\Carbon\Carbon::parse('next friday')->addDay()])
               </div>
             </div>
             <div class="col-md-4 hotels">
-              <p title2="{{ \Carbon\Carbon::parse('next sat')->addDay()->format('Y-m-d') }}" title3="Sun next">Show: <span>WAL</span> <span>TOL</span> <span>WALTOL</span></p>
+              <p title2="{{ \Carbon\Carbon::parse('next fri')->addDay(2)->format('Y-m-d') }}" title3="Sun next">Show: <span>WAL</span> <span>TOL</span> <span>WALTOL</span></p>
               <div>
               @include('includes.travday', ['text'=>'Sun next','date2'=>\Carbon\Carbon::parse('next friday')->addDay(2)])
               </div>
@@ -86,13 +86,13 @@
               </div>
             </div>
             <div class="col-md-4 hotels">
-              <p title2="{{ \Carbon\Carbon::parse('next sat')->addWeek($i)->format('Y-m-d') }}" title3="Sat next{{ $i }}">Show: <span>WAL</span> <span>TOL</span> <span>WALTOL</span></p>
+              <p title2="{{ \Carbon\Carbon::parse('next fri')->addDay()->addWeek($i)->format('Y-m-d') }}" title3="Sat next{{ $i }}">Show: <span>WAL</span> <span>TOL</span> <span>WALTOL</span></p>
               <div>
               @include('includes.travday', ['text'=>"Sat next{$i}",'date2'=>\Carbon\Carbon::parse('next fri')->addDay()->addWeek($i)])
               </div>
             </div>
             <div class="col-md-4 hotels">
-              <p title2="{{ \Carbon\Carbon::parse('next sat')->addDay()->addWeek($i)->format('Y-m-d') }}" title3="Sun next{{ $i }}">Show: <span>WAL</span> <span>TOL</span> <span>WALTOL</span></p>
+              <p title2="{{ \Carbon\Carbon::parse('next fri')->addDay(2)->addWeek($i)->format('Y-m-d') }}" title3="Sun next{{ $i }}">Show: <span>WAL</span> <span>TOL</span> <span>WALTOL</span></p>
               <div>
               @include('includes.travday', ['text'=>"Sun next{$i}",'date2'=>\Carbon\Carbon::parse('next fri')->addDay(2)->addWeek($i)])
               </div>
