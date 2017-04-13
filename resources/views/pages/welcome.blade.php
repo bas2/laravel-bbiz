@@ -199,7 +199,6 @@ $(window).scroll(function(){
       }
     }
   });
-
 });
 </script>
 @endsection
