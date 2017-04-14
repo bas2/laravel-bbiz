@@ -44,7 +44,7 @@
           <div class="col-md-4">
             <h4 class="text-center">Sunday's prices</h4>
             @include('includes.hotel-list', 
-            ['hotels'=>$travelodge['tomorrow'],'day'=>\Carbon\Carbon::now()->addDay(2)])
+            ['hotels'=>$travelodge['dayafter'],'day'=>\Carbon\Carbon::now()->addDay(2)])
           </div>
           @endif
         </div>
