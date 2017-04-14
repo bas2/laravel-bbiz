@@ -127,6 +127,10 @@ input[type=submit] {
 .travelodge-affiliate .panel {
   border-radius: 0 0 .4em .4em; }
 
+.list-group {
+  color: #fff;
+  font: bold 1.2em tahoma, arial, helvetica, sans-serif; }
+
 .zero {
   cursor: pointer; }
 
