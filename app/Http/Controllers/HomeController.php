@@ -23,8 +23,8 @@ class HomeController extends Controller
   // GET: {slug?}
   public function index() {
     $arr=[];
-    $arr['lead']=$this->_getsection('travelodge');
-    $arr['today']=$this->_getDB(Carbon::now()->format('Y-m-d'));
+    $arr['lead']    =$this->_getsection('travelodge');
+    $arr['today']   =$this->_getDB(Carbon::now()->format('Y-m-d'));
     $arr['tomorrow']=$this->_getDB(Carbon::now()->addDay());
     $arr['dayafter']=$this->_getDB(Carbon::now()->addDay(2));
 
@@ -42,9 +42,9 @@ class HomeController extends Controller
     ->with('page',['home','Bashir Patel (Web developer/programmer) London-based'])
     ->with('pagecontent', [
       'aboutme'=>$this->_getsection('about'),
-      'email'=>(!filter_var($email, FILTER_VALIDATE_EMAIL)===false)?$email:'',
-      'skills'=>\App\Skill::get(['skill','content']),
-      'recent'=>$this->_getsection('recent')
+      'email'  =>(!filter_var($email, FILTER_VALIDATE_EMAIL)===false)?$email:'',
+      'skills' =>\App\Skill::get(['skill','content']),
+      'recent' =>$this->_getsection('recent')
       ])
     ->with('travelodge', $arr)
     ->with('images',\App\Image::get(['filename']))
@@ -76,8 +76,8 @@ class HomeController extends Controller
     $hotels=[''=>'Select'];foreach(\App\TravelodgeHotel::orderBy('name')->get(['hotel_id','name']) as $hotel){$hotels[$hotel->hotel_id]=$hotel->name;}
 
     $arr=[];
-    $arr['lead']=$this->_getsection('travelodge');
-    $arr['today']=$this->_getDB(Carbon::now()->format('Y-m-d'));
+    $arr['lead']    =$this->_getsection('travelodge');
+    $arr['today']   =$this->_getDB(Carbon::now()->format('Y-m-d'));
     $arr['tomorrow']=$this->_getDB(Carbon::now()->addDay());
     $arr['dayafter']=$this->_getDB(Carbon::now()->addDay(2));
 
@@ -96,8 +96,8 @@ class HomeController extends Controller
     return view('pages.update')->with('page',['update','Update'])
     ->with('content',
       [
-       'about'=>$this->_getsection('about'),
-       'email'=>$this->_getsection('email'),
+       'about' =>$this->_getsection('about'),
+       'email' =>$this->_getsection('email'),
        'skills'=>\App\Skill::get(['id','skill','content']),
        'recent'=>$this->_getsection('recent')]
       )
@@ -219,12 +219,12 @@ class HomeController extends Controller
     }
 
     $arr=[];
-    $arr['today']=$this->_getDB(Carbon::now()->format('Y-m-d'));
+    $arr['today']   =$this->_getDB(Carbon::now()->format('Y-m-d'));
     $arr['tomorrow']=$this->_getDB(Carbon::now()->addDay());
     $arr['dayafter']=$this->_getDB(Carbon::now()->addDay(2));
-    $arr['frinext']=$this->_getDB(Carbon::parse('next friday'));
-    $arr['satnext']=$this->_getDB(Carbon::parse('next friday')->addDay());
-    $arr['sunnext']=$this->_getDB(Carbon::parse('next friday')->addDay(2));
+    $arr['frinext'] =$this->_getDB(Carbon::parse('next friday'));
+    $arr['satnext'] =$this->_getDB(Carbon::parse('next friday')->addDay());
+    $arr['sunnext'] =$this->_getDB(Carbon::parse('next friday')->addDay(2));
     for($i=1;$i<12;$i++) {
       $arr["frinext{$i}"]=$this->_getDB(Carbon::parse('next friday')
         ->addWeek($i));
@@ -260,6 +260,7 @@ class HomeController extends Controller
     ])
     ;
   }
+
 
   // GET: login
   // Show login page.
