@@ -30,36 +30,32 @@
 
         <div class="row">
           <div class="col-md-6 page-heading" id="trtodtom">
-            <h4 class="text-center">Today's prices - {{ date('l, j F') }} check-in</h4>
-            <p class="text-center">Online booking available until <strong>midnight on {{ \Carbon\Carbon::parse(\Carbon\Carbon::now()->addDay())->format('l') }}</strong>, <strong>check-in is after 3pm</strong> and <strong>check-out is at midday on {{ \Carbon\Carbon::parse(\Carbon\Carbon::now()->addDay())->format('l') }}</strong>.</p>
-            @include('includes.hotel-list', ['hotels'=>$travelodge['today'],'day'=>date('l')])
+            <h4 class="text-center">Today's prices</h4>
+            @include('includes.hotel-list', 
+            ['hotels'=>$travelodge['today'],'day'=>\Carbon\Carbon::now()])
           </div>
 
           <div class="col-md-6">
-            <h4 class="text-center">Tomorrow's prices - {{ \Carbon\Carbon::parse(\Carbon\Carbon::now()->addDay())->format('l, j F') }} check-in</h4>
-            <p class="text-center">Online booking available until <strong>midnight on {{ \Carbon\Carbon::parse(\Carbon\Carbon::now()->addDay(2))->format('l') }}</strong>, <strong>check-in is after 3pm</strong> and <strong>check-out is at midday on {{ \Carbon\Carbon::parse(\Carbon\Carbon::now()->addDay(2))->format('l') }}</strong>.</p>
-            @include('includes.hotel-list', ['hotels'=>$travelodge['tomorrow'],'day'=>\Carbon\Carbon::parse(\Carbon\Carbon::now()->addDay())->format('l')])
+            <h4 class="text-center">Tomorrow's prices</h4>
+            @include('includes.hotel-list', 
+            ['hotels'=>$travelodge['tomorrow'],'day'=>\Carbon\Carbon::now()->addDay()])
           </div>
         </div>
 
         <div class="row">
           <div class="col-md-12 page-heading" id="trwe1">
-
-            <h4 class="text-center">
-            Prices at the weekend - {{ \Carbon\Carbon::parse('next friday')->format('l j F') }}, {{ \Carbon\Carbon::parse('next friday')->addDay()->format('l j F') }} and {{ \Carbon\Carbon::parse('next friday')->addDay(2)->format('l j F') }}
-            </h4>
-            <p class="text-center">Online booking available until <strong>midnight of the following day</strong> and <strong>check-in is after 3pm on the day</strong>.</p>
+            <h4 class="text-center">Prices at the weekend</h4>
             
             <div class="col-md-4">
-              @include('includes.hotel-list', ['hotels'=>$travelodge['frinext'],'day'=>\Carbon\Carbon::parse('next friday')->format('l')])
+              @include('includes.hotel-list', ['hotels'=>$travelodge['frinext'],'day'=>\Carbon\Carbon::parse('next friday')])
             </div>
 
             <div class="col-md-4">
-              @include('includes.hotel-list', ['hotels'=>$travelodge['satnext'],'day'=>\Carbon\Carbon::parse('next friday')->addDay()->format('l')])
+              @include('includes.hotel-list', ['hotels'=>$travelodge['satnext'],'day'=>\Carbon\Carbon::parse('next friday')->addDay()])
             </div>
 
             <div class="col-md-4">
-              @include('includes.hotel-list', ['hotels'=>$travelodge['sunnext'],'day'=>\Carbon\Carbon::parse('next friday')->addDay(2)->format('l')])
+              @include('includes.hotel-list', ['hotels'=>$travelodge['sunnext'],'day'=>\Carbon\Carbon::parse('next friday')->addDay(2)])
             </div>
 
           </div>
@@ -70,20 +66,18 @@
           @for($i=1;$i<6;$i++)
           <div class="row">
             <div class="col-md-12 page-heading" id="trwe{{ $i+1 }}">
-
-              <h4 class="text-center">Prices at the weekend - {{ \Carbon\Carbon::parse('next friday')->addWeek($i)->format('l j F') }}, {{ \Carbon\Carbon::parse('next friday')->addDay()->addWeek($i)->format('l j F') }} and {{ \Carbon\Carbon::parse('next friday')->addDay(2)->addWeek($i)->format('l j F') }}</h4>
-              <p class="text-center">Online booking available until <strong>midnight of the following day</strong> and <strong>check-in is after 3pm on the day</strong>.</p>
+              <h4 class="text-center">Prices at the weekend</h4>
               
               <div class="col-md-4">
-                @include('includes.hotel-list', ['hotels'=>$travelodge["frinext{$i}"],'day'=>\Carbon\Carbon::parse('next friday')->addWeek($i)->format('l j F')])
+                @include('includes.hotel-list', ['hotels'=>$travelodge["frinext{$i}"],'day'=>\Carbon\Carbon::parse('next friday')->addWeek($i)])
               </div>
 
               <div class="col-md-4">
-                @include('includes.hotel-list', ['hotels'=>$travelodge["satnext{$i}"],'day'=>\Carbon\Carbon::parse('next friday')->addDay()->addWeek($i)->format('l j F')])
+                @include('includes.hotel-list', ['hotels'=>$travelodge["satnext{$i}"],'day'=>\Carbon\Carbon::parse('next friday')->addDay()->addWeek($i)])
               </div>
 
               <div class="col-md-4">
-                @include('includes.hotel-list', ['hotels'=>$travelodge["sunnext{$i}"],'day'=>\Carbon\Carbon::parse('next friday')->addDay(2)->addWeek($i)->format('l j F')])
+                @include('includes.hotel-list', ['hotels'=>$travelodge["sunnext{$i}"],'day'=>\Carbon\Carbon::parse('next friday')->addDay(2)->addWeek($i)])
               </div>
 
             </div>
