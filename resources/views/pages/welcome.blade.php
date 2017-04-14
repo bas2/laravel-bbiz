@@ -29,17 +29,24 @@
         {!! $travelodge['lead'] !!}
 
         <div class="row">
-          <div class="col-md-6 page-heading" id="trtodtom">
+          <div class="col-md-{{ (date('l')=='Friday') ? 4 : 6 }} page-heading" id="trtodtom">
             <h4 class="text-center">Today's prices</h4>
             @include('includes.hotel-list', 
             ['hotels'=>$travelodge['today'],'day'=>\Carbon\Carbon::now()])
           </div>
 
-          <div class="col-md-6">
+          <div class="col-md-{{ (date('l')=='Friday') ? 4 : 6 }}">
             <h4 class="text-center">Tomorrow's prices</h4>
             @include('includes.hotel-list', 
             ['hotels'=>$travelodge['tomorrow'],'day'=>\Carbon\Carbon::now()->addDay()])
           </div>
+          @if(date('l')=='Friday')
+          <div class="col-md-4">
+            <h4 class="text-center">Sunday's prices</h4>
+            @include('includes.hotel-list', 
+            ['hotels'=>$travelodge['tomorrow'],'day'=>\Carbon\Carbon::now()->addDay(2)])
+          </div>
+          @endif
         </div>
 
         <div class="row">
