@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 
 use App\Mail\ContactMail;
 
+use \Carbon\Carbon;
+
 class HomeController extends Controller
 {
 
   private function _getDB($date) {
     return \App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-      ->where('date',\Carbon\Carbon::parse($date)->format('Y-m-d'))
+      ->where('date',Carbon::parse($date)->format('Y-m-d'))
       //->where('price','>',0)
       ->orderBy('price','asc')
       ->orderBy( 'h.name' )
@@ -21,27 +23,28 @@ class HomeController extends Controller
   // GET: {slug?}
   public function index() {
     $arr=[];
-    $arr['lead']=$this->_getsection('travelodge');
-    $arr['today']=$this->_getDB(\Carbon\Carbon::now()->format('Y-m-d'));
-    $arr['tomorrow']=$this->_getDB(\Carbon\Carbon::now()->addDay());
-    $arr['dayafter']=$this->_getDB(\Carbon\Carbon::now()->addDay(2));
+    $arr['lead']    =$this->_getsection('travelodge');
+    $arr['today']   =$this->_getDB(Carbon::now()->format('Y-m-d'));
+    $arr['tomorrow']=$this->_getDB(Carbon::now()->addDay());
+    $arr['dayafter']=$this->_getDB(Carbon::now()->addDay(2));
 
-    $arr['frinext']=$this->_getDB(\Carbon\Carbon::parse('next friday'));
-    $arr['satnext']=$this->_getDB(\Carbon\Carbon::parse('next friday')->addDay());
-    $arr['sunnext']=$this->_getDB(\Carbon\Carbon::parse('next friday')->addDay(2));
+    $arr['frinext']=$this->_getDB(Carbon::parse('next friday'));
+    $arr['satnext']=$this->_getDB(Carbon::parse('next friday')->addDay());
+    $arr['sunnext']=$this->_getDB(Carbon::parse('next friday')->addDay(2));
     for($i=1;$i<7;$i++) {
-      $arr["frinext{$i}"]=$this->_getDB(\Carbon\Carbon::parse('next friday')->addWeek($i));
-      $arr["satnext{$i}"]=$this->_getDB(\Carbon\Carbon::parse('next friday')->addDay()->addWeek($i));
-      $arr["sunnext{$i}"]=$this->_getDB(\Carbon\Carbon::parse('next friday')->addDay(2)->addWeek($i));
+      $arr["frinext{$i}"]=$this->_getDB(Carbon::parse('next friday')->addWeek($i));
+      $arr["satnext{$i}"]=$this->_getDB(Carbon::parse('next friday')->addDay()->addWeek($i));
+      $arr["sunnext{$i}"]=$this->_getDB(Carbon::parse('next friday')->addDay(2)->addWeek($i));
     }
     $email=$this->_getsection('email');
+
     return view('pages.welcome')
     ->with('page',['home','Bashir Patel (Web developer/programmer) London-based'])
     ->with('pagecontent', [
       'aboutme'=>$this->_getsection('about'),
-      'email'=>(!filter_var($email, FILTER_VALIDATE_EMAIL)===false)?$email:'',
-      'skills'=>\App\Skill::get(['skill','content']),
-      'recent'=>$this->_getsection('recent')
+      'email'  =>(!filter_var($email, FILTER_VALIDATE_EMAIL)===false)?$email:'',
+      'skills' =>\App\Skill::get(['skill','content']),
+      'recent' =>$this->_getsection('recent')
       ])
     ->with('travelodge', $arr)
     ->with('images',\App\Image::get(['filename']))
@@ -73,28 +76,28 @@ class HomeController extends Controller
     $hotels=[''=>'Select'];foreach(\App\TravelodgeHotel::orderBy('name')->get(['hotel_id','name']) as $hotel){$hotels[$hotel->hotel_id]=$hotel->name;}
 
     $arr=[];
-    $arr['lead']=$this->_getsection('travelodge');
-    $arr['today']=$this->_getDB(\Carbon\Carbon::now()->format('Y-m-d'));
-    $arr['tomorrow']=$this->_getDB(\Carbon\Carbon::now()->addDay());
-    $arr['dayafter']=$this->_getDB(\Carbon\Carbon::now()->addDay(2));
+    $arr['lead']    =$this->_getsection('travelodge');
+    $arr['today']   =$this->_getDB(Carbon::now()->format('Y-m-d'));
+    $arr['tomorrow']=$this->_getDB(Carbon::now()->addDay());
+    $arr['dayafter']=$this->_getDB(Carbon::now()->addDay(2));
 
-    $arr['frinext']=$this->_getDB(\Carbon\Carbon::parse('next friday'));
-    $arr['satnext']=$this->_getDB(\Carbon\Carbon::parse('next friday')->addDay());
-    $arr['sunnext']=$this->_getDB(\Carbon\Carbon::parse('next friday')->addDay(2));
+    $arr['frinext']=$this->_getDB(Carbon::parse('next friday'));
+    $arr['satnext']=$this->_getDB(Carbon::parse('next friday')->addDay());
+    $arr['sunnext']=$this->_getDB(Carbon::parse('next friday')->addDay(2));
     for($i=1;$i<12;$i++) {
-      $arr["frinext{$i}"]=$this->_getDB(\Carbon\Carbon::parse('next friday')->addWeek($i));
-      $arr["satnext{$i}"]=$this->_getDB(\Carbon\Carbon::parse('next friday')->addDay()->addWeek($i));
-      $arr["sunnext{$i}"]=$this->_getDB(\Carbon\Carbon::parse('next friday')->addDay(2)->addWeek($i));
+      $arr["frinext{$i}"]=$this->_getDB(Carbon::parse('next friday')->addWeek($i));
+      $arr["satnext{$i}"]=$this->_getDB(Carbon::parse('next friday')->addDay()->addWeek($i));
+      $arr["sunnext{$i}"]=$this->_getDB(Carbon::parse('next friday')->addDay(2)->addWeek($i));
     }
-    $arr['dates']=\App\TravelodgeDate::where('date','>=',\Carbon\Carbon::now()->format('Y-m-d'))->orderBy('date')->get();
+    $arr['dates']=\App\TravelodgeDate::where('date','>=',Carbon::now()->format('Y-m-d'))->orderBy('date')->get();
     $arr['hotels']=$hotels;
     $arr['newrowdate']=$this->_getsection('newrowdate');
 
     return view('pages.update')->with('page',['update','Update'])
     ->with('content',
       [
-       'about'=>$this->_getsection('about'),
-       'email'=>$this->_getsection('email'),
+       'about' =>$this->_getsection('about'),
+       'email' =>$this->_getsection('email'),
        'skills'=>\App\Skill::get(['id','skill','content']),
        'recent'=>$this->_getsection('recent')]
       )
@@ -199,35 +202,35 @@ class HomeController extends Controller
       $insert->save();
       //$update=\App\Content::where('name','price')->update(['content'=>$input['newpricerow']]);
     }
-    $theday='Today';$thecdate=\Carbon\Carbon::parse($input['date'])->format('Y-m-d');
-    if($thecdate==\Carbon\Carbon::now()->addDay()->format('Y-m-d')) {$theday='Tomorrow';}
-    if($thecdate==\Carbon\Carbon::now()->addDay(2)->format('Y-m-d')) {$theday='Day after';}
-    if($thecdate==\Carbon\Carbon::parse('next friday')->format('Y-m-d')) {$theday='Fri next';}
-    if($thecdate==\Carbon\Carbon::parse('next friday')->addDay()->format('Y-m-d')) {$theday='Sat next';}
-    if($thecdate==\Carbon\Carbon::parse('next friday')->addDay(2)->format('Y-m-d')) {$theday='Sun next';}
+    $theday='Today';$thecdate=Carbon::parse($input['date'])->format('Y-m-d');
+    if($thecdate==Carbon::now()->addDay()->format('Y-m-d')) {$theday='Tomorrow';}
+    if($thecdate==Carbon::now()->addDay(2)->format('Y-m-d')) {$theday='Day after';}
+    if($thecdate==Carbon::parse('next friday')->format('Y-m-d')) {$theday='Fri next';}
+    if($thecdate==Carbon::parse('next friday')->addDay()->format('Y-m-d')) {$theday='Sat next';}
+    if($thecdate==Carbon::parse('next friday')->addDay(2)->format('Y-m-d')) {$theday='Sun next';}
     
     for($i=1;$i<12;$i++) {
-      if($thecdate==\Carbon\Carbon::parse('next friday')
+      if($thecdate==Carbon::parse('next friday')
         ->addWeek($i)->format('Y-m-d')){$theday="Fri next{$i}";}
-      if($thecdate==\Carbon\Carbon::parse('next friday')
+      if($thecdate==Carbon::parse('next friday')
         ->addDay()->addWeek($i)->format('Y-m-d')){$theday="Sat next{$i}";}
-      if($thecdate==\Carbon\Carbon::parse('next friday')
+      if($thecdate==Carbon::parse('next friday')
         ->addDay(2)->addWeek($i)->format('Y-m-d')){$theday="Sun next{$i}";}
     }
 
     $arr=[];
-    $arr['today']=$this->_getDB(\Carbon\Carbon::now()->format('Y-m-d'));
-    $arr['tomorrow']=$this->_getDB(\Carbon\Carbon::now()->addDay());
-    $arr['dayafter']=$this->_getDB(\Carbon\Carbon::now()->addDay(2));
-    $arr['frinext']=$this->_getDB(\Carbon\Carbon::parse('next friday'));
-    $arr['satnext']=$this->_getDB(\Carbon\Carbon::parse('next friday')->addDay());
-    $arr['sunnext']=$this->_getDB(\Carbon\Carbon::parse('next friday')->addDay(2));
+    $arr['today']   =$this->_getDB(Carbon::now()->format('Y-m-d'));
+    $arr['tomorrow']=$this->_getDB(Carbon::now()->addDay());
+    $arr['dayafter']=$this->_getDB(Carbon::now()->addDay(2));
+    $arr['frinext'] =$this->_getDB(Carbon::parse('next friday'));
+    $arr['satnext'] =$this->_getDB(Carbon::parse('next friday')->addDay());
+    $arr['sunnext'] =$this->_getDB(Carbon::parse('next friday')->addDay(2));
     for($i=1;$i<12;$i++) {
-      $arr["frinext{$i}"]=$this->_getDB(\Carbon\Carbon::parse('next friday')
+      $arr["frinext{$i}"]=$this->_getDB(Carbon::parse('next friday')
         ->addWeek($i));
-      $arr["satnext{$i}"]=$this->_getDB(\Carbon\Carbon::parse('next friday')
+      $arr["satnext{$i}"]=$this->_getDB(Carbon::parse('next friday')
         ->addDay()->addWeek($i));
-      $arr["sunnext{$i}"]=$this->_getDB(\Carbon\Carbon::parse('next friday')
+      $arr["sunnext{$i}"]=$this->_getDB(Carbon::parse('next friday')
         ->addDay(2)->addWeek($i));
     }
     $arr['hotels']=$hotels;
@@ -235,7 +238,7 @@ class HomeController extends Controller
     return view('includes.travday')
     ->with('travelodge', $arr)
     ->with(['text'=>$theday, 
-    'date2'=>\Carbon\Carbon::parse($input['date']),
+    'date2'=>Carbon::parse($input['date']),
     'price'=>(isset($input['newpricerow'])?$input['newpricerow']:39),
     'order'=>$request['orderby'],
     ])
@@ -252,11 +255,12 @@ class HomeController extends Controller
     return view('includes.travday')
     ->with('travelodge', $arr)
     ->with(['text'=>$request['text'], 
-    'date2'=>\Carbon\Carbon::parse($theday),
+    'date2'=>Carbon::parse($theday),
     'order'=>$request['orderby'],
     ])
     ;
   }
+
 
   // GET: login
   // Show login page.
