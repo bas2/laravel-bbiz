@@ -5,14 +5,14 @@
   <div class="container-fluid">
     <div class="panel">
       <ul class="list-inline nav-justified">
-        <li><a href="#trtodtom">{{ date('j M') }}</a>
-        <li><a href="#trwe1">{{ \Carbon\Carbon::parse('next friday')->format('j M') }}</a>
+        <li><a href="#trtodtom">{{ date('j/n') }}</a>
+        <li><a href="#trwe1">{{ \Carbon\Carbon::parse('next friday')->format('j/n') }}</a>
         @for($i=1;$i<12;$i++)
-        <li class="showmore2"><a href="#trwe{{ $i+1 }}">{{ \Carbon\Carbon::parse('next friday')->addWeek($i)->format('j M') }}</a>
+        <li class="showmore2"><a href="#trwe{{ $i+1 }}">{{ \Carbon\Carbon::parse('next friday')->addWeek($i)->format('j/n') }}</a>
         @endfor
         <li><a href="#aboutme">About me</a>
         <li><a href="#skills">Skills</a>
-        <li><a href="#recent">Recent work</a>
+        <li><a href="#recent">Recent</a>
       </ul>
     </div>
   </div>
