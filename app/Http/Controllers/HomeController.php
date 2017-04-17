@@ -31,7 +31,7 @@ class HomeController extends Controller
     $arr['frinext']=$this->_getDB(Carbon::parse('next friday'));
     $arr['satnext']=$this->_getDB(Carbon::parse('next friday')->addDay());
     $arr['sunnext']=$this->_getDB(Carbon::parse('next friday')->addDay(2));
-    for($i=1;$i<7;$i++) {
+    for($i=1;$i<12;$i++) {
       $arr["frinext{$i}"]=$this->_getDB(Carbon::parse('next friday')->addWeek($i));
       $arr["satnext{$i}"]=$this->_getDB(Carbon::parse('next friday')->addDay()->addWeek($i));
       $arr["sunnext{$i}"]=$this->_getDB(Carbon::parse('next friday')->addDay(2)->addWeek($i));
