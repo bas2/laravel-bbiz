@@ -7,7 +7,7 @@
       <ul class="list-inline nav-justified">
         <li><a href="#trtodtom">{{ date('j M') }}</a>
         <li><a href="#trwe1">{{ \Carbon\Carbon::parse('next friday')->format('j M') }}</a>
-        @for($i=1;$i<6;$i++)
+        @for($i=1;$i<12;$i++)
         <li class="showmore2"><a href="#trwe{{ $i+1 }}">{{ \Carbon\Carbon::parse('next friday')->addWeek($i)->format('j M') }}</a>
         @endfor
         <li><a href="#aboutme">About me</a>
@@ -70,7 +70,7 @@
 
         <div class="showmore ">
 
-          @for($i=1;$i<6;$i++)
+          @for($i=1;$i<12;$i++)
           <div class="row">
             <div class="col-md-12 page-heading" id="trwe{{ $i+1 }}">
               <h4 class="text-center">Prices at the weekend</h4>
