@@ -231,6 +231,8 @@ $(document).ready(function(){
 
   $('.hotels p span').css('cursor','pointer').click(function(){
     var $this=$(this);
+    $this.parent().find('span').css({'background':'transparent','font-weight':'normal'});
+    $this.css({'background':'yellow','font-weight':'bold'});
     $.ajax({
       "type":"GET",
       // /bbiz/public
