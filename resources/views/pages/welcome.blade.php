@@ -211,7 +211,7 @@ $('.list-group-item span[title2]')
     $.ajax({
       "type":"GET",
       // /bbiz/public
-      "url":"travelodge/hotel/" + $this.attr('title2') + '/notes',
+      "url":"/travelodge/hotel/" + $this.attr('title2') + '/notes',
       "success":function(data){
         $('<div>'+data+'</div>').css({'font':'normal .6em verdana, sans-serif'}).appendTo($this.parent());
       } // End ajax success function
