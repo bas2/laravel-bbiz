@@ -200,5 +200,25 @@ $(window).scroll(function(){
     }
   });
 });
+
+$('.list-group-item span[title2]')
+.html('<em>i</em>')
+.css({'cursor':'pointer','font':'1.3em arial,tahoma,verdana,sans-serif'})
+.click(function(){
+  if(!$(this).next().next('div').is(':visible')) 
+  {
+    var $this=$(this);
+    $.ajax({
+      "type":"GET",
+      // /bbiz/public
+      "url":"travelodge/hotel/" + $this.attr('title2') + '/notes',
+      "success":function(data){
+        $('<div>'+data+'</div>').css({'font':'normal .6em verdana, sans-serif'}).appendTo($this.parent());
+      } // End ajax success function
+
+    }); // End ajax.
+  }
+  else {$(this).next().next('div').remove();}
+});
 </script>
 @endsection

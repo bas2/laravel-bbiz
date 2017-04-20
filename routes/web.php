@@ -9,6 +9,8 @@ Route::post('travelodge/update/today', 'HomeController@postUpdateTravToday')
 ->middleware('auth');
 Route::get('travelodge/getday/{date}', 'HomeController@getday');
 
+Route::get('travelodge/hotel/{id}/notes', 'HomeController@getnotes');
+
 Route::get('login', 'HomeController@getlogin')->name('login');
 Route::post('login', 'HomeController@postlogin')->name('postlogin');
 Route::get('logout', 'HomeController@getlogout')->name('getlogout');
