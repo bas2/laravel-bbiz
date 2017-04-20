@@ -261,6 +261,11 @@ class HomeController extends Controller
     ;
   }
 
+  // GET: travelodge/hotel/{id}/notes
+  public function getnotes($id) {
+    return $hotelnotes=\App\TravelodgeHotel::where('hotel_id',$id)->get(['notes'])[0]->notes;
+  }
+
 
   // GET: login
   // Show login page.
