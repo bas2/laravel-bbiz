@@ -202,7 +202,7 @@ $(window).scroll(function(){
 });
 
 $('.list-group-item span[title2]')
-.html('<em>i</em>')
+.html('<em><img src="img/info.png" width="20"></em>')
 .css({'cursor':'pointer','font':'1.3em arial,tahoma,verdana,sans-serif'})
 .click(function(){
   if(!$(this).next().next('div').is(':visible')) 
