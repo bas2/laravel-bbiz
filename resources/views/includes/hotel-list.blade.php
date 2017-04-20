@@ -7,7 +7,11 @@
 @else
 <ul class="list-group">
   @foreach($hotels as $hoteldate)
+  @if(!empty($hoteldate->hotels[0]->notes))
+  <li class="list-group-item">{{ $hoteldate->hotels[0]->name }} <span title2="{{ $hoteldate->hotels[0]->hotel_id }}">i</span> <span class="badge">{{ $hoteldate->price }}</span></li>
+  @else
   <li class="list-group-item">{{ $hoteldate->hotels[0]->name }} <span class="badge">{{ $hoteldate->price }}</span></li>
+  @endif
   @endforeach
 </ul>
 @endif
