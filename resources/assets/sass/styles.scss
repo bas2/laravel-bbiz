@@ -14,6 +14,15 @@ body {
   {color: yellow;}
 }
 
+select {
+  font-weight: bold;
+}
+
+.hotels label {
+  color:#fff;
+  text-transform: uppercase;
+}
+
 a:active {color:yellow;text-decoration:none !important;}
 a:visited {text-decoration:none !important;}
 
