@@ -186,6 +186,7 @@ $(document).ready(function(){
       "data": updatestr + "&orderby=" + $this.attr('title3'),
       "success":function(data){
         $this.parent().parent().html(data);
+        colorSelects();
       }
     });
     e.preventDefault();
