@@ -16,12 +16,13 @@
   <div class="alert alert-success alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>{{ session('message') }}</div>
   @endif
 
-    <div id="travelodge" class="col-md-12 travelodge-affiliate">
+    <div id="travelodge" class="travelodge-affiliate">
       <div class="panel">
         <h2 class="panel-heading">Book a room with Travelodge</h2>
         <div class="panel-body"> 
         {!! Form::textarea('travelodge',$travelodge['lead'],['class'=>'form-control','required']) !!}
 
+        <div class="row">
           <div class="col-md-4 trav-today hotels">              
             @include('includes.travday', 
             ['text'=>'Today', 'date2'=>\Carbon\Carbon::now()])
@@ -34,7 +35,9 @@
             @include('includes.travday', 
             ['text'=>'Day after','date2'=>\Carbon\Carbon::now()->addDay(2)])
           </div>
-
+        </div>
+          
+        <div class="row">
           <div class="col-md-4 hotels">
             @include('includes.travday',
             ['text'=>'Fri next',
@@ -50,8 +53,10 @@
             ['text'=>'Sun next',
             'date2'=>\Carbon\Carbon::parse('next fri')->addDay(2)])
           </div>
+        </div>
 
         @for($i=1;$i<13;$i++)
+        <div class="row">
           <div class="col-md-4 hotels">
             @include('includes.travday',
             ['text'=>"Fri next{$i}",
@@ -67,6 +72,7 @@
             ['text'=>"Sun next{$i}",
             'date2'=>\Carbon\Carbon::parse('next fri')->addDay(2)->addWeek($i)])
           </div>
+        </div>
         @endfor
         </div>
       </div>
@@ -76,10 +82,11 @@
 </div>
 
 
+
 <div class="container-fluid">
   <div class="row">
 
-    <div id="intro" class="col-md-12 intro">
+    <div id="intro" class="intro">
       <div class="panel hunp">
         <h2 class="panel-heading">About me</h2>
         <div class="container">
@@ -94,7 +101,7 @@
     </div>
 
 
-    <div id="skills" class="col-md-12 skills">
+    <div id="skills" class="skills">
       <div class="panel hunp">
         <h2 class="panel-heading">Skills</h2>
         <div class="container">
@@ -119,8 +126,8 @@
 <div class="container-fluid">
   <div class="row">
 
-    <div id="recent" class="col-md-12 recent">
-      <div class="panel hunp">
+    <div id="recent" class="recent">
+      <div class="panel">
         <h2 class="panel-heading">Recent work</h2>
         <div class="container">
           <div>
@@ -146,8 +153,6 @@
 <div class="form-group">
   {!! Form::submit('Update >',['class'=>'btn btn-lg btn-primary btn-block']) !!}
 </div>
-
-
 
 {!! Form::close() !!}
 <script>
