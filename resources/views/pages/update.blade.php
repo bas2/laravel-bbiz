@@ -38,19 +38,22 @@
             <div class="col-md-4 trav-today hotels">
               <p title2="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" title3="Today">Show: <span>WAL</span> <span>TOL</span> <span>TW</span></p>
               <div>
-              @include('includes.travday', ['text'=>'Today', 'date2'=>\Carbon\Carbon::now()])
+              @include('includes.travday', 
+              ['text'=>'Today', 'date2'=>\Carbon\Carbon::now()])
               </div>
             </div>
             <div class="col-md-4 trav-tomorrow hotels">
               <p title2="{{ \Carbon\Carbon::now()->addDay(1)->format('Y-m-d') }}" title3="Tomorrow">Show: <span>WAL</span> <span>TOL</span> <span>TW</span></p>
               <div>
-              @include('includes.travday', ['text'=>'Tomorrow','date2'=>\Carbon\Carbon::now()->addDay(1)])
+              @include('includes.travday', 
+              ['text'=>'Tomorrow','date2'=>\Carbon\Carbon::now()->addDay(1)])
               </div>
             </div>
             <div class="col-md-4 trav-dayaftertomorrow hotels">
               <p title2="{{ \Carbon\Carbon::now()->addDay(2)->format('Y-m-d') }}" title3="Day after">Show: <span>WAL</span> <span>TOL</span> <span>TW</span></p>
               <div>
-              @include('includes.travday', ['text'=>'Day after','date2'=>\Carbon\Carbon::now()->addDay(2)])
+              @include('includes.travday', 
+              ['text'=>'Day after','date2'=>\Carbon\Carbon::now()->addDay(2)])
               </div>
             </div>
           </div>
@@ -245,6 +248,16 @@ $(document).ready(function(){
     }); // End ajax.
   });
 
+  var vals=[];valcnt=0;match=0;
+  $('.hotels select[name^=price]').each(function(){
+    for(var i=0;i<vals.length;i++) {
+      if(vals[i]==$(this).val()) {match=1;}
+    }
+    if(!match) {$(this).css('color','blue');}
+    else{$(this).css('color','green');match=0;}
+    if($(this).parent().hasClass('new-price')) {vals=[];}
+    else {vals[valcnt++]=$(this).val();}
+  });
 
 });
 </script>
