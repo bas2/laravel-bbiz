@@ -7,6 +7,13 @@ body {
   body#home a.homelink, body#projects a.projectslink, body#update a.updatelink, body#login a.loginlink {
     color: yellow; }
 
+select {
+  font-weight: bold; }
+
+.hotels label {
+  color: #fff;
+  text-transform: uppercase; }
+
 a:active {
   color: yellow;
   text-decoration: none !important; }
