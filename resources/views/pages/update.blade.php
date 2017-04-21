@@ -77,7 +77,7 @@
             </div>
           </div>
 
-          @for($i=1;$i<12;$i++)
+          @for($i=1;$i<13;$i++)
           <div class="row">
             <div class="col-md-4 hotels">
               <p title2="{{ \Carbon\Carbon::parse('next fri')->addWeek($i)->format('Y-m-d') }}" title3="Fri next{{ $i }}">Show: <span>WAL</span> <span>TOL</span> <span>WALTOL</span></p>
@@ -214,8 +214,8 @@ $(document).ready(function(){
     var $this=$(this);
     $.ajax({
       "type":"POST",
-      // /bbiz/public
-      "url":"/travelodge/update/today/",
+      // /laravel/bbiz/public
+      "url":"/laravel/bbiz/public/travelodge/update/today/",
       "data": updatestr + "&orderby=" + $this.attr('title3'),
       "success":function(data){
         $this.parent().parent().html(data);
@@ -235,8 +235,8 @@ $(document).ready(function(){
     $this.css({'background':'yellow','font-weight':'bold'});
     $.ajax({
       "type":"GET",
-      // /bbiz/public
-      "url":"/travelodge/getday/" + $this.parent().attr('title2'),
+      // /laravel/bbiz/public
+      "url":"/laravel/bbiz/public/travelodge/getday/" + $this.parent().attr('title2'),
       "data":"orderby=" + $this.text() + "&text=" + $this.parent().attr('title3'),
       "success":function(data){
         $($this).parent().next().html(data);
