@@ -241,6 +241,7 @@ class HomeController extends Controller
     'date2'=>Carbon::parse($input['date']),
     'price'=>(isset($input['newpricerow'])?$input['newpricerow']:39),
     'order'=>$request['orderby'],
+    'dontshowtabs'=>1,
     ])
     ;
   }
