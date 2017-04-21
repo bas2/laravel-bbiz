@@ -257,6 +257,7 @@ class HomeController extends Controller
     ->with(['text'=>$request['text'], 
     'date2'=>Carbon::parse($theday),
     'order'=>$request['orderby'],
+    'dontshowtabs'=>1,
     ])
     ;
   }
