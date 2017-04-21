@@ -84,7 +84,7 @@ class HomeController extends Controller
     $arr['frinext']=$this->_getDB(Carbon::parse('next friday'));
     $arr['satnext']=$this->_getDB(Carbon::parse('next friday')->addDay());
     $arr['sunnext']=$this->_getDB(Carbon::parse('next friday')->addDay(2));
-    for($i=1;$i<12;$i++) {
+    for($i=1;$i<13;$i++) {
       $arr["frinext{$i}"]=$this->_getDB(Carbon::parse('next friday')->addWeek($i));
       $arr["satnext{$i}"]=$this->_getDB(Carbon::parse('next friday')->addDay()->addWeek($i));
       $arr["sunnext{$i}"]=$this->_getDB(Carbon::parse('next friday')->addDay(2)->addWeek($i));
@@ -209,7 +209,7 @@ class HomeController extends Controller
     if($thecdate==Carbon::parse('next friday')->addDay()->format('Y-m-d')) {$theday='Sat next';}
     if($thecdate==Carbon::parse('next friday')->addDay(2)->format('Y-m-d')) {$theday='Sun next';}
     
-    for($i=1;$i<12;$i++) {
+    for($i=1;$i<13;$i++) {
       if($thecdate==Carbon::parse('next friday')
         ->addWeek($i)->format('Y-m-d')){$theday="Fri next{$i}";}
       if($thecdate==Carbon::parse('next friday')
@@ -225,7 +225,7 @@ class HomeController extends Controller
     $arr['frinext'] =$this->_getDB(Carbon::parse('next friday'));
     $arr['satnext'] =$this->_getDB(Carbon::parse('next friday')->addDay());
     $arr['sunnext'] =$this->_getDB(Carbon::parse('next friday')->addDay(2));
-    for($i=1;$i<12;$i++) {
+    for($i=1;$i<13;$i++) {
       $arr["frinext{$i}"]=$this->_getDB(Carbon::parse('next friday')
         ->addWeek($i));
       $arr["satnext{$i}"]=$this->_getDB(Carbon::parse('next friday')
