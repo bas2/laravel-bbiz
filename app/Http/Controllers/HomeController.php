@@ -179,6 +179,7 @@ class HomeController extends Controller
     return redirect('content/update');
   }
 
+  // POST: travelodge/update/today
   public function postUpdateTravToday(Request $request) {
     $hotels=[''=>'Select'];foreach(\App\TravelodgeHotel::orderBy('name')->get(['hotel_id','name']) as $hotel){$hotels[$hotel->hotel_id]=$hotel->name;}
 
