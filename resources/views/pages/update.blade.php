@@ -177,7 +177,7 @@ $(document).ready(function(){
     $.ajax({
       "type":"POST",
       // /laravel/bbiz/public
-      "url":"/laravel/bbiz/public/travelodge/update/today/",
+      "url":"/travelodge/update/today/",
       "data": updatestr + "&orderby=" + $this.attr('title3'),
       "success":function(data){
         $this.parent().parent().html(data);
@@ -197,7 +197,7 @@ $(document).ready(function(){
     $.ajax({
       "type":"GET",
       // /laravel/bbiz/public
-      "url":"/laravel/bbiz/public/travelodge/getday/" + ul.attr('title2'),
+      "url":"/travelodge/getday/" + ul.attr('title2'),
       "data":"orderby=" + $this.text() + "&text=" + ul.attr('title3'),
       "success":function(data){
         ul.next().html(data);
