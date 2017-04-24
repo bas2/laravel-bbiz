@@ -23,6 +23,7 @@ class HomeController extends Controller
   private function _arrf() {
     $arr=[];
     $arr['lead']    =$this->_getsection('travelodge');
+
     $arr['today']   =$this->_getDB(Carbon::now()->format('Y-m-d'));
     $arr['tomorrow']=$this->_getDB(Carbon::now()->addDay());
     $arr['dayafter']=$this->_getDB(Carbon::now()->addDay(2));
@@ -30,13 +31,13 @@ class HomeController extends Controller
     $arr['frinext']=$this->_getDB(Carbon::parse('next friday'));
     $arr['satnext']=$this->_getDB(Carbon::parse('next friday')->addDay());
     $arr['sunnext']=$this->_getDB(Carbon::parse('next friday')->addDay(2));
+
     for($i=1;$i<13;$i++) {
       $arr["frinext{$i}"]=$this->_getDB(Carbon::parse('next friday')->addWeek($i));
       $arr["satnext{$i}"]=$this->_getDB(Carbon::parse('next friday')->addDay()->addWeek($i));
       $arr["sunnext{$i}"]=$this->_getDB(Carbon::parse('next friday')->addDay(2)->addWeek($i));
     }
     return $arr;
-
   }
 
   // GET: {slug?}
@@ -76,14 +77,16 @@ class HomeController extends Controller
     return view('pages.projects')->with('page',['projects','Projects']);
   }
 
+  private function _hotelsDropDown(){
+    $hotels=[''=>'Select'];foreach(\App\TravelodgeHotel::orderBy('name')->get(['hotel_id','name']) as $hotel){$hotels[$hotel->hotel_id]=$hotel->name;}
+    return $hotels;
+  }
+
   // GET: content/update
   public function update() {
     //if(\Auth::check()){
-    $hotels=[''=>'Select'];foreach(\App\TravelodgeHotel::orderBy('name')->get(['hotel_id','name']) as $hotel){$hotels[$hotel->hotel_id]=$hotel->name;}
-
     $arr=$this->_arrf();
-    $arr['dates']=\App\TravelodgeDate::where('date','>=',Carbon::now()->format('Y-m-d'))->orderBy('date')->get();
-    $arr['hotels']=$hotels;
+    $arr['hotels']=$this->_hotelsDropDown();
     $arr['newrowdate']=$this->_getsection('newrowdate');
 
     return view('pages.update')->with('page',['update','Update'])
@@ -170,11 +173,6 @@ class HomeController extends Controller
     session()->flash('message','Content was updated');
 
     return redirect('content/update');
-  }
-
-  private function _hotelsDropDown(){
-    $hotels=[''=>'Select'];foreach(\App\TravelodgeHotel::orderBy('name')->get(['hotel_id','name']) as $hotel){$hotels[$hotel->hotel_id]=$hotel->name;}
-    return $hotels;
   }
 
   // POST: travelodge/update/today
