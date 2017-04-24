@@ -19,7 +19,7 @@
       )
       <div class="form-group">
       {!! Form::select("price_{$hoteldate->date_id}",range(0,50),$hoteldate->price) !!}
-      {{ Form::label($hoteldate->hotels[0]->name) }} <span class="zero">x</span> <span class="hoteldescr">{{ substr($hoteldate->descr, 0,3) }}</span>
+      {{ Form::label($hoteldate->name) }} <span class="zero">x</span> <span class="hoteldescr">{{ substr($hoteldate->descr, 0,3) }}</span>
       </div>
       @endif
     @endforeach
