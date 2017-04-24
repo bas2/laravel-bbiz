@@ -142,10 +142,10 @@
     <div class="panel">
       <h2 class="panel-heading">Recent work</h2>
       <div class="panel-body">
-      <p class="lead text-center">{!! $pagecontent['recent'] !!}</p>
-      <ul class="list-inline">
-      @foreach($images as $image)<li>{{ link_to("img/uploaded/{$image->filename}",Html::image("img/uploaded/{$image->filename}",'',['width'=>200,'class'=>'thumbnail']), ['class'=>'overlay'], null, false) }}</li>@endforeach
-      </ul>
+        <p class="lead text-center">{!! $pagecontent['recent'] !!}</p>
+        <ul class="list-inline">
+        @foreach($images as $image)<li>{{ link_to("img/uploaded/{$image->filename}",Html::image("img/uploaded/{$image->filename}",'',['width'=>200,'class'=>'thumbnail']), ['class'=>'overlay'], null, false) }}</li>@endforeach
+        </ul>
       </div>
     </div>
   </div>
@@ -153,6 +153,7 @@
 </div>
 </div>
 <script>
+// Scroll up icon.
 $('<a href="#" class="scrollup"></a>').prependTo('body').hide().click(function(e){
   $("html, body").animate({ scrollTop: 0 }, 500);
   e.preventDefault();
@@ -162,6 +163,7 @@ $(window).scroll(function(){
   if($(this).scrollTop()>100){$('a.scrollup').fadeIn();}else{$('a.scrollup').fadeOut();}
 });
 
+// Show more/less.
 $('<div class="row text-center"><button class="btn btn-primary">Show more &rarr;</button></div>')
 .insertAfter($('.showmore')).click(function(e){
   $('.showmore').toggle(); // Headings.
@@ -178,12 +180,14 @@ $('<div class="row text-center"><button class="btn btn-primary">Show more &rarr;
 $('.showmore').hide();
 $('.showmore2').hide();
 
+// Animate to anchor.
 $('nav.pagenav a').click(function(e){
   var offset=($('.pagenav').css('position')=='fixed') ? 42 : 64;
   $('html, body').animate({scrollTop: $($(this).attr('href')).offset().top-offset}, 500);
   e.preventDefault();
 });
 
+// Fixed menu.
 $(window).scroll(function(){
   if( Math.floor($('.main-heading').offset().top) > $(window).scrollTop() )
   {$('.pagenav').css('position','static');}
@@ -201,6 +205,7 @@ $(window).scroll(function(){
   });
 });
 
+// Hotel info icons.
 $('.list-group-item span[title2]')
 .html('<em><img src="img/info.png" width="20"></em>')
 .css({'cursor':'pointer','font':'1.3em arial,tahoma,verdana,sans-serif'})
