@@ -17,7 +17,9 @@ class HomeController extends Controller
       //->where('price','>',0)
       ->orderBy('travelodge_dates.price','asc')
       ->orderBy( 'h.name' )
-      ->get(['travelodge_dates.updated_at','travelodge_dates.price','h.notes','h.hotel_id','h.name']);
+      ->get(
+        ['travelodge_dates.date_id','travelodge_dates.updated_at','travelodge_dates.price',
+         'h.hotel_id','h.name','h.descr','h.notes']);
   }
 
   // GET: {slug?}
