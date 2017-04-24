@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Mail\ContactMail;
-
 use \Carbon\Carbon;
 
 class HomeController extends Controller
@@ -22,8 +20,7 @@ class HomeController extends Controller
          'h.hotel_id','h.name','h.descr','h.notes']);
   }
 
-  // GET: {slug?}
-  public function index() {
+  private function _arrf() {
     $arr=[];
     $arr['lead']    =$this->_getsection('travelodge');
     $arr['today']   =$this->_getDB(Carbon::now()->format('Y-m-d'));
@@ -33,11 +30,18 @@ class HomeController extends Controller
     $arr['frinext']=$this->_getDB(Carbon::parse('next friday'));
     $arr['satnext']=$this->_getDB(Carbon::parse('next friday')->addDay());
     $arr['sunnext']=$this->_getDB(Carbon::parse('next friday')->addDay(2));
-    for($i=1;$i<12;$i++) {
+    for($i=1;$i<13;$i++) {
       $arr["frinext{$i}"]=$this->_getDB(Carbon::parse('next friday')->addWeek($i));
       $arr["satnext{$i}"]=$this->_getDB(Carbon::parse('next friday')->addDay()->addWeek($i));
       $arr["sunnext{$i}"]=$this->_getDB(Carbon::parse('next friday')->addDay(2)->addWeek($i));
     }
+    return $arr;
+
+  }
+
+  // GET: {slug?}
+  public function index() {
+    $arr=$this->_arrf();
     $email=$this->_getsection('email');
 
     return view('pages.welcome')
@@ -77,20 +81,7 @@ class HomeController extends Controller
     //if(\Auth::check()){
     $hotels=[''=>'Select'];foreach(\App\TravelodgeHotel::orderBy('name')->get(['hotel_id','name']) as $hotel){$hotels[$hotel->hotel_id]=$hotel->name;}
 
-    $arr=[];
-    $arr['lead']    =$this->_getsection('travelodge');
-    $arr['today']   =$this->_getDB(Carbon::now()->format('Y-m-d'));
-    $arr['tomorrow']=$this->_getDB(Carbon::now()->addDay());
-    $arr['dayafter']=$this->_getDB(Carbon::now()->addDay(2));
-
-    $arr['frinext']=$this->_getDB(Carbon::parse('next friday'));
-    $arr['satnext']=$this->_getDB(Carbon::parse('next friday')->addDay());
-    $arr['sunnext']=$this->_getDB(Carbon::parse('next friday')->addDay(2));
-    for($i=1;$i<13;$i++) {
-      $arr["frinext{$i}"]=$this->_getDB(Carbon::parse('next friday')->addWeek($i));
-      $arr["satnext{$i}"]=$this->_getDB(Carbon::parse('next friday')->addDay()->addWeek($i));
-      $arr["sunnext{$i}"]=$this->_getDB(Carbon::parse('next friday')->addDay(2)->addWeek($i));
-    }
+    $arr=$this->_arrf();
     $arr['dates']=\App\TravelodgeDate::where('date','>=',Carbon::now()->format('Y-m-d'))->orderBy('date')->get();
     $arr['hotels']=$hotels;
     $arr['newrowdate']=$this->_getsection('newrowdate');
@@ -181,10 +172,13 @@ class HomeController extends Controller
     return redirect('content/update');
   }
 
+  private function _hotelsDropDown(){
+    $hotels=[''=>'Select'];foreach(\App\TravelodgeHotel::orderBy('name')->get(['hotel_id','name']) as $hotel){$hotels[$hotel->hotel_id]=$hotel->name;}
+    return $hotels;
+  }
+
   // POST: travelodge/update/today
   public function postUpdateTravToday(Request $request) {
-    $hotels=[''=>'Select'];foreach(\App\TravelodgeHotel::orderBy('name')->get(['hotel_id','name']) as $hotel){$hotels[$hotel->hotel_id]=$hotel->name;}
-
     $input=$request->all();
     foreach($input as $k=>$v) {
       if ($k!='update') {
@@ -221,22 +215,8 @@ class HomeController extends Controller
         ->addDay(2)->addWeek($i)->format('Y-m-d')){$theday="Sun next{$i}";}
     }
 
-    $arr=[];
-    $arr['today']   =$this->_getDB(Carbon::now()->format('Y-m-d'));
-    $arr['tomorrow']=$this->_getDB(Carbon::now()->addDay());
-    $arr['dayafter']=$this->_getDB(Carbon::now()->addDay(2));
-    $arr['frinext'] =$this->_getDB(Carbon::parse('next friday'));
-    $arr['satnext'] =$this->_getDB(Carbon::parse('next friday')->addDay());
-    $arr['sunnext'] =$this->_getDB(Carbon::parse('next friday')->addDay(2));
-    for($i=1;$i<13;$i++) {
-      $arr["frinext{$i}"]=$this->_getDB(Carbon::parse('next friday')
-        ->addWeek($i));
-      $arr["satnext{$i}"]=$this->_getDB(Carbon::parse('next friday')
-        ->addDay()->addWeek($i));
-      $arr["sunnext{$i}"]=$this->_getDB(Carbon::parse('next friday')
-        ->addDay(2)->addWeek($i));
-    }
-    $arr['hotels']=$hotels;
+    $arr=$this->_arrf();
+    $arr['hotels']=$this->_hotelsDropDown();
 
     return view('includes.travday')
     ->with('travelodge', $arr)
@@ -251,10 +231,9 @@ class HomeController extends Controller
 
   // GET: travelodge/getday
   public function getday($theday, Request $request) {
-    $hotels=[''=>'Select'];foreach(\App\TravelodgeHotel::orderBy('name')->get(['hotel_id','name']) as $hotel){$hotels[$hotel->hotel_id]=$hotel->name;}
     $arr=[];
     $arr[strtolower(str_replace(' ','',$request['text']))]=$this->_getDB($theday);
-    $arr['hotels']=$hotels;
+    $arr['hotels']=$this->_hotelsDropDown();
 
     return view('includes.travday')
     ->with('travelodge', $arr)
