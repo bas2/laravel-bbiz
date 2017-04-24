@@ -7,10 +7,10 @@
 @else
 <ul class="list-group">
   @foreach($hotels as $hoteldate)
-  @if(!empty($hoteldate->hotels[0]->notes))
-  <li class="list-group-item">{{ $hoteldate->hotels[0]->name }} <span title2="{{ $hoteldate->hotels[0]->hotel_id }}">i</span> <span class="badge">{{ $hoteldate->price }}</span></li>
+  @if(!empty($hoteldate->notes))
+  <li class="list-group-item">{{ $hoteldate->name }} <span title2="{{ $hoteldate->hotel_id }}">i</span> -{{ FixData($hoteldate->updated_at->diffForHumans(\Carbon\Carbon::now())) }} <span class="badge">{{ $hoteldate->price }}</span></li>
   @else
-  <li class="list-group-item">{{ $hoteldate->hotels[0]->name }} <span class="badge">{{ $hoteldate->price }}</span></li>
+  <li class="list-group-item">{{ $hoteldate->name . ' -' . FixData($hoteldate->updated_at->diffForHumans(\Carbon\Carbon::now())) }} <span class="badge">{{ $hoteldate->price }}</span></li>
   @endif
   @endforeach
 </ul>
