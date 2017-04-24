@@ -13,11 +13,11 @@ class HomeController extends Controller
 
   private function _getDB($date) {
     return \App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
-      ->where('date',Carbon::parse($date)->format('Y-m-d'))
+      ->where('travelodge_dates.date',Carbon::parse($date)->format('Y-m-d'))
       //->where('price','>',0)
-      ->orderBy('price','asc')
+      ->orderBy('travelodge_dates.price','asc')
       ->orderBy( 'h.name' )
-      ->get();
+      ->get(['travelodge_dates.updated_at','travelodge_dates.price','h.notes','h.hotel_id','h.name']);
   }
 
   // GET: {slug?}
