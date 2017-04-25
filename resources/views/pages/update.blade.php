@@ -55,7 +55,7 @@
           </div>
         </div>
 
-        @for($i=1;$i<13;$i++)
+        @for($i=1;$i<$travelodge['otherwhcount'];$i++)
         <div class="row">
           <div class="col-md-4 hotels">
             @include('includes.travday',
