@@ -7,10 +7,10 @@
       <ul class="list-inline nav-justified">
         <li><a href="#trtodtom">{{ date('j/n') }}</a>
         <li><a href="#trwe1">{{ \Carbon\Carbon::parse('next friday')->format('j/n') }}</a>
-        @for($i=1;$i<12;$i++)
+        @for($i=1;$i<$travelodge['otherwhcount'];$i++)
         <li class="showmore2"><a href="#trwe{{ $i+1 }}">{{ \Carbon\Carbon::parse('next friday')->addWeek($i)->format('j/n') }}</a>
         @endfor
-        <li><a href="#aboutme">About me</a>
+        <li><a href="#aboutme">About</a>
         <li><a href="#skills">Skills</a>
         <li><a href="#recent">Recent</a>
       </ul>
@@ -70,7 +70,7 @@
 
         <div class="showmore ">
 
-          @for($i=1;$i<12;$i++)
+          @for($i=1;$i<$travelodge['otherwhcount'];$i++)
           <div class="row">
             <div class="col-md-12 page-heading" id="trwe{{ $i+1 }}">
               <h4 class="text-center">Prices at the weekend</h4>
