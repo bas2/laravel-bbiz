@@ -45,7 +45,7 @@ class HomeController extends Controller
   // GET: {slug?}
   public function index() {
     $arr=$this->_arrf();
-    $arr['otherwhcount']=$this->_otherwhcount;
+    $arr['otherwhcount']=$this->_otherwhcount-1;
     $email=$this->_getsection('email');
 
     return view('pages.welcome')
