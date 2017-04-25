@@ -9,6 +9,8 @@ use \Carbon\Carbon;
 class HomeController extends Controller
 {
 
+  private $_otherwhcount=14;
+
   private function _getDB($date) {
     return \App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
       ->where('travelodge_dates.date',Carbon::parse($date)->format('Y-m-d'))
@@ -32,7 +34,7 @@ class HomeController extends Controller
     $arr['satnext']=$this->_getDB(Carbon::parse('next friday')->addDay());
     $arr['sunnext']=$this->_getDB(Carbon::parse('next friday')->addDay(2));
 
-    for($i=1;$i<13;$i++) {
+    for($i=1;$i<$this->_otherwhcount;$i++) {
       $arr["frinext{$i}"]=$this->_getDB(Carbon::parse('next friday')->addWeek($i));
       $arr["satnext{$i}"]=$this->_getDB(Carbon::parse('next friday')->addDay()->addWeek($i));
       $arr["sunnext{$i}"]=$this->_getDB(Carbon::parse('next friday')->addDay(2)->addWeek($i));
@@ -43,6 +45,7 @@ class HomeController extends Controller
   // GET: {slug?}
   public function index() {
     $arr=$this->_arrf();
+    $arr['otherwhcount']=$this->_otherwhcount;
     $email=$this->_getsection('email');
 
     return view('pages.welcome')
@@ -88,6 +91,7 @@ class HomeController extends Controller
     $arr=$this->_arrf();
     $arr['hotels']=$this->_hotelsDropDown();
     $arr['newrowdate']=$this->_getsection('newrowdate');
+    $arr['otherwhcount']=$this->_otherwhcount;
 
     return view('pages.update')->with('page',['update','Update'])
     ->with('content',
@@ -204,7 +208,7 @@ class HomeController extends Controller
     if($thecdate==Carbon::parse('next friday')->addDay()->format('Y-m-d')) {$theday='Sat next';}
     if($thecdate==Carbon::parse('next friday')->addDay(2)->format('Y-m-d')) {$theday='Sun next';}
     
-    for($i=1;$i<13;$i++) {
+    for($i=1;$i<$this->_otherwhcount;$i++) {
       if($thecdate==Carbon::parse('next friday')
         ->addWeek($i)->format('Y-m-d')){$theday="Fri next{$i}";}
       if($thecdate==Carbon::parse('next friday')
@@ -249,6 +253,7 @@ class HomeController extends Controller
   }
 
 
+  ######################### LOGIN / LOGOUT METHODS
   // GET: login
   // Show login page.
   public function getlogin(){return view('pages.login')->with('page',['login','Login']);}
