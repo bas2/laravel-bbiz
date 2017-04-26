@@ -2,6 +2,7 @@
 
 function FixData($data){
   $str=str_replace(' before', '', $data);
+  $str=str_replace(' second', 's', $str);
   $str=str_replace(' hour', 'h', $str);
   $str=str_replace('hs', 'h', $str);
   $str=str_replace(' minutes', 'm', $str);
