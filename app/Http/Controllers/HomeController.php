@@ -182,13 +182,21 @@ class HomeController extends Controller
   // POST: travelodge/update/today
   public function postUpdateTravToday(Request $request) {
     $input=$request->all();
-    foreach($input as $k=>$v) {
+    foreach($input as $k=>$price) {
       if ($k!='update') {
-        $hotel_id=substr($k, strlen('hotel_price')+1);
-        if ($v==0) {
-          $delete=\App\TravelodgeDate::where('date_id',$hotel_id)->delete();
-        } else {
-          $update=\App\TravelodgeDate::where('date_id',$hotel_id)->update(['price'=>$v]);
+        $date_id=substr($k, strlen('hotel_price')+1);
+        if ($price==0) { # Price set to zero, delete row with this date_id.
+          $delete=\App\TravelodgeDate::where('date_id',$date_id)->delete();
+        } else { # Update row with date_id.
+          $current=\App\TravelodgeDate::where('date_id',$date_id)->get(['price','previous_price']);
+          if($current->count()==1) { # Check if date row exists before updating.
+            if($current[0]->price==$price) { # Don't update if price hasn't changed.
+            } else {
+              //$current=\App\TravelodgeDate::where('date_id',$date_id)->get([]);
+              $update=\App\TravelodgeDate::where('date_id',$date_id)
+              ->update(['price'=>$price,'previous_price'=>$current[0]->price]);
+            }
+          }
         }
       }
     }
