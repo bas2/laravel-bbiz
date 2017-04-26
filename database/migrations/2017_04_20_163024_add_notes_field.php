@@ -14,7 +14,7 @@ class AddNotesField extends Migration
     public function up()
     {
         Schema::table('travelodge_hotels', function (Blueprint $table) {
-            $table->text('notes');
+            //$table->text('notes');
         });
     }
 
