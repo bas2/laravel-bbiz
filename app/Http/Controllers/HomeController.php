@@ -18,7 +18,7 @@ class HomeController extends Controller
       ->orderBy('travelodge_dates.price','asc')
       ->orderBy( 'h.name' )
       ->get(
-        ['travelodge_dates.date_id','travelodge_dates.updated_at','travelodge_dates.price',
+        ['travelodge_dates.date_id','travelodge_dates.updated_at','travelodge_dates.previous_price','travelodge_dates.price',
          'h.hotel_id','h.name','h.descr','h.notes']);
   }
 
