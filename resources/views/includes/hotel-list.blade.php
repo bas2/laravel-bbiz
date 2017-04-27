@@ -11,7 +11,7 @@
   <li class="list-group-item">{{ 
     $hoteldate->name
   }} <span title2="{{ $hoteldate->hotel_id }}">i</span> 
-  -{!! FixData($hoteldate->updated_at->diffForHumans(\Carbon\Carbon::now())) 
+  {!! FixData($hoteldate->updated_at->diffForHumans(\Carbon\Carbon::now())) 
   
   . ' '
   . (
@@ -32,7 +32,7 @@
   </li>
   @else
   <li class="list-group-item">{!! 
-    $hoteldate->name . ' -' 
+    $hoteldate->name . ' ' 
   . FixData($hoteldate->updated_at->diffForHumans(\Carbon\Carbon::now()))
   . ' '
   . (
