@@ -11,7 +11,7 @@
   <li class="list-group-item">{{ 
     $hoteldate->name
   }} <span title2="{{ $hoteldate->hotel_id }}">i</span> 
-  -{{ FixData($hoteldate->updated_at->diffForHumans(\Carbon\Carbon::now())) 
+  -{!! FixData($hoteldate->updated_at->diffForHumans(\Carbon\Carbon::now())) 
   
   . ' '
   . (
@@ -19,19 +19,19 @@
     ? (
         (
         ( ($hoteldate->price-$hoteldate->previous_price)!= $hoteldate->price)
-        ? '+'.($hoteldate->price-$hoteldate->previous_price)
+        ? '<span class="error">+'.($hoteldate->price-$hoteldate->previous_price).'</span>'
         : ''
         )
       )
-    : ''.($hoteldate->price-$hoteldate->previous_price)
+    : '<span class="success">'.($hoteldate->price-$hoteldate->previous_price).'</span>'
     )
   
-  }} 
+  !!} 
 
   <span class="badge">&pound;{{ $hoteldate->price }}</span>
   </li>
   @else
-  <li class="list-group-item">{{ 
+  <li class="list-group-item">{!! 
     $hoteldate->name . ' -' 
   . FixData($hoteldate->updated_at->diffForHumans(\Carbon\Carbon::now()))
   . ' '
@@ -40,13 +40,13 @@
     ? (
         (
         ( ($hoteldate->price-$hoteldate->previous_price)!= $hoteldate->price)
-        ? '+'.($hoteldate->price-$hoteldate->previous_price)
+        ? '<span class="error">+'.($hoteldate->price-$hoteldate->previous_price).'</span>'
         : ''
         )
       )
-    : '-'.($hoteldate->price-$hoteldate->previous_price)
+    : '<span class="success">'.($hoteldate->price-$hoteldate->previous_price).'</span>'
     )
-  }} 
+  !!} 
   <span class="badge">&pound;{{ $hoteldate->price }}</span>
   </li>
   @endif
