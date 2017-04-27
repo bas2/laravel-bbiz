@@ -11,9 +11,9 @@
   <li class="list-group-item">{{ 
     $hoteldate->name
   }} <span title2="{{ $hoteldate->hotel_id }}">i</span> 
-  {!! FixData($hoteldate->updated_at->diffForHumans(\Carbon\Carbon::now())) 
-  
-  . ' '
+  {{ FixData($hoteldate->updated_at->diffForHumans(\Carbon\Carbon::now())) }} 
+  <span class="badge">&pound;{!! $hoteldate->price 
+    . ' '
   . (
     (($hoteldate->price-$hoteldate->previous_price)>0) 
     ? (
@@ -25,15 +25,14 @@
       )
     : '<span class="success">'.($hoteldate->price-$hoteldate->previous_price).'</span>'
     )
-  
-  !!} 
-
-  <span class="badge">&pound;{{ $hoteldate->price }}</span>
+  !!}
+  </span>
   </li>
   @else
   <li class="list-group-item">{!! 
-    $hoteldate->name . ' ' 
-  . FixData($hoteldate->updated_at->diffForHumans(\Carbon\Carbon::now()))
+  $hoteldate->name . ' '  . FixData($hoteldate->updated_at->diffForHumans(\Carbon\Carbon::now()))
+  !!} 
+  <span class="badge">&pound;{!! $hoteldate->price
   . ' '
   . (
     (($hoteldate->price-$hoteldate->previous_price)>0) 
@@ -46,8 +45,8 @@
       )
     : '<span class="success">'.($hoteldate->price-$hoteldate->previous_price).'</span>'
     )
-  !!} 
-  <span class="badge">&pound;{{ $hoteldate->price }}</span>
+  !!}
+  </span>
   </li>
   @endif
   @endforeach
