@@ -10,9 +10,9 @@
         @for($i=1;$i<$travelodge['otherwhcount'];$i++)
         <li class="showmore2"><a href="#trwe{{ $i+1 }}">{{ \Carbon\Carbon::parse('next friday')->addWeek($i)->format('j/n') }}</a>
         @endfor
-        <li><a href="#aboutme">About</a>
-        <li><a href="#skills">Skills</a>
-        <li><a href="#recent">Recent</a>
+        <li><a id="aboutlink" href="#aboutme">About me</a>
+        <li><a id="skillslink" href="#skills">Skills history</a>
+        <li><a id="recentlink" href="#recent">Recent work</a>
       </ul>
     </div>
   </div>
@@ -169,9 +169,15 @@ $('<div class="row text-center"><button class="btn btn-primary">Show more &rarr;
   $('.showmore').toggle(); // Headings.
   $('.showmore2').toggle();; // Menu items.
   if ($('.showmore').is(':visible')) {
+    $('a#aboutlink').html('About');
+    $('a#skillslink').html('Skills');
+    $('a#recentlink').html('Recent');
     $(this).find('button').html('Show less &larr;');
     $('html, body').animate({scrollTop: $('#trwe2').offset().top-42}, 1000);
   } else {
+    $('a#aboutlink').html('About me');
+    $('a#skillslink').html('Skills history');
+    $('a#recentlink').html('Recent work');
     $(this).find('button').html('Show more &rarr;');
     $('html, body').animate({scrollTop: $('#trwe1').offset().top-42}, 1000);
   }
