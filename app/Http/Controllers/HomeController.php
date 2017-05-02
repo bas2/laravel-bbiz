@@ -54,7 +54,9 @@ class HomeController extends Controller
       'aboutme'=>$this->_getsection('about'),
       'email'  =>(!filter_var($email, FILTER_VALIDATE_EMAIL)===false)?$email:'',
       'skills' =>\App\Skill::get(['skill','content']),
-      'recent' =>$this->_getsection('recent')
+      'recent' =>$this->_getsection('recent'),
+      'sections'=>
+      ['about'=>'About me','skills'=>'Skills summary','recent'=>'Recent work']
       ])
     ->with('travelodge', $arr)
     ->with('images',\App\Image::get(['filename']))
