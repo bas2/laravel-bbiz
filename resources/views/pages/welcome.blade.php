@@ -10,9 +10,9 @@
         @for($i=1;$i<$travelodge['otherwhcount'];$i++)
         <li class="showmore2"><a href="#trwe{{ $i+1 }}">{{ \Carbon\Carbon::parse('next friday')->addWeek($i)->format('j/n') }}</a>
         @endfor
-        <li><a id="aboutlink" href="#aboutme">About me</a>
-        <li><a id="skillslink" href="#skills">Skills history</a>
-        <li><a id="recentlink" href="#recent">Recent work</a>
+        @foreach($pagecontent['sections'] as $s1=>$s2)
+        <li><a id="{{ $s1 }}link" href="#{{ $s1 }}">{{ $s2 }}</a>
+        @endforeach
       </ul>
     </div>
   </div>
@@ -104,7 +104,7 @@
 <div class="container-fluid">
 <div class="row equal">
 
-  <div class="col-md-4 col-sm-12 intro page-heading" id="aboutme">
+  <div class="col-md-4 col-sm-12 intro page-heading" id="about">
     <div class="panel hunp">
       <h2 class="panel-heading">About me</h2>
       <div class="panel-body text-center">
@@ -169,18 +169,18 @@ $('<div class="row text-center"><button class="btn btn-primary">Show more &rarr;
   $('.showmore').toggle(); // Headings.
   $('.showmore2').toggle();; // Menu items.
   if ($('.showmore').is(':visible')) {
-    $('a#aboutlink').html('About');
-    $('a#skillslink').html('Skills');
-    $('a#recentlink').html('Recent');
-    $(this).find('button').html('Show less &larr;');
-    $('html, body').animate({scrollTop: $('#trwe2').offset().top-42}, 1000);
+    @foreach($pagecontent['sections'] as $s1=>$s2)
+    $('a#{{ $s1 }}link').html('{{ substr($s2,0,strpos($s2,' ')) }}');
+    @endforeach
+    var moretext=['less',2];
   } else {
-    $('a#aboutlink').html('About me');
-    $('a#skillslink').html('Skills history');
-    $('a#recentlink').html('Recent work');
-    $(this).find('button').html('Show more &rarr;');
-    $('html, body').animate({scrollTop: $('#trwe1').offset().top-42}, 1000);
+    @foreach($pagecontent['sections'] as $s1=>$s2)
+    $('a#{{ $s1 }}link').html('{{ $s2 }}');
+    @endforeach
+    var moretext=['more',1];
   }
+  $(this).find('button').html('Show ' + moretext[0] + ' &rarr;');
+  $('html, body').animate({scrollTop: $('#trwe' + moretext[1]).offset().top-42}, 1000);
   e.preventDefault();
 });
 $('.showmore').hide();
