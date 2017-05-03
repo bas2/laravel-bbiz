@@ -14,7 +14,6 @@ class HomeController extends Controller
   private function _getDB($date) {
     return \App\TravelodgeDate::join('travelodge_hotels AS h','h.hotel_id','=','travelodge_dates.hotelid')
       ->where('travelodge_dates.date',Carbon::parse($date)->format('Y-m-d'))
-      //->where('price','>',0)
       ->orderBy('travelodge_dates.price','asc')
       ->orderBy( 'h.name' )
       ->get(
@@ -49,7 +48,7 @@ class HomeController extends Controller
     $email=$this->_getsection('email');
 
     return view('pages.welcome')
-    ->with('page',['home','Bashir Patel (Web developer/programmer) London-based'])
+    ->with('page',['home',$this->_getsection('index_page_title')])
     ->with('pagecontent', [
       'aboutme'=>$this->_getsection('about'),
       'email'  =>(!filter_var($email, FILTER_VALIDATE_EMAIL)===false)?$email:'',
