@@ -15,6 +15,9 @@
 <body id="{{ $page[0] }}">
   @include('nav')
   <div class="wrapper">
+  <p class="text-center">
+  <a href="http://www.1and1.com/web-hosting?kwk=523119831&ac=OM.US.US930K244547B7030a" rel="nofollow"><img src="http://adimg.uimserv.net/1und1/KWK/Classic-Hosting/US/NewHosting_kwk_us_sw_728x90.gif"/></a>
+  </p>
   @yield('content')
   </div>
   <footer class="footer">
