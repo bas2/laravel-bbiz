@@ -48,7 +48,9 @@ class HomeController extends Controller
     $email=$this->_getsection('email');
 
     return view('pages.welcome')
-    ->with('page',['home',$this->_getsection('index_page_title')])
+    ->with('page',
+    ['home',$this->_getsection('index_page_title'),
+    'meta_description'=>$this->_getsection('meta_description')])
     ->with('pagecontent', [
       'aboutme'=>$this->_getsection('about'),
       'email'  =>(!filter_var($email, FILTER_VALIDATE_EMAIL)===false)?$email:'',
