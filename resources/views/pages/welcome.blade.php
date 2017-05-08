@@ -5,8 +5,8 @@
   <div class="container-fluid">
     <div class="panel">
       <ul class="list-inline nav-justified">
-        <li><a href="#trtodtom">{{ date('j/n') }}</a>
-        <li><a href="#trwe1">{{ \Carbon\Carbon::parse('next friday')->format('j/n') }}</a>
+        <li><a id="trtodtom1" href="#trtodtom">{{ date('j M') }}</a>
+        <li><a id="trwe11" href="#trwe1">{{ \Carbon\Carbon::parse('next friday')->format('j M') }}</a>
         @for($i=1;$i<$travelodge['otherwhcount'];$i++)
         <li class="showmore2"><a href="#trwe{{ $i+1 }}">{{ \Carbon\Carbon::parse('next friday')->addWeek($i)->format('j/n') }}</a>
         @endfor
@@ -152,6 +152,7 @@
 
 </div>
 </div>
+
 <script>
 // Scroll up icon.
 $('<a href="#" class="scrollup"></a>').prependTo('body').hide().click(function(e){
@@ -169,14 +170,18 @@ $('<div class="row text-center"><button class="btn btn-primary">Show more &rarr;
   $('.showmore').toggle(); // Headings.
   $('.showmore2').toggle();; // Menu items.
   if ($('.showmore').is(':visible')) {
-    @foreach($pagecontent['sections'] as $s1=>$s2)
+  $('#trtodtom1').html('{{ date("j/n") }}');
+  $('#trwe11').html('{{ \Carbon\Carbon::parse('next friday')->format("j/n") }}');
+  @foreach($pagecontent['sections'] as $s1=>$s2)
     $('a#{{ $s1 }}link').html('{{ substr($s2,0,strpos($s2,' ')) }}');
-    @endforeach
+  @endforeach
     var moretext=['less',2];
   } else {
-    @foreach($pagecontent['sections'] as $s1=>$s2)
+    $('#trtodtom1').html('{{ date("j M") }}');
+    $('#trwe11').html('{{ \Carbon\Carbon::parse('next friday')->format("j M") }}');
+  @foreach($pagecontent['sections'] as $s1=>$s2)
     $('a#{{ $s1 }}link').html('{{ $s2 }}');
-    @endforeach
+  @endforeach
     var moretext=['more',1];
   }
   $(this).find('button').html('Show ' + moretext[0] + ' &rarr;');
@@ -200,7 +205,7 @@ $(window).scroll(function(){
   else {$('.pagenav').css({'position':'fixed','top':0,'left':0});}
 
   $('.page-heading').each(function(){
-    if($(this).is(':visible')) { // Avoid interating through hidden weekend headings.
+    if($(this).is(':visible')) { // Avoid iterating through hidden weekend headings.
       if( Math.floor($(this).offset().top)-42 > $(window).scrollTop() ) {
         $('.pagenav a[href$='+$(this).attr('id')+']').removeClass('selected').addClass('unselected');
       } else {
