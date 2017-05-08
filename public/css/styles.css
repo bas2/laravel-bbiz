@@ -41,13 +41,13 @@ a:visited {
       .pagenav .panel a.selected, .pagenav .panel a:hover {
         color: #fff;
         text-shadow: 1px 1px #000; }
-      .pagenav .panel a[href*=aboutme] {
+      .pagenav .panel a[href*=about] {
         background: url(../img/Person.png) no-repeat left center; }
       .pagenav .panel a[href*=skills] {
         background: url(../img/bulb.png) no-repeat left center; }
       .pagenav .panel a[href*=recent] {
         background: url(../img/time2.png) no-repeat left center; }
-      .pagenav .panel a[href*=aboutme], .pagenav .panel a[href*=skills], .pagenav .panel a[href*=recent] {
+      .pagenav .panel a[href*=about], .pagenav .panel a[href*=skills], .pagenav .panel a[href*=recent] {
         padding-left: 22px;
         background-size: 20px; }
 
