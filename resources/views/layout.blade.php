@@ -16,11 +16,13 @@
 <body id="{{ $page[0] }}">
   @include('nav')
   <div class="wrapper">
-  <p class="text-center">
-  <a href="https://www.1and1.co.uk/hosting?ac=OM.UK.UKf11K357007T7073a&kwk=523119831" rel="nofollow"><img src="http://adimg.uimserv.net/1und1/KWK/Classic-Hosting/US/NewHosting_kwk_us_sw_728x90.gif"/></a>
-  </p>
   @yield('content')
+    <div class="container-fluid">
+    <a href="https://www.1and1.co.uk/hosting?ac=OM.UK.UKf11K357007T7073a&kwk=523119831" rel="nofollow">
+    <img class="img-responsive center-block" src="http://adimg.uimserv.net/1und1/KWK/Classic-Hosting/US/NewHosting_kwk_us_sw_728x90.gif"/></a>
+    </div>
   </div>
+
   <footer class="footer">
     <div class="container-fluid">
       <p class="text-muted text-center">Glyphicons provided by {{ link_to('http://glyphicons.com','<span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Glyphicons',[],null,false) }}</p>
