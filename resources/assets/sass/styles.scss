@@ -41,10 +41,10 @@ a:visited {text-decoration:none !important;}
     a {
       color:#ccc;text-decoration:none;font-variant: small-caps;
       &.selected,&:hover {color:#fff;text-shadow:1px 1px #000;}
-      &[href*=aboutme] {background: url(../img/Person.png) no-repeat left center;}
+      &[href*=about] {background: url(../img/Person.png) no-repeat left center;}
       &[href*=skills] {background: url(../img/bulb.png) no-repeat left center;}
       &[href*=recent] {background: url(../img/time2.png) no-repeat left center;}
-      &[href*=aboutme],&[href*=skills],&[href*=recent]
+      &[href*=about],&[href*=skills],&[href*=recent]
       {padding-left:22px;background-size:20px;}
     }
   }
