@@ -60,7 +60,7 @@ a:visited {
 
 .wrapper {
   /* Margin bottom by footer height */
-  margin: 0 0 60px; }
+  margin: 0 0 80px; }
 
 input[type=text], input[type=email], textarea {
   border: none;
