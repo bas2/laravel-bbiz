@@ -1,6 +1,7 @@
 @extends('layout')
 @section('content')
 
+    <!--
 <nav class="pagenav">
   <div class="container-fluid">
     <div class="panel">
@@ -19,8 +20,9 @@
     </div>
   </div>
 </nav>
+      -->
 
-
+<!--
 <div class="container-fluid">
 <div class="row">
 
@@ -101,7 +103,7 @@
 
 </div>
 </div>
-
+-->
 
 <div class="container-fluid">
 <div class="row equal">
