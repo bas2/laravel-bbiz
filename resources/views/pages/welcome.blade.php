@@ -235,5 +235,48 @@ $('.list-group-item span[title2]')
   }
   else {$(this).next().next('div').remove();}
 });
+
+$('.interested').click(function(){
+  var resetBtn = '<p class="btnReset"><button class="btn btn-warning">Cancel</button></p>';
+
+  var contactForm = '<div class="interested_form"><div class="form-group"><input class="form-control" type="text" placeholder="Your name (required)"></div>';
+  contactForm+= '<div class="form-group"><input class="form-control" type="email" placeholder="Your email (optional)"></div>';
+  contactForm+= '<div class="form-group"><input class="btn btn-primary" type="submit" value="Send"></div></div>';
+  $(
+    '<p><strong>Great! You can contact me on 077 599 702 09 or by using the form below:</strong></p>'
+    + contactForm
+    + resetBtn
+  )
+  .insertAfter($(this));
+  $('.not-interested').hide();
+  $(this).hide();
+})
+
+// Send message:
+$('body').on('click','.interested_form input[type=submit]',function(){
+  var nameInput = $(this).parent().prev().prev().find('input');
+
+  if(nameInput.val().length<4) {
+    nameInput.next('span').remove();
+    $('<span class="error" style="color:#f00;">Please supply your name</span>').insertAfter(nameInput);
+    nameInput.focus();
+
+  } else {
+    var emailInput = $(this).parent().prev().find('input').val();
+    var success_msg = 'Thank you for your interest!';
+    if(emailInput.length>0) {
+      success_msg+=' I will contact you asap at ' + emailInput + '.';
+    } else {
+      success_msg+=' You did not supply an email address.';
+    }
+
+    $('<p class="alert-success">'+success_msg+'</p>')
+    .insertAfter(nameInput.parent().parent());
+
+    nameInput.parent().parent().remove();
+
+    $('.btnReset').hide();
+  }
+});
 </script>
 @endsection
