@@ -6,12 +6,29 @@ html {
 }
 
 body {
-  background: hsla(0,0%,0%,.6);
+  /*background: hsla(0,0%,0%,.6);*/
   &#home a.homelink, 
   &#projects a.projectslink,
   &#update a.updatelink,
   &#login a.loginlink
   {color: yellow;}
+}
+
+.jumbotron {
+  h2 {margin-top: 0;}
+  h3 {
+    position: relative;
+    color:hsl(20,100%,50%);
+    padding-right: 100px;
+    .badge {
+      position: absolute;
+      right:20px;
+      top:0;
+      font-size:1.4em;
+      background-color:hsl(20,100%,50%);
+    }
+  }
+  button {color:hsl(0,100%,50%);}
 }
 
 select {
