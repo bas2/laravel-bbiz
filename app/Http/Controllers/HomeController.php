@@ -43,9 +43,12 @@ class HomeController extends Controller
 
   // GET: {slug?}
   public function index() {
-    $arr=$this->_arrf();
-    $arr['otherwhcount']=$this->_otherwhcount;
-    $email=$this->_getsection('email');
+    //$arr=$this->_arrf();
+    //$arr['otherwhcount']=$this->_otherwhcount;
+    $email=$this->_getsection('email'); # Contact email address.
+    //$mobile=$this->_getsection('mobile'); # Contact mobile number.
+
+    $products=\App\Product::get(); # Items to sell.
 
     return view('pages.welcome')
     ->with('page',
@@ -54,13 +57,15 @@ class HomeController extends Controller
     ->with('pagecontent', [
       'aboutme'=>$this->_getsection('about'),
       'email'  =>(!filter_var($email, FILTER_VALIDATE_EMAIL)===false)?$email:'',
+      'mobile' =>$this->_getsection('mobile'), # Contact mobile number.
       'skills' =>\App\Skill::get(['skill','content']),
       'recent' =>$this->_getsection('recent'),
       'sections'=>
       ['about'=>'About me','skills'=>'Skills summary','recent'=>'Recent work']
-      ])
-    ->with('travelodge', $arr)
+    ])
+    //->with('travelodge', $arr)
     ->with('images',\App\Image::get(['filename']))
+    ->with('products', $products)
     ;
   }
 
