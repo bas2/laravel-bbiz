@@ -25,6 +25,29 @@
     <h2 class="text-center">Items I'm selling</h2>
     <p class="lead text-center">I have two items that I'm currently selling</p>
 
+
+    <div class="itemtosell">
+      <h3><span class="badge">&pound;</span></h3>
+      <p></p> 
+      <div class="row">
+        <div class="col-md-8">
+
+        </div>
+        <div class="col-md-4 text-center">
+        {{ Html::Image('img/itemstosell/zoostorm.jpg','',['width'=>300,'class'=>'thumbnail']) }}
+        </div>
+      </div>
+      <p class="actionbuttons">
+      <button class="interested btn btn-success">I am interested in buying this for &pound;90</button>
+      <button class="not-interested btn btn-warning">I am not interested in buying this for &pound;90</button>
+      </p>
+    </div>
+
+
+
+
+
+
     <div class="itemtosell">
       <h3>1. Pink Zoostorm W25 1EL notebook in very good condition<span class="badge">&pound;90</span></h3>
       <p>I have a notebook purchased a few years ago in very good condition for sale. There are very slight imperfections but it's in otherwise great condition. 
@@ -34,7 +57,7 @@
           <ul>
             <li>2.4Gig Pentium CPU 
             <li>1TB hard drive 
-            <li>8Gb memory 
+            <li>8Gb RAM
             <li>CD/DVD 
             <li>Laptop bag (unused) 
             <li>Latest Ubuntu installed (notebook did not come with Windows installed. 
@@ -47,7 +70,7 @@
         {{ Html::Image('img/itemstosell/zoostorm.jpg','',['width'=>300,'class'=>'thumbnail']) }}
         </div>
       </div>
-      <p>
+      <p class="actionbuttons">
       <button class="interested btn btn-success">I am interested in buying this for &pound;90</button>
       <button class="not-interested btn btn-warning">I am not interested in buying this for &pound;90</button>
       </p>
@@ -88,7 +111,7 @@
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="home2">
       <p>Once you've decided you are interested in buying an item, contact me by
-      calling me or by sending your name and contact email. You don't have to 
+      calling me on +44 77 599 702 09 or by sending your name and contact email. You don't have to 
       supply your email address. If you don't, you will be given a link to communicate via this site.</p> 
       <p>We can meet and you can take a look at the item.</p>
       <p>If you agree, pay the amount and take the item.</p>
