@@ -1,109 +1,7 @@
 @extends('layout')
 @section('content')
 
-    <!--
-<nav class="pagenav">
-  <div class="container-fluid">
-    <div class="panel">
-      <ul class="list-inline nav-justified">
-        <li><a id="trtodtom1" href="#trtodtom">{{ date('l j M') }}</a>
-        <li><a id="trwe11" href="#trwe1">{{ \Carbon\Carbon::parse('next friday')->format('l j M') }}</a>
-        @for($i=1;$i<$travelodge['otherwhcount'];$i++)
-        <li class="showmore2"><a href="#trwe{{ $i+1 }}">{{ \Carbon\Carbon::parse('next friday')->addWeek($i)->format('j/n') }}</a>
-        @endfor
-      </ul>
-      <ul class="list-inline nav-justified">  
-        @foreach($pagecontent['sections'] as $s1=>$s2)
-        <li><a id="{{ $s1 }}link" href="#{{ $s1 }}">{{ $s2 }}</a>
-        @endforeach
-      </ul>
-    </div>
-  </div>
-</nav>
-      -->
 
-<!--
-<div class="container-fluid">
-<div class="row">
-
-  <div class="col-md-12 travelodge-affiliate">
-    <div class="panel">
-      <h3 class="panel-heading text-center main-heading">Book a room for one night with Travelodge</h3>
-      <div class="panel-body">
-        {!! $travelodge['lead'] !!}
-
-        <div class="row">
-          <div class="col-md-{{ (date('l')=='Friday') ? 4 : 6 }} page-heading" id="trtodtom">
-            <h4 class="text-center">Today's prices</h4>
-            @include('includes.hotel-list', 
-            ['hotels'=>$travelodge['today'],'day'=>\Carbon\Carbon::now()])
-          </div>
-
-          <div class="col-md-{{ (date('l')=='Friday') ? 4 : 6 }}">
-            <h4 class="text-center">Tomorrow's prices</h4>
-            @include('includes.hotel-list', 
-            ['hotels'=>$travelodge['tomorrow'],'day'=>\Carbon\Carbon::now()->addDay()])
-          </div>
-          @if(date('l')=='Friday')
-          <div class="col-md-4">
-            <h4 class="text-center">Sunday's prices</h4>
-            @include('includes.hotel-list', 
-            ['hotels'=>$travelodge['dayafter'],'day'=>\Carbon\Carbon::now()->addDay(2)])
-          </div>
-          @endif
-        </div>
-
-        <div class="row">
-          <div class="col-md-12 page-heading" id="trwe1">
-            <h4 class="text-center">Prices at the weekend</h4>
-            
-            <div class="col-md-4">
-              @include('includes.hotel-list', ['hotels'=>$travelodge['frinext'],'day'=>\Carbon\Carbon::parse('next friday')])
-            </div>
-
-            <div class="col-md-4">
-              @include('includes.hotel-list', ['hotels'=>$travelodge['satnext'],'day'=>\Carbon\Carbon::parse('next friday')->addDay()])
-            </div>
-
-            <div class="col-md-4">
-              @include('includes.hotel-list', ['hotels'=>$travelodge['sunnext'],'day'=>\Carbon\Carbon::parse('next friday')->addDay(2)])
-            </div>
-
-          </div>
-        </div>
-
-        <div class="showmore ">
-
-          @for($i=1;$i<$travelodge['otherwhcount'];$i++)
-          <div class="row">
-            <div class="col-md-12 page-heading" id="trwe{{ $i+1 }}">
-              <h4 class="text-center">Prices at the weekend</h4>
-              
-              <div class="col-md-4">
-                @include('includes.hotel-list', ['hotels'=>$travelodge["frinext{$i}"],'day'=>\Carbon\Carbon::parse('next friday')->addWeek($i)])
-              </div>
-
-              <div class="col-md-4">
-                @include('includes.hotel-list', ['hotels'=>$travelodge["satnext{$i}"],'day'=>\Carbon\Carbon::parse('next friday')->addDay()->addWeek($i)])
-              </div>
-
-              <div class="col-md-4">
-                @include('includes.hotel-list', ['hotels'=>$travelodge["sunnext{$i}"],'day'=>\Carbon\Carbon::parse('next friday')->addDay(2)->addWeek($i)])
-              </div>
-
-            </div>
-          </div>
-          @endfor
-
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-</div>
-</div>
--->
 
 <div class="container-fluid">
 <div class="row equal">
@@ -169,79 +67,14 @@ $(window).scroll(function(){
   if($(this).scrollTop()>100){$('a.scrollup').fadeIn();}else{$('a.scrollup').fadeOut();}
 });
 
-// Show more/less.
-$('<div class="row text-center"><button class="btn btn-primary">Show more &rarr;</button></div>')
-.insertAfter($('.showmore')).click(function(e){
-  $('.showmore').toggle(); // Headings.
-  $('.showmore2').toggle();; // Menu items.
-  if ($('.showmore').is(':visible')) {
-    $('#trtodtom1').html('{{ date("j/n") }}');
-    $('#trwe11').html('{{ \Carbon\Carbon::parse('next friday')->format("j/n") }}');
-    var moretext=['less',2];
-  } else {
-    $('#trtodtom1').html('{{ date("l j M") }}');
-    $('#trwe11').html('{{ \Carbon\Carbon::parse('next friday')->format("l j M") }}');
-    var moretext=['more',1];
-  }
-  $(this).find('button').html('Show ' + moretext[0] + ' &rarr;');
-  $('html, body').animate({scrollTop: $('#trwe' + moretext[1]).offset().top-numf}, 1000);
-  e.preventDefault();
-});
-$('.showmore').hide();
-$('.showmore2').hide();
-
-// Animate to anchor.
-$('nav.pagenav a').click(function(e){
-  var offset=($('.pagenav').css('position')=='fixed') ? numf : (numf*2);
-  $('html, body').animate({scrollTop: $($(this).attr('href')).offset().top-offset}, 500);
-  e.preventDefault();
-});
-
-// Fixed menu.
-$(window).scroll(function(){
-  if( Math.floor($('.main-heading').offset().top) > $(window).scrollTop() )
-  {$('.pagenav').css('position','static');}
-  else {$('.pagenav').css({'position':'fixed','top':0,'left':0});}
-
-  $('.page-heading').each(function(){
-    if($(this).is(':visible')) { // Avoid iterating through hidden weekend headings.
-      if( Math.floor($(this).offset().top)-numf > $(window).scrollTop() ) {
-        $('.pagenav a[href$='+$(this).attr('id')+']').removeClass('selected').addClass('unselected');
-      } else {
-        $('.pagenav a[href]').removeAttr('class').addClass('unselected');
-        $('.pagenav a[href$='+$(this).attr('id')+']').removeClass('unselected').addClass('selected');
-      }
-    }
-  });
-});
-
-// Hotel info icons.
-$('.list-group-item span[title2]')
-.html('<em><img src="img/info.png" width="20"></em>')
-.css({'cursor':'pointer','font':'1.3em arial,tahoma,verdana,sans-serif'})
-.click(function(){
-  if(!$(this).next().next('div').is(':visible')) 
-  {
-    var $this=$(this);
-    $.ajax({
-      "type":"GET",
-      // /bbiz/public
-      "url":"/travelodge/hotel/" + $this.attr('title2') + '/notes',
-      "success":function(data){
-        $('<div>'+data+'</div>').css({'font':'normal .6em verdana, sans-serif'}).appendTo($this.parent());
-      } // End ajax success function
-
-    }); // End ajax.
-  }
-  else {$(this).next().next('div').remove();}
-});
 
 $('.interested').click(function(){
   var resetBtn = '<p class="btnReset"><button class="btn btn-warning">Cancel</button></p>';
 
-  var contactForm = '<div class="interested_form"><div class="form-group"><input class="form-control" type="text" placeholder="Your name (required)"></div>';
+  var contactForm = '<div class="interested_form">';
+  contactForm+= '<div class="form-group"><input class="form-control" type="text" placeholder="Your name (required)"></div>';
   contactForm+= '<div class="form-group"><input class="form-control" type="email" placeholder="Your email (optional)"></div>';
-  contactForm+= '<div class="form-group"><input class="btn btn-primary" type="submit" value="Send"></div></div>';
+  contactForm+= '<div class="form-group"><input class="btn btn-primary" type="submit" value="Submit"></div></div>';
   $(
     '<p><strong>Great! You can contact me on 077 599 702 09 or by using the form below:</strong></p>'
     + contactForm
@@ -250,6 +83,7 @@ $('.interested').click(function(){
   .insertAfter($(this));
   $('.not-interested').hide();
   $(this).hide();
+  $('.interested_form div').first().find('input').focus();
 })
 
 // Send message:
