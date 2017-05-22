@@ -103,7 +103,11 @@ class HomeController extends Controller
       $sender=request('name');
       // E-mail sender:
       \Mail::to($email)->send(new ContactMail($sender,'',
-      "Hi {$sender}. Thank you for your interest in <strong>{$prod[0]->name}</strong> I am selling for <strong>&pound:{$prod[0]->price}</strong>. I will be in contact asap."));
+      "Hi {$sender}.
+      
+      Thank you for your interest in {$prod[0]->name} I am selling for &pound;{$prod[0]->price}.
+      
+      I will be in contact asap."));
 
       // Send one to me:
       $email2=\App\Content::where('name','email')->get(['content']);
