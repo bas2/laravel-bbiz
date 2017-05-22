@@ -26,7 +26,7 @@
 <p class="alert alert-danger">{{ $flash }}</p>
 @endif
 <div class="form-group">
-{!! Form::submit('Reply &rarr;',['class'=>'btn btn-primary']) !!}
+{!! Form::submit('Reply',['class'=>'btn btn-primary']) !!}
 </div>
 
 {{ Form::close() }}
