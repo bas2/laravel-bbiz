@@ -43,7 +43,7 @@
         supply your email address. If you don't, you will be given a link to communicate via this site.</p> 
         <p>We can meet and you can take a look at the item.</p>
         <p>If you agree, pay the amount and take the item.</p>
-        <p>You can ask for a discount (via the not interested button) and I will contact you if I can sell it at that price.</p>
+        <!--<p>You can ask for a discount (via the not interested button) and I will contact you if I can sell it at that price.</p>-->
       </div>
       <div role="tabpanel" class="tab-pane" id="payitem">
         <p>I accept only cash payments.</p>
