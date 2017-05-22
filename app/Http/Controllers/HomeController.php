@@ -98,7 +98,13 @@ class HomeController extends Controller
   public function sendEmail3() {
     $email=request('email');
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)===false) {
-      \Mail::to($email)->send(new ContactMail(request('name'),$email,''));
+      $sender=request('name');
+      \Mail::to($email)->send(new ContactMail($sender,'',
+      "Hi {$sender}. Thank you for your interest in one of the items I am selling. I will be in contact asap."));
+
+      $email2=\App\Content::where('name','email')->get(['content']);
+      \Mail::to($email2[0]->content)->send(new ContactMail(request('name'),$email,
+      'Someone has made contact via their e-mail address'));
     } else {
       // Invalid email address.
       //return 'email_not_valid';
