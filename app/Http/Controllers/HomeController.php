@@ -136,8 +136,8 @@ class HomeController extends Controller
     $this->validate(request(),['message'=>'required|min:5|max:300',]);
     $email=\App\Content::where('name','email')->get(['content']);
     if(!empty($email[0]->content)) {
-      //\Mail::to($email[0]->content)->send(new ContactMail(request('name'),request('email'),request('message')));
       $prodid=\App\Message::where('code',$code)->get(['product_id','name']);
+      \Mail::to($email[0]->content)->send(new ContactMail($prodid[0]->name,$email[0]->content,request('message')));
       $message=new \App\Message;
       $message->name=$prodid[0]->name;
       $message->message=request('message');
