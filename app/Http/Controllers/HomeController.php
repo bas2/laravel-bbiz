@@ -84,7 +84,7 @@ class HomeController extends Controller
     return redirect('home');
   }
 
-  // POST: itemstosell/email
+  // POST: itemstosell/email. Checks an email address was supplied.
   public function sendEmail2() {
     $email=request('email');
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)===false) {
@@ -95,7 +95,7 @@ class HomeController extends Controller
     }
   }
 
-  // POST: itemstosell/email/send
+  // POST: itemstosell/email/send. Actually send the emails.
   public function sendEmail3() {
     $prodid=request('item');
     $prod=\App\Product::where('id',$prodid)->get(['name','price']);
@@ -117,23 +117,27 @@ class HomeController extends Controller
     }
   }
 
-  // GET: getcode
+  // GET: getcode. Generate code to generate URL. Welcome message. Email notification.
   public function getCode() {
     // Link code to product.
-    $prodid=request('productid');
+    $prodid=(int)request('productid');
     $prod=\App\Product::where('id',$prodid)->get(['name']);
-    $code=uniqid();
+    $prod=$prod[0]->name;
+
+    $code  =uniqid();
+    $sender=request('name');
+
     $message=new \App\Message;
     $message->product_id=$prodid;
-    $sender=request('name');
-    $msg = "Hi {$sender}. Thank you for your interest in {$prod[0]->name}";
     $message->name=$sender; # Initial message from me.
-    $message->message=$msg;
+    $message->message="Hi {$sender}. Thank you for your interest in {$prod}. I will get back to you asap.";
     $message->code=$code;
     $message->save();
-    $email=$this->_getsection('email'); # Contact email address.
-    \Mail::to($email)->send(new ContactMail(request('name'),'',
-    "{$sender} got in touch regarding {$prod[0]->name} you are selling on your website."));
+
+    \Mail::to($this->_getsection('email'))->send(new ContactMail('','',
+    "{$sender} got in touch regarding {$prod} you are selling on your website."))
+    ->subject('override subject');
+    
     return $code;
   }
 
@@ -148,8 +152,10 @@ class HomeController extends Controller
   // POST: viewmessages/code
   public function messageReply($code) {
     $this->validate(request(),['message'=>'required|min:5|max:300',]);
+
     $email=\App\Content::where('name','email')->get(['content']);
-    if(!empty($email[0]->content)) {
+    $email=$email[0]->content;
+    if(!empty($email)) {
       $prodid=\App\Message::where('code',$code)->get(['product_id','name']);
       $message=new \App\Message;
       $message->name=$prodid[0]->name;
@@ -157,7 +163,8 @@ class HomeController extends Controller
       $message->code=$code;
       $message->product_id=$prodid[0]->product_id;
       $message->save();
-      \Mail::to($email[0]->content)->send(new ContactMail($prodid[0]->name,$email[0]->content,request('message')));
+
+      \Mail::to($email)->send(new ContactMail($prodid[0]->name,$email,request('message')));
       session()->flash('successmessage','Thank you for your message!');
     } else {
       session()->flash('failuremessage','Your message could not be sent');
