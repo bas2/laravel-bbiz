@@ -112,7 +112,7 @@ class HomeController extends Controller
       // Send one to me:
       $email2=\App\Content::where('name','email')->get(['content']);
       \Mail::to($email2[0]->content)->send(new ContactMail($sender,$email,
-      'Someone has made contact via their e-mail address'));
+      "{$sender} has made contact via their e-mail address regarding {$prod[0]->name}"));
     } else {
       // Invalid email address.
       //return 'email_not_valid';
@@ -127,13 +127,15 @@ class HomeController extends Controller
     $code=uniqid();
     $message=new \App\Message;
     $message->product_id=$prodid;
-    $msg = "Hi " . request('name') . ". Thank you for your interest in {$prod[0]->name}";
-    $message->name=request('name'); # Initial message from me.
+    $sender=request('name');
+    $msg = "Hi {$sender}. Thank you for your interest in {$prod[0]->name}";
+    $message->name=$sender; # Initial message from me.
     $message->message=$msg;
     $message->code=$code;
     $message->save();
     $email=$this->_getsection('email'); # Contact email address.
-    \Mail::to($email)->send(new ContactMail(request('name'),$email,''));
+    \Mail::to($email)->send(new ContactMail(request('name'),$email,
+    "{$sender} got in contact regarding item you are selling on your website."));
     return $code;
   }
 
