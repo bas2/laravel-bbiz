@@ -96,11 +96,13 @@ class HomeController extends Controller
 
   // POST: itemstosell/email/send
   public function sendEmail3() {
+    $prodid=request('item');
+    $prod=\App\Product::where('id',$prodid)->get(['name']);
     $email=request('email');
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)===false) {
       $sender=request('name');
       \Mail::to($email)->send(new ContactMail($sender,'',
-      "Hi {$sender}. Thank you for your interest in one of the items I am selling. I will be in contact asap."));
+      "Hi {$sender}. Thank you for your interest in {$prod[0]->name} I am selling. I will be in contact asap."));
 
       $email2=\App\Content::where('name','email')->get(['content']);
       \Mail::to($email2[0]->content)->send(new ContactMail($sender,$email,
