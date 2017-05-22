@@ -135,7 +135,8 @@ class HomeController extends Controller
     $message->save();
 
     \Mail::to($this->_getsection('email'))->send(new ContactMail('','',
-    "{$sender} got in touch regarding {$prod} you are selling on your website."))
+    "{$sender} got in touch regarding {$prod} you are selling on your website.")
+    , function($msg) {$msg->subject('test');})
     //->subject('override subject')
     ;
     
