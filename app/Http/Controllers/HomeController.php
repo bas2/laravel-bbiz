@@ -102,7 +102,7 @@ class HomeController extends Controller
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)===false) {
       $sender=request('name');
       // E-mail sender:
-      \Mail::to($email)->send(new ContactMail($sender,'',
+      \Mail::to($email)->send(new ContactMail('','',
       "Hi {$sender}.
       
       Thank you for your interest in {$prod[0]->name} I am selling for &pound;{$prod[0]->price}.
