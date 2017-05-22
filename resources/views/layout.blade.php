@@ -18,9 +18,6 @@
   {{-- @include('nav') --}}
 
   <div class="wrapper">
-
-
-
   @yield('content')
     <div class="container-fluid">
     <a href="https://www.1and1.co.uk/hosting?ac=OM.UK.UKf11K357007T7073a&kwk=523119831" rel="nofollow">
