@@ -178,7 +178,7 @@ $('body').on('click','.interested_form input[type=submit]',function(){
             $.ajax({
               "type":"POST",
               "url":"itemstosell/email/send",
-              "data":"message=12345&email=" + emailInput.val(),
+              "data":"message=12345&email=" + emailInput.val() + '&name=' + nameInput.val(),
               "success":function(data){
 
               }
