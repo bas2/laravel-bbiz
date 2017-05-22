@@ -119,7 +119,7 @@
 </div>
 
 <script>
-  var numf=43;
+//var numf=43;
 // Scroll up icon.
 $('<a href="#" class="scrollup"></a>').prependTo('body').hide().click(function(e){
   $("html, body").animate({ scrollTop: 0 }, 500);
@@ -132,6 +132,7 @@ $(window).scroll(function(){
 
 
 $('.interested').click(function(){
+  // Display contact form.
   var productId = $(this).parent().attr('title2');
   var contactForm = '<div class="interested_form">';
   contactForm+= '<p><strong>Great! You can contact me on {{ $pagecontent['mobile'] }} or by using the form below:</strong></p>';
@@ -153,11 +154,13 @@ $('body').on('click','.interested_form input[type=submit]',function(){
   var nameInput = $(this).parent().prev().prev().find('input');
 
   if(nameInput.val().length<3) {
-    nameInput.next('span').remove();
-    $('<span class="error" style="color:#f00;">Please supply your name (not less than 3 characters)</span>').insertAfter(nameInput);
+    nameInput.next('span').remove(); // Remove any error spans.
+    $('<span class="error" style="color:#f00;">Please supply your name (not less than 3 characters)</span>')
+    .insertAfter(nameInput);
     nameInput.focus();
 
   } else {
+    // Name has been supplied. Check email field.
     var emailInput  = $(this).parent().prev().find('input');
     var success_msg = 'Thank you for your interest!';
     if(emailInput.val().length>0) {
@@ -168,7 +171,7 @@ $('body').on('click','.interested_form input[type=submit]',function(){
         "data":"message=12345&email=" + emailInput.val(),
         "success":function(data){
           if (data=='email_not_valid') {
-            emailInput.next('span').remove();
+            emailInput.next('span').remove(); // Remove any error spans.
             $('<span class="error" style="color:#f00;">The email address you supplied does not look correct.</span>')
             .insertAfter(emailInput);
             emailInput.focus();
@@ -195,7 +198,7 @@ $('body').on('click','.interested_form input[type=submit]',function(){
 
       }); // End ajax.
 
-    } else { // Form submitted without supplying an email address.
+    } else { // Form submitted without supplying an email address. Communicate via site.
       success_msg+= ' You did not supply an email address so can';
       success_msg+= ' send receive message via the following URL:';
       // Generate code to allow contact via web site.
