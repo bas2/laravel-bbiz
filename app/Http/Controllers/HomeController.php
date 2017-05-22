@@ -83,6 +83,82 @@ class HomeController extends Controller
     return redirect('home');
   }
 
+  // POST: itemstosell/email
+  public function sendEmail2() {
+    $email=request('email');
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)===false) {
+      return $email;
+    } else {
+      // Invalid email address.
+      return 'email_not_valid';
+    }
+  }
+
+  // POST: itemstosell/email/send
+  public function sendEmail3() {
+    $email=request('email');
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)===false) {
+      \Mail::to($email)->send(new ContactMail(request('name'),$email,''));
+    } else {
+      // Invalid email address.
+      //return 'email_not_valid';
+    }
+  }
+
+  // GET: getcode
+  public function getCode() {
+    // Link code to product.
+    $prodid=request('productid');
+    $prod=\App\Product::where('id',$prodid)->get(['name']);
+    $code=uniqid();
+    $message=new \App\Message;
+    $message->product_id=$prodid;
+    $msg = "Hi " . request('name') . ". Thank you for your interest in {$prod[0]->name}";
+    $message->name=request('name'); # Initial message from me.
+    $message->message=$msg;
+    $message->code=$code;
+    $message->save();
+    $email=$this->_getsection('email'); # Contact email address.
+    \Mail::to($email)->send(new ContactMail(request('name'),$email,''));
+    return $code;
+  }
+
+  // GET: viewmessages/code
+  public function viewMessages($code) {
+    return view('pages.viewmessages')
+    ->with('page', ['home','View messages', 'meta_description'=>''])
+    ->with('messages', \App\Message::where('code',$code)->get());
+    ;
+  }
+
+  // POST: viewmessages/code
+  public function messageReply($code) {
+    $this->validate(request(),['message'=>'required|min:5|max:300',]);
+    $email=\App\Content::where('name','email')->get(['content']);
+    if(!empty($email[0]->content)) {
+      //\Mail::to($email[0]->content)->send(new ContactMail(request('name'),request('email'),request('message')));
+      $prodid=\App\Message::where('code',$code)->get(['product_id','name']);
+      $message=new \App\Message;
+      $message->name=$prodid[0]->name;
+      $message->message=request('message');
+      $message->code=$code;
+      $message->product_id=$prodid[0]->product_id;
+      $message->save();
+      session()->flash('successmessage','Thank you for your message!');
+    } else {
+      session()->flash('failuremessage','Your message could not be sent');
+    }
+    return redirect("viewmessages/$code");
+  }
+
+
+
+
+
+
+
+
+
   // GET: projects
   public function projects() {
     return view('pages.projects')->with('page',['projects','Projects']);
