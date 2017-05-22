@@ -137,13 +137,13 @@ class HomeController extends Controller
     $email=\App\Content::where('name','email')->get(['content']);
     if(!empty($email[0]->content)) {
       $prodid=\App\Message::where('code',$code)->get(['product_id','name']);
-      \Mail::to($email[0]->content)->send(new ContactMail($prodid[0]->name,$email[0]->content,request('message')));
       $message=new \App\Message;
       $message->name=$prodid[0]->name;
       $message->message=request('message');
       $message->code=$code;
       $message->product_id=$prodid[0]->product_id;
       $message->save();
+      \Mail::to($email[0]->content)->send(new ContactMail($prodid[0]->name,$email[0]->content,request('message')));
       session()->flash('successmessage','Thank you for your message!');
     } else {
       session()->flash('failuremessage','Your message could not be sent');
