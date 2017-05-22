@@ -103,7 +103,7 @@ class HomeController extends Controller
       $sender=request('name');
       // E-mail sender:
       \Mail::to($email)->send(new ContactMail($sender,'',
-      "Hi {$sender}.\n
+      "Hi {$sender}.
       
       Thank you for your interest in {$prod[0]->name} I am selling for &pound;{$prod[0]->price}.
       
@@ -134,8 +134,8 @@ class HomeController extends Controller
     $message->code=$code;
     $message->save();
     $email=$this->_getsection('email'); # Contact email address.
-    \Mail::to($email)->send(new ContactMail(request('name'),$email,
-    "{$sender} got in contact regarding item you are selling on your website."));
+    \Mail::to($email)->send(new ContactMail(request('name'),'',
+    "{$sender} got in touch regarding {$prod[0]->name} you are selling on your website."));
     return $code;
   }
 
