@@ -103,7 +103,7 @@ class HomeController extends Controller
       "Hi {$sender}. Thank you for your interest in one of the items I am selling. I will be in contact asap."));
 
       $email2=\App\Content::where('name','email')->get(['content']);
-      \Mail::to($email2[0]->content)->send(new ContactMail(request('name'),$email,
+      \Mail::to($email2[0]->content)->send(new ContactMail($sender,$email,
       'Someone has made contact via their e-mail address'));
     } else {
       // Invalid email address.
