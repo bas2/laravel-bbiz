@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 use App\Mail\ContactMail;
 use \Carbon\Carbon;
 
 class HomeController extends Controller
 {
-
+/*
   private $_otherwhcount=14;
 
   private function _getDB($date) {
@@ -40,6 +40,7 @@ class HomeController extends Controller
     }
     return $arr;
   }
+*/
 
   // GET: {slug?}
   public function index() {
@@ -113,9 +114,6 @@ class HomeController extends Controller
       $email2=\App\Content::where('name','email')->get(['content']);
       \Mail::to($email2[0]->content)->send(new ContactMail($sender,$email,
       "{$sender} has made contact via their e-mail address regarding {$prod[0]->name}"));
-    } else {
-      // Invalid email address.
-      //return 'email_not_valid';
     }
   }
 
@@ -174,7 +172,7 @@ class HomeController extends Controller
 
 
 
-
+/*
   // GET: projects
   public function projects() {
     return view('pages.projects')->with('page',['projects','Projects']);
@@ -184,14 +182,15 @@ class HomeController extends Controller
     $hotels=[''=>'Select'];foreach(\App\TravelodgeHotel::orderBy('name')->get(['hotel_id','name']) as $hotel){$hotels[$hotel->hotel_id]=$hotel->name;}
     return $hotels;
   }
+*/
 
   // GET: content/update
   public function update() {
     //if(\Auth::check()){
-    $arr=$this->_arrf();
-    $arr['hotels']=$this->_hotelsDropDown();
-    $arr['newrowdate']=$this->_getsection('newrowdate');
-    $arr['otherwhcount']=$this->_otherwhcount;
+    //$arr=$this->_arrf();
+    //$arr['hotels']=$this->_hotelsDropDown();
+    //$arr['newrowdate']=$this->_getsection('newrowdate');
+    //$arr['otherwhcount']=$this->_otherwhcount;
 
     return view('pages.update')->with('page',['update','Update'])
     ->with('content',
@@ -202,7 +201,7 @@ class HomeController extends Controller
        'recent'=>$this->_getsection('recent')]
       )
     ->with('images',\App\Image::get(['id','filename']))
-    ->with('travelodge', $arr)
+    //->with('travelodge', $arr)
     ;
     //} else {abort(404);}
   }
@@ -279,6 +278,7 @@ class HomeController extends Controller
     return redirect('content/update');
   }
 
+/*
   // POST: travelodge/update/today
   public function postUpdateTravToday(Request $request) {
     $input=$request->all();
@@ -359,6 +359,7 @@ class HomeController extends Controller
   public function getnotes($id) {
     return $hotelnotes=\App\TravelodgeHotel::where('hotel_id',$id)->get(['notes'])[0]->notes;
   }
+*/
 
 
   ######################### LOGIN / LOGOUT METHODS
