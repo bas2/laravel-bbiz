@@ -3,9 +3,24 @@ html {
   min-height: 100%; }
 
 body {
-  background: rgba(0, 0, 0, 0.6); }
+  /*background: hsla(0,0%,0%,.6);*/ }
   body#home a.homelink, body#projects a.projectslink, body#update a.updatelink, body#login a.loginlink {
     color: yellow; }
+
+.jumbotron h2 {
+  margin-top: 0; }
+.jumbotron h3 {
+  position: relative;
+  color: #ff5500;
+  padding-right: 100px; }
+  .jumbotron h3 .badge {
+    position: absolute;
+    right: 20px;
+    top: 0;
+    font-size: 1.4em;
+    background-color: #ff5500; }
+.jumbotron button {
+  color: red; }
 
 select {
   font-weight: bold; }
