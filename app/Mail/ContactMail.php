@@ -29,6 +29,7 @@ class ContactMail extends Mailable
      */
     public function build()
     {
+      // Name, email, message.
       return $this->view('emails.contact')
       ->with('cont',[$this->msg[0],$this->msg[1],$this->msg[2]]);
     }
