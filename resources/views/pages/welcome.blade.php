@@ -5,25 +5,42 @@
   <div class="jumbotron">
 
     <h2 class="text-center">Items I'm selling</h2>
-    <p class="lead text-center">I have two items that I'm currently selling</p>
-
+    <!--<p class="lead text-center">I have two items that I'm currently selling</p>-->
 
     @foreach($products as $product)
-    <div class="itemtosell">
-      <h3>{{ $product->name }}<span class="badge">&pound;{{ $product->price }}</span></h3>
-      <p>{{ $product->intro }}</p> 
+    <div class="panel itemtosell">
+      <div class="panel-heading">
+        <h3>{{ $product->name }}<span class="badge">&pound;{{ $product->price }}</span></h3>
+      </div>
+      <div class="panel-body">
+      <div class="alert-danger poster">
+        <p class="text-center"><small>Posted by <strong>Bashir</strong> on <strong>{{ \Carbon\Carbon::parse($product->created_at)->format('l jS F, Y') }}</strong></small></p>
+      </div>
+      <p class="text-center">{{ $product->intro }}</p>
       <div class="row">
         <div class="col-md-8">
         {!! $product->descr !!}
         </div>
-        <div class="col-md-4 text-center">
-        {{ Html::Image("img/itemstosell/{$product->id}/1.jpg",'',['width'=>300,'class'=>'thumbnail']) }}
+        <div class="col-md-4">
+        <div class="thumbnail">
+        {{ Html::Image("img/itemstosell/{$product->id}/1.jpg",'',
+        ['width'=>300,'class'=>'img-responsive','style'=>'margin:0 auto 20px auto']) }}
+        <p class="text-center"><small>{{ $product->productImages[0]->caption }}</small></p>
+        </div>
         </div>
       </div>
-      <p class="actionbuttons" title2="{{ $product->id }}">
-        <button class="interested btn btn-success">I am interested in buying this for &pound;{{ $product->price }}</button>
+      <ul class="list-inline text-center">
+        @foreach($product->productImages as $prodimage)
+      <li class="thumbnail">{{ Html::Image("img/itemstosell/{$product->id}/".$prodimage->num.".jpg",'',
+        ['width'=>200,'class'=>'img-responsive']) }}
+        <p><small>{{ $prodimage->caption }}</small></p>
+        @endforeach
+      </ul>
+      <p class="actionbuttons text-center" title2="{{ $product->id }}">
+        <button class="interested btn btn-success">Buy this for &pound;{{ $product->price }}</button>
         <!--<button class="not-interested btn btn-warning">I am not interested in buying this for &pound;{{ $product->price }}</button>-->
       </p>
+      </div>
     </div>
     @endforeach
 
@@ -36,8 +53,8 @@
     </ul>
 
     <!-- Tab panes -->
-    <div class="tab-content">
-      <div role="tabpanel" class="tab-pane active" id="home2">
+    <div class="panel tab-content">
+      <div role="tabpanel" class="panel-body tab-pane active" id="home2">
         <p>Once you've decided you are interested in buying an item, contact me by
         calling me on {{ $pagecontent['mobile'] }} or by sending your name and contact email. You don't have to 
         supply your email address. If you don't, you will be given a link to communicate via this site.</p> 
@@ -138,8 +155,8 @@ $('.interested').click(function(){
   contactForm+= '<p><strong>Great! You can contact me on {{ $pagecontent['mobile'] }} or by using the form below:</strong></p>';
   contactForm+= '<div class="form-group"><input class="form-control" type="text" placeholder="Your name (required)"></div>';
   contactForm+= '<div class="form-group"><input class="form-control" type="email" placeholder="Your email (optional)"></div>';
-  contactForm+= '<div class="form-group"><input title2="'+productId+'" class="btn btn-primary" type="submit" value="Submit"></div>';
-  contactForm+= '<div class="form-group"><button class="btnReset btn btn-warning">Cancel</button></div>';
+  contactForm+= '<div class="form-group"><input title2="'+productId+'" class="btn btn-primary" type="submit" value="Submit"> ';
+  contactForm+= '<button class="btnReset btn btn-warning">Cancel</button></div>';
   contactForm+= '</div>';
   $( contactForm ).insertAfter($(this));
 
