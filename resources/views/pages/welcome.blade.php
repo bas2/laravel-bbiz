@@ -63,7 +63,7 @@
     <div class="panel tab-content">
       <div role="tabpanel" class="panel-body tab-pane active" id="home2">
         <p>Once you've decided you are interested in buying an item, contact me by
-        calling me on {{ $pagecontent['mobile'] }} or by sending your name and contact email. You don't have to 
+        calling me on <strong>{{ $pagecontent['mobile'] }}</strong> or by sending your name and contact email. You don't have to 
         supply your email address. If you don't, you will be given a link to communicate via this site.</p> 
         <p>We can meet and you can take a look at the item.</p>
         <p>If you agree, pay the amount and take the item.</p>
