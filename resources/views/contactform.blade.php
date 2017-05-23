@@ -1,14 +1,14 @@
 {!! Form::open(['route'=>'sendcontacemeil']) !!}
-<div>
-{!! Form::text('name',null,['placeholder'=>'Your name...']) !!}
+<div class="form-group">
+{!! Form::text('name',null,['class'=>'form-control','placeholder'=>'Your name...']) !!}
 </div>
-<div>
-{!! Form::email('email',null,['placeholder'=>'Your email...','required']) !!}
+<div class="form-group">
+{!! Form::email('email',null,['class'=>'form-control','placeholder'=>'Your email...','required']) !!}
 </div>
-<div>
+<div class="form-group">
 {!! Form::textarea('message',null,['class'=>'form-control','placeholder'=>'Your message...','required']) !!}
 </div>
-<div>
+<div class="form-group">
 {!! Form::submit('Send >',['class'=>'btn btn-primary btn-lg btn-block']) !!}
 </div>
 {!! Form::close() !!}
