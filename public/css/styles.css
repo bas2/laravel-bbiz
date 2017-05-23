@@ -33,6 +33,11 @@ body {
   .jumbotron button {
     color: #fff;
     font-weight: bold; }
+  .jumbotron ul.product-image .thumbnail {
+    margin-bottom: 0; }
+  .jumbotron ul.product-image-caption div {
+    width: 200px;
+    font: bold .8em sans-serif; }
 
 select {
   font-weight: bold; }
