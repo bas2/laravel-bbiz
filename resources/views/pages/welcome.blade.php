@@ -29,13 +29,20 @@
         </div>
         </div>
       </div>
-      <ul class="list-inline text-center">
+
+      <ul class="product-image list-inline text-center">
         @foreach($product->productImages as $prodimage)
-      <li class="thumbnail">{{ Html::Image("img/itemstosell/{$product->id}/".$prodimage->num.".jpg",'',
-        ['width'=>200,'class'=>'img-responsive']) }}
-        <p><small>{{ $prodimage->caption }}</small></p>
+        <li>{{ Html::Image("img/itemstosell/{$product->id}/".$prodimage->num.".jpg",'',
+        ['width'=>200,'class'=>'thumbnail img-responsive']) }}
         @endforeach
       </ul>
+
+      <ul class="product-image-caption list-inline text-center">
+        @foreach($product->productImages as $prodimage)
+        <li><div>{{ $prodimage->caption }}</div>
+        @endforeach
+      </ul>
+
       <p class="actionbuttons text-center" title2="{{ $product->id }}">
         <button class="interested btn btn-success">Buy this for &pound;{{ $product->price }}</button>
         <!--<button class="not-interested btn btn-warning">I am not interested in buying this for &pound;{{ $product->price }}</button>-->
