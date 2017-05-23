@@ -69,14 +69,14 @@
         <p>If you agree, pay the amount and take the item.</p>
         <!--<p>You can ask for a discount (via the not interested button) and I will contact you if I can sell it at that price.</p>-->
       </div>
-      <div role="tabpanel" class="tab-pane" id="payitem">
+      <div role="tabpanel" class="panel-body tab-pane" id="payitem">
         <p>I accept only cash payments.</p>
       </div>
-      <div role="tabpanel" class="tab-pane" id="messages">
+      <div role="tabpanel" class="panel-body tab-pane" id="messages">
         <p>I am based in Walthamstow and I would expect you come to me to see 
         the item you're interested in to make sure it is what you want.</p>
       </div>
-      <div role="tabpanel" class="tab-pane" id="settings">
+      <div role="tabpanel" class="panel-body tab-pane" id="settings">
         <p>You can use the system on this web site if you have any further questions 
         about the items or anything else.</p>
       </div>
