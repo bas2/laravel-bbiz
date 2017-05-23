@@ -15,6 +15,8 @@ body {
 }
 
 .jumbotron {
+  background-color:hsl(20,100%,50%);
+  color:#fff;
   h2 {margin-top: 0;}
   h3 {
     position: relative;
@@ -22,13 +24,27 @@ body {
     padding-right: 100px;
     .badge {
       position: absolute;
-      right:20px;
+      right:0;
       top:0;
       font-size:1.4em;
       background-color:hsl(20,100%,50%);
     }
   }
-  button {color:hsl(0,100%,50%);}
+  .panel {
+    color:#636b6f;
+  }
+  .nav-tabs {
+    a {
+      color:#fff;
+    }
+    li a:hover {
+      color:#636b6f;
+    }
+    li.active a {
+      color: #636b6f;
+    }
+  }
+  button {color:#fff;font-weight: bold;}
 }
 
 select {
@@ -96,11 +112,11 @@ input[type=submit]{width:auto;}
 }
 
 .intro {
-  h2 {background: url(../img/Person.png);}
+  h2 {background: url(../img/Person2.png);}
 }
 
 .skills {
-  h2 {background: url('../img/bulb.png');}
+  h2 {background: url('../img/bulb2.png');}
   .panel-body {
     padding: 0;
     ul {
@@ -122,7 +138,7 @@ input[type=submit]{width:auto;}
 }
 
 .recent {
-  h2 {background: url('../img/time2.png');padding-bottom:0;}
+  h2 {background: url('../img/time3.png');padding-bottom:0;}
   p {margin-left:0;}
   ul{text-align: center;}
   li{padding:0;}
@@ -144,6 +160,7 @@ input[type=submit]{width:auto;}
 span.hoteldescr {text-transform:uppercase;font-weight:bold;background-color:yellow;color:#000;}
 
 .intro, .skills, .recent, .travelodge-affiliate {
+  .panel {box-shadow: 2px 2px 4px rgba(0,0,0,.4);}
   h2 {
     background-repeat: no-repeat;
     background-position: right 10px;
