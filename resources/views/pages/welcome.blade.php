@@ -23,8 +23,10 @@
         </div>
         <div class="col-md-4">
         <div class="thumbnail">
+        <a href="img/itemstosell/{{ $product->id }}/1.jpg" class="overlay">
         {{ Html::Image("img/itemstosell/{$product->id}/1.jpg",'',
-        ['width'=>300,'class'=>'img-responsive','style'=>'margin:0 auto 20px auto']) }}
+        ['width'=>350,'class'=>'img-responsive','style'=>'margin:0 auto 20px auto']) }}
+        </a>
         <p class="text-center"><small>{{ $product->productImages[0]->caption }}</small></p>
         </div>
         </div>
@@ -32,8 +34,13 @@
 
       <ul class="product-image list-inline text-center">
         @foreach($product->productImages as $prodimage)
+        @if($loop->first)
+        <li>{{ Html::Image("img/itemstosell/{$product->id}/".$prodimage->num.".jpg",'',
+        ['width'=>200,'class'=>'sel thumbnail img-responsive']) }}
+        @else
         <li>{{ Html::Image("img/itemstosell/{$product->id}/".$prodimage->num.".jpg",'',
         ['width'=>200,'class'=>'thumbnail img-responsive']) }}
+        @endif
         @endforeach
       </ul>
 
@@ -62,23 +69,31 @@
     <!-- Tab panes -->
     <div class="panel tab-content">
       <div role="tabpanel" class="panel-body tab-pane active" id="home2">
-        <p>Once you've decided you are interested in buying an item, contact me by
+        <ul>
+        <li>Once you've decided you are interested in buying an item, contact me by
         calling me on <strong>{{ $pagecontent['mobile'] }}</strong> or by sending your name and contact email. You don't have to 
         supply your email address. If you don't, you will be given a link to communicate via this site.</p> 
-        <p>We can meet and you can take a look at the item.</p>
-        <p>If you agree, pay the amount and take the item.</p>
+        <li>We can meet and you can take a look at the item.</p>
+        <li>If you agree, pay the amount and take the item.</p>
         <!--<p>You can ask for a discount (via the not interested button) and I will contact you if I can sell it at that price.</p>-->
+        </ul>
       </div>
       <div role="tabpanel" class="panel-body tab-pane" id="payitem">
-        <p>I accept only cash payments.</p>
+        <ul>
+        <li>I accept only cash payments.</p>
+        </ul>
       </div>
       <div role="tabpanel" class="panel-body tab-pane" id="messages">
-        <p>I am based in Walthamstow and I would expect you come to me to see 
+        <ul>
+        <li>I am based in Walthamstow and I would expect you come to me to see 
         the item you're interested in to make sure it is what you want.</p>
+        </ul>
       </div>
       <div role="tabpanel" class="panel-body tab-pane" id="settings">
-        <p>You can use the system on this web site if you have any further questions 
+        <ul>
+        <li>You can use the system on this web site if you have any further questions 
         about the items or anything else.</p>
+        </ul>
       </div>
     </div>
 
@@ -251,5 +266,21 @@ $('body').on('click','button.btnReset', function(){
   $(this).parent().parent().parent().find('.not-interested').show();
   $(this).parent().parent().remove(); // Remove form.
 });
+
+$('img.sel').addClass('img-glow');
+
+$('.product-image img').hover(function() {
+  $(this).css({'cursor':'pointer'});
+  $(this).parent().parent().prev().find('img').attr('src',$(this).attr('src'));
+  $(this).parent().parent().prev().find('img').parent().next().html('test');
+  $(this).parent().parent().find('img').removeClass('sel');
+  $(this).addClass('sel');
+  $('img.sel').addClass('img-glow');
+}, function() {
+  //$(this).css({'cursor':'pointer'});
+  $('.product-image img').removeClass('img-glow');
+  $('img.sel').addClass('img-glow');
+});
+
 </script>
 @endsection
