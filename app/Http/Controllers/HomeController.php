@@ -49,7 +49,7 @@ class HomeController extends Controller
     $email=$this->_getsection('email'); # Contact email address.
     //$mobile=$this->_getsection('mobile'); # Contact mobile number.
 
-    $products=\App\Product::get(); # Items to sell.
+    $products=\App\Product::latest()->get(); # Items to sell.
 
     return view('pages.welcome')
     ->with('page',
