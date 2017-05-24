@@ -22,6 +22,7 @@ body {
     position: relative;
     color:hsl(20,100%,50%);
     padding-right: 100px;
+    margin:0 auto;
     .badge {
       position: absolute;
       right:0;
@@ -53,6 +54,10 @@ body {
     width:200px;
     font: bold .8em sans-serif;
   }
+}
+
+.img-glow {
+  box-shadow: 0 0 5px blue;
 }
 
 select {

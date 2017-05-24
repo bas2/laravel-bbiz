@@ -15,7 +15,8 @@ body {
   .jumbotron h3 {
     position: relative;
     color: #ff5500;
-    padding-right: 100px; }
+    padding-right: 100px;
+    margin: 0 auto; }
     .jumbotron h3 .badge {
       position: absolute;
       right: 0;
@@ -40,6 +41,9 @@ body {
   .jumbotron ul.product-image-caption div {
     width: 200px;
     font: bold .8em sans-serif; }
+
+.img-glow {
+  box-shadow: 0 0 5px blue; }
 
 select {
   font-weight: bold; }
