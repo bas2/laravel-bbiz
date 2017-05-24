@@ -31,15 +31,31 @@
         </div>
         </div>
       </div>
+<!--
+      <div class="row">
+        @foreach($product->productImages as $prodimage)
+        <div class="col-md-3">
 
+          <div class="thumbnail">
+          {{ Html::Image("img/itemstosell/{$product->id}/".$prodimage->num.".jpg",'',
+        ['width'=>200,'class'=>'sel thumbnail img-responsive']) }}
+          <div class="caption">
+          <p>{{ $prodimage->caption }}</p>
+          </div>
+          </div>
+
+        </div>
+        @endforeach
+      </div>
+-->
       <ul class="product-image list-inline text-center">
         @foreach($product->productImages as $prodimage)
         @if($loop->first)
         <li>{{ Html::Image("img/itemstosell/{$product->id}/".$prodimage->num.".jpg",'',
-        ['width'=>200,'class'=>'sel thumbnail img-responsive']) }}
+        ['width'=>200,'class'=>'sel thumbnail img-responsive','title'=>$product->productImages[0]->caption]) }}
         @else
         <li>{{ Html::Image("img/itemstosell/{$product->id}/".$prodimage->num.".jpg",'',
-        ['width'=>200,'class'=>'thumbnail img-responsive']) }}
+        ['width'=>200,'class'=>'thumbnail img-responsive','title'=>$product->productImages[$prodimage->num-1]->caption]) }}
         @endif
         @endforeach
       </ul>
@@ -272,7 +288,7 @@ $('img.sel').addClass('img-glow');
 $('.product-image img').hover(function() {
   $(this).css({'cursor':'pointer'});
   $(this).parent().parent().prev().find('img').attr('src',$(this).attr('src'));
-  $(this).parent().parent().prev().find('img').parent().next().html('test');
+  $(this).parent().parent().prev().find('img').parent().next().html($(this).attr('title'));
   $(this).parent().parent().find('img').removeClass('sel');
   $(this).addClass('sel');
   $('img.sel').addClass('img-glow');
