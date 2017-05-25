@@ -25,12 +25,21 @@ body {
       background-color: #ff5500; }
   .jumbotron .panel {
     color: #636b6f; }
-  .jumbotron .nav-tabs a {
-    color: #fff; }
-  .jumbotron .nav-tabs li a:hover {
-    color: #636b6f; }
-  .jumbotron .nav-tabs li.active a {
-    color: #636b6f; }
+  .jumbotron .nav-tabs {
+    border-bottom: 0; }
+    .jumbotron .nav-tabs > li {
+      margin-bottom: 0; }
+    .jumbotron .nav-tabs a {
+      color: #fff; }
+    .jumbotron .nav-tabs li a {
+      border: 0;
+      font-weight: bold; }
+    .jumbotron .nav-tabs li a:hover {
+      color: #636b6f; }
+    .jumbotron .nav-tabs li.active a {
+      background-color: #cc2200;
+      color: #fff;
+      border: 0; }
   .jumbotron button {
     color: #fff;
     font-weight: bold; }
